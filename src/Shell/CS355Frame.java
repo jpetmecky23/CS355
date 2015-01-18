@@ -6,6 +6,9 @@ package Shell;
 
 import Controller.CS355Controller;
 import Model.Model;
+import Model.shapes.Circle;
+import Model.shapes.Point3D;
+import Model.shapes.Shape;
 import View.ViewRefresher;
 import static Shell.CS355SScrollbarAttrConsts.H_SCROLL_BAR;
 import static Shell.CS355SScrollbarAttrConsts.KNOB;
@@ -69,8 +72,6 @@ class CS355Frame extends javax.swing.JFrame implements KeyListener
     private CS355Frame(CS355Controller c, ViewRefresher viewRefresher, MouseListener mouseListener, MouseMotionListener mml) 
     {
         this.viewRefresher = viewRefresher;
-       // Model model = new Model();
-        //model.addObserver(viewRefresher);
         initComponents();
         controller = c;
         RedrawRoutine r = RedrawRoutine.inst();

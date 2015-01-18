@@ -42,9 +42,10 @@ import javax.swing.text.View;
     }
     
        
-    public static void createModel()
+    public static Model createModel()
     {
         instance = new Model();
+        return instance;
     }
 
 	static boolean isInitialized() 
