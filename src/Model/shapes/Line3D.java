@@ -1,0 +1,33 @@
+package Model.shapes;
+
+/**
+ *
+ * @author Brennan Smith
+ */
+public class Line3D extends Shape 
+{
+    public Point3D start;
+    public Point3D end;
+    public Line3D(Point3D s, Point3D e)
+    {
+        start = s;
+        end = e;
+    }
+
+    public Point3D getStart() {
+        return start;
+    }
+
+    public void setStart(Point3D start) {
+        this.start = start;
+    }
+
+    public Point3D getEnd() {
+        return end;
+    }
+
+    public void setEnd(Point3D end) {
+        this.end = end;
+    }
+
+}
