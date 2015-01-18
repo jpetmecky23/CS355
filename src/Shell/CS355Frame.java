@@ -65,7 +65,7 @@ class CS355Frame extends javax.swing.JFrame implements KeyListener
     }
     
         CS355Controller controller;
-    
+        
         
     Thread keyPollingThread;
     private final ViewRefresher viewRefresher;

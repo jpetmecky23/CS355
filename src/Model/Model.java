@@ -31,11 +31,11 @@ import javax.swing.text.View;
     private static Model instance;
     private String currentShape;
     
-    static Model inst()
+    public static Model inst()
     {
         if (instance == null)
         {
-            throw new IllegalStateException("Tried to get instance of Model without initializing it first!");
+        	instance = createModel();
         }
         
         return instance;
@@ -61,6 +61,7 @@ import javax.swing.text.View;
     
     public void addShape(Shape s){
     	container.add(s);
+    	this.setChanged();
     	this.notifyObservers();
     }
     
