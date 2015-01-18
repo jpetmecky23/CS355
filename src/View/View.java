@@ -33,9 +33,10 @@ public class View implements ViewRefresher {
 	    }
 	    
 	       
-	    public static void createView()
+	    public static View createView()
 	    {
 	        instance = new View();
+	        return instance;
 	    }
 
 		static boolean isInitialized() 
