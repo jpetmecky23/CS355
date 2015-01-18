@@ -5,7 +5,9 @@
 package Shell;
 
 import Controller.CS355Controller;
+import Model.Model;
 import View.ViewRefresher;
+
 import java.awt.Color;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -121,7 +123,7 @@ public class GUIFunctions
      * @param mouseListener The mouseListener that will be sent mouse events from the canvas.
      * @param mouseMotionListener The Mouse Motion Listener that will be sent events from the canvas.
      */
-    public static void createCS355Frame(CS355Controller inst, ViewRefresher viewRefresher, 
+    public static void createCS355Frame(CS355Controller inst, ViewRefresher viewRefresher,  
             MouseListener mouseListener, MouseMotionListener mouseMotionListener) 
     {
         CS355Frame.createCS355Frame(inst, viewRefresher, mouseListener, mouseMotionListener);

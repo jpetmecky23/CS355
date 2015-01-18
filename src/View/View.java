@@ -22,11 +22,11 @@ public class View implements ViewRefresher {
 	 private static View instance;
 	
 	  
-	 static View inst()
+	 public static View inst()
 	    {
 	        if (instance == null)
 	        {
-	            throw new IllegalStateException("Tried to get instance of View without initializing it first!");
+	            instance = createView();
 	        }
 	        
 	        return instance;
@@ -52,6 +52,8 @@ public class View implements ViewRefresher {
 		@Override
 		public void update(Observable o, Object arg) {
 			// TODO Auto-generated method stub
+			
+				System.out.println("Stop!");
 			
 		}
 

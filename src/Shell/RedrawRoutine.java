@@ -4,7 +4,9 @@
  */
 package Shell;
 
+import View.View;
 import View.ViewRefresher;
+
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
