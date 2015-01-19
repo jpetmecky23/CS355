@@ -7,9 +7,12 @@ package Model;
 
 import Controller.CS355Controller;
 import Model.shapes.Shape;
+import View.View;
 import View.ViewRefresher;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
@@ -19,7 +22,6 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.Semaphore;
 
-import javax.swing.text.View;
 
 /**
  *
@@ -54,7 +56,7 @@ import javax.swing.text.View;
     } 
 
     public Model() {
-        this.container = new ArrayList<Shape>();
+        this.container = new ArrayList();
         shapeColor = Color.BLUE;
         
     }
@@ -65,12 +67,12 @@ import javax.swing.text.View;
     	this.notifyObservers();
     }
     
-    public ArrayList<Shape> getContainer() {
-        return container;
+    public Shape getShape(int index) {
+        return container.get(index);
     }
-
-    public void setContainer(ArrayList<Shape> container) {
-        this.container = container;
+    
+    public int getShapeCount(){
+        return container.size();
     }
 
     public Color getColor() {

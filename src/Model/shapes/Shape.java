@@ -6,14 +6,15 @@
 package Model.shapes;
 
 import java.awt.Color;
+import java.awt.Graphics;
 
 /**
  *
  * @author James
  */
-public class Shape {
+public class Shape{
     private Color color;
-
+    
     public Color getColor() {
         return color;
     }   

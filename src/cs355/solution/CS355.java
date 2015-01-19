@@ -15,6 +15,7 @@ import Shell.GUIFunctions;
 import View.View;
 import View.ViewRefresher;
 
+import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,7 +46,10 @@ public class CS355
         Point3D p = new Point3D(5.0, 5.0, 5.0);//Testing
         Circle circle = new Circle(p,5);//Testing
         Model.inst().addShape(circle);//Testing
+       
+        GUIFunctions.refresh(); 
         
+        GUIFunctions.changeSelectedColor(Color.cyan);
         GUIFunctions.refresh(); 
         
    
