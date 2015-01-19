@@ -5,12 +5,9 @@
  */
 package View;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
-import java.util.ArrayList;
 import java.util.Observable;
-import java.util.Observer;
-
+import java.awt.Color;
 import Model.Model;
 import Model.shapes.Shape;
 
@@ -52,19 +49,29 @@ public class View implements ViewRefresher {
 		@Override
 		public void update(Observable o, Object arg) {
 			// TODO Auto-generated method stub
-			
-				System.out.println("Stop!");
-			
+			//GUIFunctions.refresh();
 		}
 
 
 		@Override
 		public void refreshView(Graphics2D g2d) {
 			// TODO Auto-generated method stub
-			
+	    	//s.getGr
+	    	//View.inst().refreshView(square);
+                    
+                    //write a function that will iterart though the shapes array and draw them to the screen.
+                    for(int i = 0; i < Model.inst().getShapeCount(); i++){
+                        Shape s = Model.inst().getShape(i);
+                        //Write a class that takes a shape as input and then
+                        //figures out whay type it is and then draws it.
+                    }
+                    
+                    g2d.setColor(Color.blue);
+                    g2d.fillRect(5, 5, 50, 500);
+                    
 		}
 	
-		
+        
 	
     
 }

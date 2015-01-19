@@ -141,6 +141,7 @@ class CS355Frame extends javax.swing.JFrame implements KeyListener
 
         canvas1.setMaximumSize(new java.awt.Dimension(512, 512));
         canvas1.setMinimumSize(new java.awt.Dimension(512, 512));
+        canvas1.setPreferredSize(new java.awt.Dimension(512, 512));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cs355/res/Colors.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -357,7 +358,7 @@ class CS355Frame extends javax.swing.JFrame implements KeyListener
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(canvas1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(canvas1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -399,7 +400,7 @@ class CS355Frame extends javax.swing.JFrame implements KeyListener
                         .addComponent(jButton11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton12)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 60, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
