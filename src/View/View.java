@@ -59,20 +59,10 @@ public class View implements ViewRefresher {
 	    	//s.getGr
 	    	//View.inst().refreshView(square);
                     
-                    //write a function that will iterart though the shapes array and draw them to the screen.
-                    for(int i = 0; i < Model.inst().getShapeCount(); i++){
-                        Shape s = Model.inst().getShape(i);
-                        //start here
-                        //Write a class that takes a shape as input and then
-                        //figures out whay type it is and then draws it.
-                    }
-                    
-                    g2d.setColor(Color.blue);
-                    g2d.fillRect(5, 5, 50, 500);
-                    
 		}
 	
-        
+
+        }
 	
     
 }
