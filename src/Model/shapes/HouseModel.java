@@ -1,4 +1,6 @@
-package Shell;
+package Model.shapes;
+
+
 
 import Model.shapes.Point3D;
 import Model.shapes.Line3D;
@@ -18,7 +20,7 @@ public class HouseModel extends WireFrame
     {
         //Make the object:
          //Floor
-        lines.add(new Line3D(new Point3D(-5,0,-5), new Point3D(5,0,-5)));
+       /* lines.add(new Line3D(new Point3D(-5,0,-5), new Point3D(5,0,-5)));
         lines.add(new Line3D(new Point3D(5,0,-5), new Point3D(5,0,5)));
         lines.add(new Line3D(new Point3D(5,0,5), new Point3D(-5,0,5)));
         lines.add(new Line3D(new Point3D(-5,0,5), new Point3D(-5,0,-5)));
@@ -41,7 +43,7 @@ public class HouseModel extends WireFrame
          //Door
         lines.add(new Line3D(new Point3D(1,0,5), new Point3D(1,3,5)));
         lines.add(new Line3D(new Point3D(-1,0,5), new Point3D(-1,3,5)));
-        lines.add(new Line3D(new Point3D(1,3,5), new Point3D(-1,3,5)));
+        lines.add(new Line3D(new Point3D(1,3,5), new Point3D(-1,3,5)));*/
     }
     
     

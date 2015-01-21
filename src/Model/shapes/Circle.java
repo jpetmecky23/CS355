@@ -5,6 +5,8 @@
  */
 package Model.shapes;
 
+import java.awt.Color;
+
 /**
  *
  * @author James
@@ -12,8 +14,9 @@ package Model.shapes;
 public class Circle extends Shape{
     private Point3D center;
     private int radis; 
-    
-    public Circle(Point3D c, int r){
+  
+    public Circle(Point3D c, int r, Color color){
+        super(color);
         this.center = c;
         this.radis = r;
     }

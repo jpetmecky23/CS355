@@ -1,4 +1,6 @@
-package Shell;
+package Model.shapes;
+
+
 
 import Model.shapes.Line3D;
 import java.util.ArrayList;

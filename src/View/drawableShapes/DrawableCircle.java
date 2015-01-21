@@ -26,6 +26,7 @@ public class DrawableCircle extends DrawableShape{
         this.color = color;
     }
 
+    @Override
     public void draw(Graphics2D g2d){
         g2d.setColor(color);
         g2d.fillOval(x, y, width, height);

@@ -1,5 +1,7 @@
 package Model.shapes;
 
+import java.awt.Color;
+
 /**
  *
  * @author Brennan Smith
@@ -8,8 +10,9 @@ public class Line3D extends Shape
 {
     public Point3D start;
     public Point3D end;
-    public Line3D(Point3D s, Point3D e)
+    public Line3D(Point3D s, Point3D e, Color color)
     {
+        super(color);
         start = s;
         end = e;
     }
