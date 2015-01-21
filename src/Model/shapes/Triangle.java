@@ -5,6 +5,8 @@
  */
 package Model.shapes;
 
+import java.awt.Color;
+
 /**
  *
  * @author James
@@ -14,7 +16,8 @@ public class Triangle extends Shape{
     private Point3D two;
     private Point3D three;
     
-    public Triangle(Point3D a, Point3D b, Point3D c){
+    public Triangle(Point3D a, Point3D b, Point3D c, Color color){
+        super(color);
         this.one = a;
         this.two = b;
         this.three = c;

@@ -21,6 +21,9 @@ public class DrawableTri extends DrawableShape{
     
     public DrawableTri(Point3D p1, Point3D p2, Point3D p3, Color color) {
         this.color = color;
+        this.p1 = p1;
+        this.p2 = p2;
+        this.p3 = p3;
     }
 
     

@@ -5,6 +5,8 @@
  */
 package Model.shapes;
 
+import java.awt.Color;
+
 /**
  *
  * @author James
@@ -14,8 +16,9 @@ public class Ellipses extends Shape{
     private int height;
     private int width;
     
-    Ellipses(Point3D c, int h, int w){
-        this.center = c;
+   public  Ellipses(Point3D c, int h, int w, Color color){
+       super(color); 
+       this.center = c;
         this.height = h;
         this. width = w;
     }

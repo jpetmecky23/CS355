@@ -5,6 +5,8 @@
  */
 package Model.shapes;
 
+import java.awt.Color;
+
 /**
  *
  * @author James
@@ -13,22 +15,23 @@ package Model.shapes;
 
 
 public class Rectangle extends Shape{
-    private Point3D upperLeftCorner;
+    private Point3D Corner;
     private int height;
     private int width;
     
-    public Rectangle(Point3D ulc, int h, int w){
-        this.upperLeftCorner = ulc;
+    public Rectangle(Point3D c, int h, int w, Color color){
+        super(color);
+        this.Corner = c;
         this.height = h;
         this.width = w;
     }
 
-    public Point3D getUpperLeftCorner() {
-        return upperLeftCorner;
+    public Point3D getCorner() {
+        return Corner;
     }
 
-    public void setUpperLeftCorner(Point3D upperLeftCorner) {
-        this.upperLeftCorner = upperLeftCorner;
+    public void setUpperLeftCorner(Point3D Corner) {
+        this.Corner = Corner;
     }
 
     public int getHeight() {

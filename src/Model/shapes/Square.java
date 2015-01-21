@@ -5,25 +5,28 @@
  */
 package Model.shapes;
 
+import java.awt.Color;
+
 /**
  *
  * @author James
  */
 public class Square extends Shape{
-    private Point3D upperLeftCorner;
+    private Point3D Corner;
     private int size;
     
-    public Square(Point3D ulc, int s){
-        this.upperLeftCorner = ulc;
+    public Square(Point3D c, int s, Color color){
+        super(color);
+        this.Corner = c;
         this.size = s;
     }
 
-    public Point3D getUpperLeftCorner() {
-        return upperLeftCorner;
+    public Point3D getCorner() {
+        return Corner;
     }
 
-    public void setUpperLeftCorner(Point3D upperLeftCorner) {
-        this.upperLeftCorner = upperLeftCorner;
+    public void setCorner(Point3D Corner) {
+        this.Corner = Corner;
     }
 
     public int getSize() {

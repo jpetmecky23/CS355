@@ -42,14 +42,11 @@ public class CS355
     	//MouseMotionLis mml = new MouseMotionLis();
     	
         GUIFunctions.createCS355Frame(null,v, null, null);
-        
-        Point3D p = new Point3D(5.0, 5.0, 5.0);//Testing
-        Circle circle = new Circle(p,5);//Testing
-        Model.inst().addShape(circle);//Testing
        
         GUIFunctions.refresh(); 
         
         GUIFunctions.changeSelectedColor(Color.cyan);
+        Model.inst().testModel();
         GUIFunctions.refresh(); 
         
    

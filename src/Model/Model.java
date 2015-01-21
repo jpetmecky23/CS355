@@ -6,7 +6,7 @@
 package Model;
 
 import Controller.CS355Controller;
-import Model.shapes.Shape;
+import Model.shapes.*;
 import View.View;
 import View.ViewRefresher;
 
@@ -92,5 +92,25 @@ import java.util.concurrent.Semaphore;
 		this.currentShape = currentShape;
 	}
     
-    
+    public void testModel(){
+        Shape s = null;
+        s = new Circle(new Point3D(285, 325, 60), 50, Color.BLUE);
+        addShape(s);
+        
+        s = new Ellipses(new Point3D(140, 420, 60), 30, 20, Color.CYAN);
+        addShape(s);
+
+        s = new Line3D(new Point3D(30, 40, 60), new Point3D(300, 400, 60), Color.YELLOW);
+        addShape(s);
+        
+        s = new Rectangle(new Point3D(240, 290, 60), 50, 60, Color.PINK);
+        addShape(s);
+
+        s = new Square(new Point3D(80, 400, 60), 50, Color.ORANGE);
+        addShape(s);
+        
+        s = new Triangle(new Point3D(383, 425, 60), new Point3D(100, 30, 60), new Point3D(55, 45, 60), Color.RED);
+        addShape(s);
+                
+    }
 }

@@ -1,10 +1,12 @@
 package Model.shapes;
 
+import java.awt.Color;
+
 /**
  *
  * @author Brennan Smith
  */
-public class Point3D extends Shape 
+public class Point3D //extends Shape 
 {
     public double x;
     public double y;
@@ -12,6 +14,7 @@ public class Point3D extends Shape
     
     public Point3D(double newX, double newY, double newZ)
     {
+        //super(Color.black);//Points dont need a color to my knoledge
         x = newX;
         y = newY;
         z = newZ;
