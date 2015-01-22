@@ -5,9 +5,7 @@
 package Shell;
 
 import Controller.CS355Controller;
-import Model.Model;
 import View.ViewRefresher;
-
 import java.awt.Color;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;

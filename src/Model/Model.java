@@ -6,10 +6,10 @@
 package Model;
 
 import Controller.CS355Controller;
-import Model.shapes.*;
 import View.View;
 import View.ViewRefresher;
-
+import Model.shapes.*;
+import Shell.GUIFunctions;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -29,10 +29,9 @@ import java.util.concurrent.Semaphore;
  */
  public class Model extends Observable {
     private ArrayList<Shape> container;
-    private Color shapeColor;
     private static Model instance;
-    private String currentShape;
-    
+    private Color shapeColor;
+        
     public static Model inst()
     {
         if (instance == null)
@@ -57,8 +56,7 @@ import java.util.concurrent.Semaphore;
 
     public Model() {
         this.container = new ArrayList();
-        shapeColor = Color.BLUE;
-        
+        this.shapeColor = Color.BLACK;   
     }
     
     public void addShape(Shape s){
@@ -71,26 +69,24 @@ import java.util.concurrent.Semaphore;
         return container.get(index);
     }
     
+    public void setShape(Shape shape, int index){
+        container.set(index, shape);
+        this.setChanged();
+    	this.notifyObservers();
+    }
+    
     public int getShapeCount(){
         return container.size();
     }
-
+       
+    
     public Color getColor() {
         return shapeColor;
     }
 
     public void setColor(Color color) {
         this.shapeColor = color;
-        this.notifyObservers();
     }
-
-	public String getCurrentShape() {
-		return currentShape;
-	}
-
-	public void setCurrentShape(String currentShape) {
-		this.currentShape = currentShape;
-	}
     
     public void testModel(){
         Shape s = null;
@@ -106,8 +102,8 @@ import java.util.concurrent.Semaphore;
         s = new Rectangle(new Point3D(240, 290, 60), 50, 60, Color.PINK);
         addShape(s);
 
-        s = new Square(new Point3D(80, 400, 60), 50, Color.ORANGE);
-        addShape(s);
+        //s = new Square(new Point3D(80, 400, 60), 50, Color.ORANGE);
+       // addShape(s);
         
         s = new Triangle(new Point3D(383, 425, 60), new Point3D(100, 30, 60), new Point3D(55, 45, 60), Color.RED);
         addShape(s);

@@ -10,6 +10,7 @@ import java.util.Observable;
 import java.awt.Color;
 import Model.Model;
 import Model.shapes.Shape;
+import Shell.GUIFunctions;
 import View.drawableShapes.DrawableShape;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -52,7 +53,7 @@ public class View implements ViewRefresher {
             @Override
             public void update(Observable o, Object arg) {
                     // TODO Auto-generated method stub
-                    //GUIFunctions.refresh();
+                   // GUIFunctions.refresh();
             }
 
 
