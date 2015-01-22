@@ -15,10 +15,14 @@ public class Circle extends Shape{
     private Point3D center;
     private int radis; 
   
-    public Circle(Point3D c, int r, Color color){
+    public Circle(Point3D center, Point3D mouseCurrentLocation, Color color){
         super(color);
-        this.center = c;
-        this.radis = r;
+        if(center != null){
+        this.center = center;
+        double x = Math.abs((center.x - mouseCurrentLocation.x));
+        double y = Math.abs((center.y - mouseCurrentLocation.y));
+        this.radis = (int) Math.sqrt((x * x) + (y * y));//pythagorean therom
+        }
     }
 
     public Point3D getCenter() {

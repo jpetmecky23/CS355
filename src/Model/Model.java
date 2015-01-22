@@ -31,7 +31,9 @@ import java.util.concurrent.Semaphore;
     private ArrayList<Shape> container;
     private static Model instance;
     private Color shapeColor;
-        
+    private Shape currentShape;
+    private ArrayList<Point3D>triPoints;
+    
     public static Model inst()
     {
         if (instance == null)
@@ -88,7 +90,31 @@ import java.util.concurrent.Semaphore;
         this.shapeColor = color;
     }
     
+    public Shape getCurrentShape() {
+        return currentShape;
+    }
+
+    public void setCurrentShape(Shape currentShape) {
+            this.currentShape = currentShape;
+    }
+    
+    public Point3D getTriPoint(int index) {
+        return triPoints.get(index);
+    }
+
+    public void setTriPoint(Point3D triPoint) {
+        this.triPoints.add(triPoint);
+    }
+    public void resetTriPoints(){
+        this.triPoints = new ArrayList();
+    }
+    
+    public int getTriPointSize(){
+        return this.triPoints.size();
+    }
+    
     public void testModel(){
+        /*
         Shape s = null;
         s = new Circle(new Point3D(285, 325, 60), 50, Color.BLUE);
         addShape(s);
@@ -99,14 +125,15 @@ import java.util.concurrent.Semaphore;
         s = new Line3D(new Point3D(30, 40, 60), new Point3D(300, 400, 60), Color.YELLOW);
         addShape(s);
         
-        s = new Rectangle(new Point3D(240, 290, 60), 50, 60, Color.PINK);
-        addShape(s);
+        //s = new Rectangle(new Point3D(240, 290, 60), 50, 60, Color.PINK);
+       // addShape(s);
 
         //s = new Square(new Point3D(80, 400, 60), 50, Color.ORANGE);
        // addShape(s);
         
         s = new Triangle(new Point3D(383, 425, 60), new Point3D(100, 30, 60), new Point3D(55, 45, 60), Color.RED);
         addShape(s);
+                */
                 
     }
 }

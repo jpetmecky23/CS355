@@ -16,11 +16,13 @@ public class Ellipses extends Shape{
     private int height;
     private int width;
     
-   public  Ellipses(Point3D c, int h, int w, Color color){
-       super(color); 
-       this.center = c;
-        this.height = h;
-        this. width = w;
+   public  Ellipses(Point3D center, Point3D mouseCurrentLocation, Color color){
+       super(color);
+       if(center != null){
+       this.center = center;
+       this.width = 2 * (Math.abs((int) (center.x - mouseCurrentLocation.x)));//Times 2 since these oare radii
+       this.height = 2 * (Math.abs((int) (center.y - mouseCurrentLocation.y)));//Times 2 since these oare radii 
+       }
     }
 
     public Point3D getCenter() {

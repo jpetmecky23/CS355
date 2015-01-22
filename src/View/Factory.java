@@ -85,20 +85,20 @@ public class Factory {
        }
        
        public DrawableCircle processCircle(Circle s){
-           int x = (int) s.getCenter().x;
-           int y = (int) s.getCenter().y;
            int width = s.getRadis() * 2;//Diameter is twice the radius
            int height = width;//Circles has the same height and width
+           int x = ((int) s.getCenter().x - s.getRadis());//Get upper left corner
+           int y = ((int) s.getCenter().y - s.getRadis());//Get upper left corner
            Color color = s.getColor();
            DrawableCircle  dc = new DrawableCircle(x, y, width, height, color);
            return dc;
        }
        
        public DrawableCircle processEllipses(Ellipses s){
-           int x = (int) s.getCenter().x;
-           int y = (int) s.getCenter().y;
            int width = s.getWidth();
            int height = s.getHeight();
+           int x = ((int) s.getCenter().x - (width / 2));//Get upper left corner. See circle for why divide by 2
+           int y = ((int) s.getCenter().y - (height / 2));//Get upper left corner. See circle for why divide by 2
            Color color = s.getColor();
            DrawableCircle  dc = new DrawableCircle(x, y, width, height, color);
            return dc;
@@ -125,6 +125,7 @@ public class Factory {
        }
        
        public DrawableQuad processSquare(Square s){
+
            int x = (int) s.getCorner().x;
            int y = (int) s.getCorner().y;
            int width = s.getSize();//Square same width and hight
@@ -132,6 +133,7 @@ public class Factory {
            Color color = s.getColor();
            DrawableQuad  dq= new DrawableQuad(x, y, width, height, color);
            return dq;
+           
        }
        
        public DrawableTri processTri(Triangle s){//I included the conversion logic for the
