@@ -33,21 +33,20 @@ public class CS355
     {
     	// Fill in the parameters below with your controller, view, 
     	//   mouse listener, and mouse motion listener
-    	//CS355Controller c = 
+    	CS355Controller c = new Controller(); 
     	View v = new View();
     	Model.inst().addObserver(v);
         //Model model = Model.createModel();
         
-    	//MouseLis ml = new MouseLis();
-    	//MouseMotionLis mml = new MouseMotionLis();
+    	MouseLis ml = new MouseLis();
+    	MouseMotionLis mml = new MouseMotionLis();
     	
-        GUIFunctions.createCS355Frame(null,v, null, null);
-       
-        GUIFunctions.refresh(); 
+        GUIFunctions.createCS355Frame(c,v, ml, mml);
+        GUIFunctions.refresh();
         
-        GUIFunctions.changeSelectedColor(Color.cyan);
-        Model.inst().testModel();
-        GUIFunctions.refresh(); 
+        //GUIFunctions.changeSelectedColor(Color.cyan);
+        //Model.inst().testModel();
+       //GUIFunctions.refresh(); 
         
    
     }
