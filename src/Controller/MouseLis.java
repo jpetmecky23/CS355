@@ -37,7 +37,6 @@ public class MouseLis implements java.awt.event.MouseListener{
     
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -59,6 +58,8 @@ public class MouseLis implements java.awt.event.MouseListener{
 		//pass the coordinates to the model class
             Point3D mouseLocation = new Point3D(arg0.getX(), arg0.getY(), 0);
             Controller.inst().setMouseDown(mouseLocation);
+            Point3D p = new Point3D(arg0.getX(), arg0.getY(), 0);
+            Model.inst().setTriPoint(p);
 	}
 
 	@Override

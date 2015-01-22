@@ -15,23 +15,42 @@ import java.awt.Color;
 
 
 public class Rectangle extends Shape{
-    private Point3D Corner;
+    private Point3D UpperLeftCorner;
     private int height;
     private int width;
     
-    public Rectangle(Point3D c, int h, int w, Color color){
+    public Rectangle(Point3D cornerStart, Point3D cornerEnd, Color color){
         super(color);
-        this.Corner = c;
-        this.height = h;
-        this.width = w;
+        if(cornerStart != null){
+        if((cornerStart.y > cornerEnd.y) && (cornerStart.x > cornerEnd.x)){
+            this.UpperLeftCorner = cornerEnd;
+        }
+        
+        else if((cornerStart.y < cornerEnd.y) && (cornerStart.x < cornerEnd.x)){
+            this.UpperLeftCorner = cornerStart;
+        }
+        
+        else if((cornerStart.y > cornerEnd.y) && (cornerStart.x < cornerEnd.x)){
+            Point3D p = new Point3D(cornerStart.x, cornerEnd.y, 0);
+             this.UpperLeftCorner = p;
+        }
+        
+        else {//if((cornerStart.y < cornerEnd.y) && (cornerStart.x > cornerEnd.x)){
+            Point3D p = new Point3D(cornerEnd.x, cornerStart.y, 0);
+            this.UpperLeftCorner = p;
+        }
+
+        this.width = Math.abs((int) (cornerStart.x - cornerEnd.x));
+        this.height = Math.abs((int) (cornerStart.y - cornerEnd.y));        
+        }
     }
 
     public Point3D getCorner() {
-        return Corner;
+        return UpperLeftCorner;
     }
 
     public void setUpperLeftCorner(Point3D Corner) {
-        this.Corner = Corner;
+        this.UpperLeftCorner = Corner;
     }
 
     public int getHeight() {
