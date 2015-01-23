@@ -30,8 +30,6 @@ import java.util.concurrent.Semaphore;
  public class Model extends Observable {
     private ArrayList<Shape> container;
     private static Model instance;
-    private Color shapeColor;
-    private Shape currentShape;
     
     public static Model inst()
     {
@@ -57,7 +55,7 @@ import java.util.concurrent.Semaphore;
 
     public Model() {
         this.container = new ArrayList();
-        this.shapeColor = Color.BLACK;   
+          
     }
     
     public void addShape(Shape s){
@@ -79,25 +77,8 @@ import java.util.concurrent.Semaphore;
     public int getShapeCount(){
         return container.size();
     }
-       
+ 
     
-    public Color getColor() {
-        return shapeColor;
-    }
-
-    public void setColor(Color color) {
-        this.shapeColor = color;
-    }
-    
-    public Shape getCurrentShape() {
-        return currentShape;
-    }
-
-    public void setCurrentShape(Shape currentShape) {
-            this.currentShape = currentShape;
-    }
-    
-
     public void testModel(){
         /*
         Shape s = null;

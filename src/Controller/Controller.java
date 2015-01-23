@@ -11,7 +11,6 @@ import java.awt.image.BufferedImage;
 import java.util.Iterator;
 import Model.Model;
 import Model.shapes.*;
-import java.util.ArrayList;
 
 
 /**
@@ -23,7 +22,8 @@ public class Controller implements CS355Controller{
     private Point3D mousePressed;
     private Point3D mouseReleased;
     private Point3D mouseCurrentLocation;  
-    
+    private Color shapeColor;
+    private Shape currentShape;
             
     public static Controller inst()
     {
@@ -51,36 +51,37 @@ public class Controller implements CS355Controller{
         this.mousePressed = null;
         this.mouseReleased = null;
         this.mouseCurrentLocation = null;
+        this.shapeColor = Color.BLACK; 
     }
     
  
     public void colorButtonHit(Color c){
         GUIFunctions.changeSelectedColor(c);
-        Model.inst().setColor(c);
+        Controller.inst().setColor(c);
     }
     
     public void triangleButtonHit(){
-        Model.inst().setCurrentShape(new Triangle(null, null));
+        Controller.inst().setCurrentShape(new Triangle(null, null));
     }
     
     public void squareButtonHit(){
-        Model.inst().setCurrentShape(new Square(null, null, null));
+        Controller.inst().setCurrentShape(new Square(null, null, null));
     }
     
     public void rectangleButtonHit(){
-        Model.inst().setCurrentShape(new Rectangle(null, null, null));
+        Controller.inst().setCurrentShape(new Rectangle(null, null, null));
     }
     
     public void circleButtonHit(){
-        Model.inst().setCurrentShape(new Circle(null, null, null));
+        Controller.inst().setCurrentShape(new Circle(null, null, null));
     }
     
     public void ellipseButtonHit(){
-        Model.inst().setCurrentShape(new Ellipses(null, null, null));
+        Controller.inst().setCurrentShape(new Ellipses(null, null, null));
     }
 
     public void lineButtonHit(){
-        Model.inst().setCurrentShape(new Line3D(null, null, null));// Blank shape placeholder
+        Controller.inst().setCurrentShape(new Line3D(null, null, null));// Blank shape placeholder
         
     }
 
@@ -142,6 +143,22 @@ public class Controller implements CS355Controller{
         
     }
 
+    public Color getColor() {
+        return shapeColor;
+    }
+
+    public void setColor(Color color) {
+        this.shapeColor = color;
+    }
+    
+    public Shape getCurrentShape() {
+        return currentShape;
+    }
+
+    public void setCurrentShape(Shape currentShape) {
+            this.currentShape = currentShape;
+    }
+    
     public Point3D getMouseDown() {
         return mousePressed;
     }
@@ -173,33 +190,33 @@ public class Controller implements CS355Controller{
     
     public void addShape(){
          
-           if(Model.inst().getCurrentShape() instanceof Circle){
-               Circle c = new Circle(this.mousePressed, this.mousePressed, Model.inst().getColor());
+           if(Controller.inst().getCurrentShape() instanceof Circle){
+               Circle c = new Circle(this.mousePressed, this.mousePressed, this.shapeColor);
                Model.inst().addShape(c);
            }
            
-           else if(Model.inst().getCurrentShape() instanceof Ellipses){
-               Ellipses c = new Ellipses(this.mousePressed, this.mousePressed, Model.inst().getColor());
+           else if(Controller.inst().getCurrentShape() instanceof Ellipses){
+               Ellipses c = new Ellipses(this.mousePressed, this.mousePressed, this.shapeColor);
                Model.inst().addShape(c);
            }
            
-           else if(Model.inst().getCurrentShape() instanceof Line3D){
+           else if(Controller.inst().getCurrentShape() instanceof Line3D){
               //ds = processLine((Line3D) s);
-               Line3D l = new Line3D(this.mousePressed, this.mousePressed, Model.inst().getColor());
+               Line3D l = new Line3D(this.mousePressed, this.mousePressed, this.shapeColor);
                Model.inst().addShape(l);
            } 
            
-           else if(Model.inst().getCurrentShape() instanceof Rectangle){
-               Rectangle s = new Rectangle(this.mousePressed, this.mousePressed, Model.inst().getColor());
+           else if(Controller.inst().getCurrentShape() instanceof Rectangle){
+               Rectangle s = new Rectangle(this.mousePressed, this.mousePressed, this.shapeColor);
                Model.inst().addShape(s);
            }
            
-           else if(Model.inst().getCurrentShape() instanceof Square){
-               Square s = new Square(this.mousePressed, this.mousePressed, Model.inst().getColor());
+           else if(Controller.inst().getCurrentShape() instanceof Square){
+               Square s = new Square(this.mousePressed, this.mousePressed, this.shapeColor);
                Model.inst().addShape(s);
            }
            
-           else if(Model.inst().getCurrentShape() instanceof Triangle){
+           else if(Controller.inst().getCurrentShape() instanceof Triangle){
                int index = Model.inst().getShapeCount() - 1;//last shape in array
                boolean updateShape = false;
                boolean isTriangle =  false;
@@ -216,7 +233,7 @@ public class Controller implements CS355Controller{
                }
 
                else{
-                Triangle t = new Triangle(this.mousePressed, Model.inst().getColor());
+                Triangle t = new Triangle(this.mousePressed, this.shapeColor);
                 Model.inst().addShape(t);
                }
            }  
@@ -224,21 +241,21 @@ public class Controller implements CS355Controller{
     }
     
     public void updateShape(){
-            if(Model.inst().getCurrentShape() instanceof Circle){
+            if(Controller.inst().getCurrentShape() instanceof Circle){
               int index = Model.inst().getShapeCount() - 1;//last shape in array
               Color c = Model.inst().getShape(index).getColor();
               Circle circle = new Circle(this.mousePressed, this.mouseCurrentLocation, c);
               Model.inst().setShape(circle, index);
            }
            
-           else if(Model.inst().getCurrentShape() instanceof Ellipses){
+           else if(Controller.inst().getCurrentShape() instanceof Ellipses){
               int index = Model.inst().getShapeCount() - 1;//last shape in array
               Color c = Model.inst().getShape(index).getColor();
               Ellipses e = new Ellipses(this.mousePressed, this.mouseCurrentLocation, c);
               Model.inst().setShape(e, index);
            }
            
-           else if(Model.inst().getCurrentShape() instanceof Line3D){
+           else if(Controller.inst().getCurrentShape() instanceof Line3D){
               //ds = processLine((Line3D) s);
               int index = Model.inst().getShapeCount() - 1;//last shape in array
               Color c = Model.inst().getShape(index).getColor();
@@ -246,21 +263,21 @@ public class Controller implements CS355Controller{
               Model.inst().setShape(l, index);
            } 
            
-           else if(Model.inst().getCurrentShape() instanceof Rectangle){
+           else if(Controller.inst().getCurrentShape() instanceof Rectangle){
               int index = Model.inst().getShapeCount() - 1;//last shape in array
               Color c = Model.inst().getShape(index).getColor();
               Rectangle r = new Rectangle(this.mousePressed, this.mouseCurrentLocation, c);
               Model.inst().setShape(r, index);
            }
            
-           else if(Model.inst().getCurrentShape() instanceof Square){
+           else if(Controller.inst().getCurrentShape() instanceof Square){
               int index = Model.inst().getShapeCount() - 1;//last shape in array
               Color c = Model.inst().getShape(index).getColor();
               Square s = new Square(this.mousePressed, this.mouseCurrentLocation, c);
               Model.inst().setShape(s, index); 
            }
            
-           else if(Model.inst().getCurrentShape() instanceof Triangle){
+           else if(Controller.inst().getCurrentShape() instanceof Triangle){
               int index = Model.inst().getShapeCount() - 1;//last shape in array
               Triangle tri = (Triangle)Model.inst().getShape(index);
               if(tri.isTwoNull()){
@@ -271,6 +288,6 @@ public class Controller implements CS355Controller{
                }
               Model.inst().setShape(tri, index);
            }  
-            GUIFunctions.refresh();
+            //GUIFunctions.refresh();
     }
 }

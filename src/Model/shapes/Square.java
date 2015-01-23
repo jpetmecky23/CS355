@@ -28,7 +28,7 @@ public class Square extends Shape{
         
         else if((cornerStart.y > cornerEnd.y) && (cornerStart.x < cornerEnd.x)){
             Point3D p = new Point3D(cornerStart.x, cornerEnd.y, 0);
-             this.UpperLeftCorner = p;
+            this.UpperLeftCorner = p;
         }
         
         else {//if((cornerStart.y < cornerEnd.y) && (cornerStart.x > cornerEnd.x)){
@@ -40,7 +40,7 @@ public class Square extends Shape{
         
         int width = Math.abs((int) (cornerStart.x - cornerEnd.x));
         int height = Math.abs((int) (cornerStart.y - cornerEnd.y));        
-        this.size = Math.max(width, height);
+        this.size = Math.min(width, height);
         }
     }
 
