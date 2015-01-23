@@ -53,7 +53,7 @@ public class View implements ViewRefresher {
             @Override
             public void update(Observable o, Object arg) {
                     // TODO Auto-generated method stub
-                   // GUIFunctions.refresh();
+                    GUIFunctions.refresh();
             }
 
 
