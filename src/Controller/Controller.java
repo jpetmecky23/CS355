@@ -166,7 +166,7 @@ public class Controller implements CS355Controller{
     public void setMouseDown(Point3D mouseDown) {
         this.mousePressed = mouseDown;
         this.mouseReleased = null;
-        addShape();
+        this.addShape();
     }
 
     public Point3D getMouseUp() {
@@ -229,7 +229,7 @@ public class Controller implements CS355Controller{
                }
                
                if(isTriangle && updateShape){//If the shape is a triangle and if the this point is null the update the shape with  mousePressed
-                this.updateShape();
+                this.updateTri();
                }
 
                else{
@@ -276,18 +276,17 @@ public class Controller implements CS355Controller{
               Square s = new Square(this.mousePressed, this.mouseCurrentLocation, c);
               Model.inst().setShape(s, index); 
            }
-           
-           else if(Controller.inst().getCurrentShape() instanceof Triangle){
-              int index = Model.inst().getShapeCount() - 1;//last shape in array
-              Triangle tri = (Triangle)Model.inst().getShape(index);
-              if(tri.isTwoNull()){
-                  tri.setTwo(this.mousePressed);
-               }
-               else if(tri.isThreeNull()){
-                   tri.setThree(this.mousePressed);
-               }
-              Model.inst().setShape(tri, index);
-           }  
-            //GUIFunctions.refresh();
     }
+    
+     public void updateTri(){
+        int index = Model.inst().getShapeCount() - 1;//last shape in array
+        Triangle tri = (Triangle)Model.inst().getShape(index);
+        if(tri.isTwoNull()){
+            tri.setTwo(this.mousePressed);
+         }
+         else if(tri.isThreeNull()){
+             tri.setThree(this.mousePressed);
+         }
+        Model.inst().setShape(tri, index);
+     }  
 }
