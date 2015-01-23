@@ -60,8 +60,7 @@ public class Controller implements CS355Controller{
     }
     
     public void triangleButtonHit(){
-        Model.inst().setCurrentShape(new Triangle(null, null, null, null));
-        Model.inst().resetTriPoints();
+        Model.inst().setCurrentShape(new Triangle(null, null));
     }
     
     public void squareButtonHit(){
@@ -167,9 +166,7 @@ public class Controller implements CS355Controller{
 
     public void setMouseCurrentLocation(Point3D mouseCurrentLocation) {
         this.mouseCurrentLocation = mouseCurrentLocation;
-        
-        if(mouseReleased != null){//only update the shape if the mouse button is pressed down still
-                                   //MouseReleased is set to null in mousedown function.
+        if(mouseReleased != null){//only update the shape if the mouse button is pressed down still                       //MouseReleased is set to null in mousedown function.
             this.updateShape();
         }
     }       
@@ -203,11 +200,24 @@ public class Controller implements CS355Controller{
            }
            
            else if(Model.inst().getCurrentShape() instanceof Triangle){
-               if(Model.inst().getTriPointSize() == 3){
-                Triangle t = new Triangle(Model.inst().getTriPoint(0), Model.inst().getTriPoint(1), Model.inst().getTriPoint(2), Model.inst().getColor());
+               int index = Model.inst().getShapeCount() - 1;//last shape in array
+               boolean updateShape = false;
+               boolean isTriangle =  false;
+                       
+               if(index >= 0){
+                isTriangle = (Model.inst().getShape(index)instanceof Triangle);//Check to see if the last shape in the arrat is a triangle
+                if(isTriangle){
+                    updateShape = ((Triangle)Model.inst().getShape(index)).isThreeNull(); //If it is a triangle is the third point null                   
+                }
+               }
+               
+               if(isTriangle && updateShape){//If the shape is a triangle and if the this point is null the update the shape with  mousePressed
+                this.updateShape();
+               }
+
+               else{
+                Triangle t = new Triangle(this.mousePressed, Model.inst().getColor());
                 Model.inst().addShape(t);
-                Model.inst().resetTriPoints();
-                GUIFunctions.refresh();
                }
            }  
            
@@ -251,7 +261,15 @@ public class Controller implements CS355Controller{
            }
            
            else if(Model.inst().getCurrentShape() instanceof Triangle){
-              //ds = processTri((Triangle) s);
+              int index = Model.inst().getShapeCount() - 1;//last shape in array
+              Triangle tri = (Triangle)Model.inst().getShape(index);
+              if(tri.isTwoNull()){
+                  tri.setTwo(this.mousePressed);
+               }
+               else if(tri.isThreeNull()){
+                   tri.setThree(this.mousePressed);
+               }
+              Model.inst().setShape(tri, index);
            }  
             GUIFunctions.refresh();
     }

@@ -29,9 +29,23 @@ public class DrawableTri extends DrawableShape{
     
     @Override
     public void draw(Graphics2D g2d){
+        if(this.p2 == null){//Don't draw anything if there is only one point
+            
+        }
+        
+        else if(this.p3 == null){//Only draw a line if there is only two points
+        g2d.setColor(color);
+        int x1 = (int) p1.x;
+        int y1 = (int) p1.y;
+        int x2 = (int) p2.x;
+        int y2 = (int) p2.y;
+        g2d.drawLine(x1, y1, x2, y2);
+        }
+        else{
         g2d.setColor(color);
         Polygon p = getPolygon();
         g2d.fillPolygon(p);
+        }
     }
     
     public Polygon getPolygon() {
