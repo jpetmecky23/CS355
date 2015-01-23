@@ -16,11 +16,11 @@ public class Triangle extends Shape{
     private Point3D two;
     private Point3D three;
     
-    public Triangle(Point3D a, Point3D b, Point3D c, Color color){
+    public Triangle(Point3D a,Color color){
         super(color);
         this.one = a;
-        this.two = b;
-        this.three = c;
+        this.two = null;
+        this.three = null;
     }
 
     public Point3D getOne() {
@@ -45,6 +45,20 @@ public class Triangle extends Shape{
 
     public void setThree(Point3D three) {
         this.three = three;
+    }
+    
+    public boolean isTwoNull(){
+        if(two == null){
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean isThreeNull(){
+    if(three == null){
+        return true;
+    }
+    return false;
     }
     
 }

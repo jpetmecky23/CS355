@@ -32,7 +32,6 @@ import java.util.concurrent.Semaphore;
     private static Model instance;
     private Color shapeColor;
     private Shape currentShape;
-    private ArrayList<Point3D>triPoints;
     
     public static Model inst()
     {
@@ -98,21 +97,7 @@ import java.util.concurrent.Semaphore;
             this.currentShape = currentShape;
     }
     
-    public Point3D getTriPoint(int index) {
-        return triPoints.get(index);
-    }
 
-    public void setTriPoint(Point3D triPoint) {
-        this.triPoints.add(triPoint);
-    }
-    public void resetTriPoints(){
-        this.triPoints = new ArrayList();
-    }
-    
-    public int getTriPointSize(){
-        return this.triPoints.size();
-    }
-    
     public void testModel(){
         /*
         Shape s = null;
