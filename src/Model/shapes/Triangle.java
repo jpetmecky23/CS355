@@ -46,7 +46,7 @@ public class Triangle extends Shape{
     public void setThree(Point3D three) {
         this.three = three;
     }
-    
+        
     public boolean isTwoNull(){
         if(two == null){
             return true;

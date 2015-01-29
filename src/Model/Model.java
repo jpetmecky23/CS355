@@ -78,6 +78,12 @@ import java.util.concurrent.Semaphore;
         return container.size();
     }
  
+    public Shape isClickOnShape(Point3D p){
+        Shape shape = null;
+        //Trans world coords. to 
+        
+        return shape;
+    }
     
     public void testModel(){
         /*

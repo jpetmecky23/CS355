@@ -13,15 +13,15 @@ import java.awt.Color;
  */
 public class Ellipses extends Shape{
     private Point3D center;
-    private int height;
-    private int width;
+    private double height;
+    private double width;
     
    public  Ellipses(Point3D center, Point3D mouseCurrentLocation, Color color){
        super(color);
        if(center != null){
        this.center = center;
-       this.width = 2 * (Math.abs((int) (center.x - mouseCurrentLocation.x)));//Times 2 since these oare radii
-       this.height = 2 * (Math.abs((int) (center.y - mouseCurrentLocation.y)));//Times 2 since these oare radii 
+       this.width = 2 * (Math.abs((center.x - mouseCurrentLocation.x)));//Times 2 since these oare radii
+       this.height = 2 * (Math.abs((center.y - mouseCurrentLocation.y)));//Times 2 since these oare radii 
        }
     }
 
@@ -33,7 +33,7 @@ public class Ellipses extends Shape{
         this.center = center;
     }
 
-    public int getHeight() {
+    public double getHeight() {
         return height;
     }
 
@@ -41,13 +41,11 @@ public class Ellipses extends Shape{
         this.height = height;
     }
 
-    public int getWidth() {
+    public double getWidth() {
         return width;
     }
 
     public void setWidth(int width) {
         this.width = width;
     }
-    
-    
 }

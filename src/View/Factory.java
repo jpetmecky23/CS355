@@ -85,22 +85,22 @@ public class Factory {
        }
        
        public DrawableCircle processCircle(Circle s){
-           int width = s.getRadis() * 2;//Diameter is twice the radius
-           int height = width;//Circles has the same height and width
-           int x = ((int) s.getCenter().x - s.getRadis());//Get upper left corner
-           int y = ((int) s.getCenter().y - s.getRadis());//Get upper left corner
+           double width =  s.getRadis() * 2;//Diameter is twice the radius
+           double height = width;//Circles has the same height and width
+           double x = (s.getCenter().x - s.getRadis());//Get upper left corner
+           double y = (s.getCenter().y - s.getRadis());//Get upper left corner
            Color color = s.getColor();
-           DrawableCircle  dc = new DrawableCircle(x, y, width, height, color);
+           DrawableCircle  dc = new DrawableCircle((int) x, (int) y,(int)  width, (int) height, color);
            return dc;
        }
        
        public DrawableCircle processEllipses(Ellipses s){
-           int width = s.getWidth();
-           int height = s.getHeight();
-           int x = ((int) s.getCenter().x - (width / 2));//Get upper left corner. See circle for why divide by 2
-           int y = ((int) s.getCenter().y - (height / 2));//Get upper left corner. See circle for why divide by 2
+           double width = s.getWidth();
+           double height = s.getHeight();
+           double x = (s.getCenter().x - (width / 2));//Get upper left corner. See circle for why divide by 2
+           double y = (s.getCenter().y - (height / 2));//Get upper left corner. See circle for why divide by 2
            Color color = s.getColor();
-           DrawableCircle  dc = new DrawableCircle(x, y, width, height, color);
+           DrawableCircle  dc = new DrawableCircle((int) x, (int) y, (int) width, (int) height, color);
            return dc;
        }
        
@@ -115,23 +115,23 @@ public class Factory {
        }
        
        public DrawableQuad processRec(Rectangle s){
-           int x = (int) s.getCorner().x;
-           int y = (int) s.getCorner().y;
-           int width = s.getWidth();
-           int height = s.getHeight();
+           double x = s.getCorner().x;
+           double y = s.getCorner().y;
+           double width = s.getWidth();
+           double height = s.getHeight();
            Color color = s.getColor();
-           DrawableQuad  dq= new DrawableQuad(x, y, width, height, color);
+           DrawableQuad  dq= new DrawableQuad((int) x, (int) y,(int) width, (int) height, color);
            return dq;
        }
        
        public DrawableQuad processSquare(Square s){
 
-           int x = (int) s.getCorner().x;
-           int y = (int) s.getCorner().y;
-           int width = s.getSize();//Square same width and hight
-           int height = s.getSize();
+           double x = s.getCorner().x;
+           double y = s.getCorner().y;
+           double width = s.getSize();//Square same width and hight
+           double height = s.getSize();
            Color color = s.getColor();
-           DrawableQuad  dq= new DrawableQuad(x, y, width, height, color);
+           DrawableQuad  dq= new DrawableQuad((int) x, (int) y, (int) width, (int) height, color);
            return dq;
            
        }

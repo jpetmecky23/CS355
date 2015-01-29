@@ -16,8 +16,8 @@ import java.awt.Color;
 
 public class Rectangle extends Shape{
     private Point3D UpperLeftCorner;
-    private int height;
-    private int width;
+    private double height;
+    private double width;
     
     public Rectangle(Point3D cornerStart, Point3D cornerEnd, Color color){
         super(color);
@@ -40,8 +40,8 @@ public class Rectangle extends Shape{
             this.UpperLeftCorner = p;
         }
 
-        this.width = Math.abs((int) (cornerStart.x - cornerEnd.x));
-        this.height = Math.abs((int) (cornerStart.y - cornerEnd.y));        
+        this.width = Math.abs((cornerStart.x - cornerEnd.x));
+        this.height = Math.abs((cornerStart.y - cornerEnd.y));
         }
     }
 
@@ -53,7 +53,7 @@ public class Rectangle extends Shape{
         this.UpperLeftCorner = Corner;
     }
 
-    public int getHeight() {
+    public double getHeight() {
         return height;
     }
 
@@ -61,13 +61,11 @@ public class Rectangle extends Shape{
         this.height = height;
     }
 
-    public int getWidth() {
+    public double getWidth() {
         return width;
     }
 
     public void setWidth(int width) {
         this.width = width;
-    }
-    
-    
+    }   
 }

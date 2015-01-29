@@ -14,9 +14,11 @@ import java.awt.Graphics;
  */
 public class Shape{
     private Color color;
-
+    private double angle;
+    
     public Shape(Color color) {
         this.color = color;
+        this.angle = 0;
     }
        
     public Color getColor() {
@@ -26,5 +28,12 @@ public class Shape{
     public void setColor(Color color) {
         this.color = color;
     }
-    
+
+    public double getAngle() {
+        return angle;
+    }
+
+    public void setAngle(double angle) {
+        this.angle = angle;
+    }
 }

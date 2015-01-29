@@ -13,7 +13,7 @@ import java.awt.Color;
  */
 public class Circle extends Shape{
     private Point3D center;
-    private int radis; 
+    private double radis;
   
     public Circle(Point3D center, Point3D mouseCurrentLocation, Color color){
         super(color);
@@ -21,7 +21,7 @@ public class Circle extends Shape{
         this.center = center;
         double x = Math.abs((center.x - mouseCurrentLocation.x));
         double y = Math.abs((center.y - mouseCurrentLocation.y));
-        this.radis = (int) Math.sqrt((x * x) + (y * y));//pythagorean therom
+        this.radis = Math.sqrt((x * x) + (y * y));//pythagorean therom
         }
     }
 
@@ -33,13 +33,12 @@ public class Circle extends Shape{
         this.center = center;
     }
 
-    public int getRadis() {
+    public double getRadis() {
         return radis;
     }
 
     public void setRadis(int radis) {
         this.radis = radis;
-    }
-    
+    }  
     
 }

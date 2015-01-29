@@ -13,14 +13,14 @@ import java.awt.Color;
  */
 public class Square extends Shape{
     private Point3D UpperLeftCorner;
-    private int size;
+    private double size;
     
     public Square(Point3D cornerStart, Point3D cornerEnd, Color color){
         super(color);
         if(cornerStart != null){
             
-        int width = Math.abs((int) (cornerStart.x - cornerEnd.x));
-        int height = Math.abs((int) (cornerStart.y - cornerEnd.y));        
+        double width = Math.abs((cornerStart.x - cornerEnd.x));
+        double height = Math.abs((cornerStart.y - cornerEnd.y));        
         this.size = Math.min(width, height);
             
         if((cornerStart.y > cornerEnd.y) && (cornerStart.x > cornerEnd.x)){
@@ -52,12 +52,11 @@ public class Square extends Shape{
         this.UpperLeftCorner = Corner;
     }
 
-    public int getSize() {
+    public double getSize() {
         return size;
     }
 
     public void setSize(int size) {
         this.size = size;
     }
-    
 }
