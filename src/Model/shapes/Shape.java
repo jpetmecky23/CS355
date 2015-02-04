@@ -14,8 +14,8 @@ import java.awt.Graphics;
  */
 public class Shape{
     private Color color;
-    private double angle;
-    private Point3D center;
+    protected double angle;
+    protected Point3D center;
     
     public Shape(Color color) {
         this.color = color;
@@ -23,8 +23,8 @@ public class Shape{
     }
        
     public Point3D world2Obj(Point3D p){        
-        double transX = center.x - p.x;
-        double transY = center.y - p.y;
+        double transX = p.x - center.x;
+        double transY = p.y - center.y;
         Point3D transPoint = new Point3D(transX, transY, 0);
         return transPoint;
     }

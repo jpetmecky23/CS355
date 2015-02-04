@@ -23,11 +23,6 @@ public class Ellipses extends Shape{
        this.height = 2 * (Math.abs((center.y - mouseCurrentLocation.y)));//Times 2 since these oare radii 
        }
     }
-
-   @Override
-    public Point3D world2Obj(Point3D p) {
-        return super.world2Obj(p); //To change body of generated methods, choose Tools | Templates.
-    }
    
     @Override
     public boolean isPointInShape(Point3D p) {

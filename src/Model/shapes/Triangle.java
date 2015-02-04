@@ -22,11 +22,6 @@ public class Triangle extends Shape{
         this.two = null;
         this.three = null;
     }
-
-    @Override
-    public Point3D world2Obj(Point3D p) {
-        return super.world2Obj(p); //To change body of generated methods, choose Tools | Templates.
-    }
     
     @Override
     public boolean isPointInShape(Point3D p) {
@@ -55,8 +50,9 @@ public class Triangle extends Shape{
 
     public void setThree(Point3D three) {
         this.three = three;
+        this.findCenter();
     }
-        
+    
     public boolean isTwoNull(){
         if(two == null){
             return true;
@@ -71,4 +67,10 @@ public class Triangle extends Shape{
     return false;
     }
     
+    public void findCenter(){
+        double centerX = (this.one.x + this.two.x + this.three.x) / 3; //Find the average
+        double centerY = (this.one.y + this.two.y + this.three.y) / 3; //Find the average
+        Point3D center = new Point3D(centerX, centerY, 0);
+        this.setCenter(center);
+    }
 }

@@ -24,14 +24,19 @@ public class Circle extends Shape{
         }
     }
 
-   @Override
-    public Point3D world2Obj(Point3D p) {
-        return super.world2Obj(p); //To change body of generated methods, choose Tools | Templates.
-    }
-    
     @Override
     public boolean isPointInShape(Point3D p) {
-        return super.isPointInShape(p); //To change body of generated methods, choose Tools | Templates.
+       Point3D convertedPoint = this.world2Obj(p);
+        double X = (convertedPoint.x - center.x);
+        X = X * X;
+        double Y = (convertedPoint.y - center.y);
+        Y = Y * Y;
+        double sum = X + Y;
+        double radisSquared = (this.radis * this.radis);
+        if(sum <= radisSquared){
+            return true;
+        }
+        return false;
     }
     
     public double getRadis() {

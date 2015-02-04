@@ -42,17 +42,22 @@ public class Rectangle extends Shape{
 
         this.width = Math.abs((cornerStart.x - cornerEnd.x));
         this.height = Math.abs((cornerStart.y - cornerEnd.y));
+        
+        double centerX = this.UpperLeftCorner.x + (this.width / 2);
+        double centerY = this.UpperLeftCorner.y + (this.height / 2);
+        this.setCenter(new Point3D(centerX, centerY, 0));
         }
     }
-
-   @Override
-    public Point3D world2Obj(Point3D p) {
-        return super.world2Obj(p); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+   
     @Override
     public boolean isPointInShape(Point3D p) {
-        return super.isPointInShape(p); //To change body of generated methods, choose Tools | Templates.
+        Point3D convertedPoint = this.world2Obj(p);
+        double dfocX = this.width / 2;//distanceFromObjectCenter
+        double dfocY = this.height / 2;//distanceFromObjectCenter
+        if(Math.abs(convertedPoint.x) <= dfocX && Math.abs(convertedPoint.y) <= dfocY){
+            return true;
+        }
+        return false; 
     }
     
     public Point3D getCorner() {
