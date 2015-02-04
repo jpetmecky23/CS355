@@ -15,12 +15,25 @@ import java.awt.Graphics;
 public class Shape{
     private Color color;
     private double angle;
+    private Point3D center;
     
     public Shape(Color color) {
         this.color = color;
         this.angle = 0;
     }
        
+    public Point3D world2Obj(Point3D p){        
+        double transX = center.x - p.x;
+        double transY = center.y - p.y;
+        Point3D transPoint = new Point3D(transX, transY, 0);
+        return transPoint;
+    }
+    
+    public boolean isPointInShape(Point3D p){
+        //Call world2Obj and the check to see if the point lies within the shape.
+        return false;
+    }
+    
     public Color getColor() {
         return color;
     }   
@@ -35,5 +48,21 @@ public class Shape{
 
     public void setAngle(double angle) {
         this.angle = angle;
+    }
+
+    public Point3D getCenter() {
+        return center;
+    }
+
+    public void setCenter(Point3D center) {
+        this.center = center;
+    }
+        
+    public void selectShape(Color color){
+        this.color = color;
+    }
+    
+    public void deselectShape(){
+        
     }
 }

@@ -12,25 +12,26 @@ import java.awt.Color;
  * @author James
  */
 public class Ellipses extends Shape{
-    private Point3D center;
     private double height;
     private double width;
     
    public  Ellipses(Point3D center, Point3D mouseCurrentLocation, Color color){
        super(color);
        if(center != null){
-       this.center = center;
+       this.setCenter(center);
        this.width = 2 * (Math.abs((center.x - mouseCurrentLocation.x)));//Times 2 since these oare radii
        this.height = 2 * (Math.abs((center.y - mouseCurrentLocation.y)));//Times 2 since these oare radii 
        }
     }
 
-    public Point3D getCenter() {
-        return center;
+   @Override
+    public Point3D world2Obj(Point3D p) {
+        return super.world2Obj(p); //To change body of generated methods, choose Tools | Templates.
     }
-
-    public void setCenter(Point3D center) {
-        this.center = center;
+   
+    @Override
+    public boolean isPointInShape(Point3D p) {
+        return super.isPointInShape(p); //To change body of generated methods, choose Tools | Templates.
     }
 
     public double getHeight() {

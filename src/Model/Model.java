@@ -78,11 +78,34 @@ import java.util.concurrent.Semaphore;
         return container.size();
     }
  
-    public Shape isClickOnShape(Point3D p){
+    public int check4ShapeClicked(Point3D world){
         Shape shape = null;
+        int shapeIndex = -1;
+        int count = Model.inst().getShapeCount();
         //Trans world coords. to 
-        
-        return shape;
+        for(int i = 0; i < count; i++){
+            shape = Model.inst().getShape(i);
+            boolean pass = shape.isPointInShape(world);
+            if(pass){
+                shapeIndex = i;
+                return shapeIndex;
+            }
+        }
+        return shapeIndex;
+    }
+    
+    public void selectShape(int shapeIndex, Color color){
+        Shape s = this.getShape(shapeIndex);
+        s.selectShape(color);
+        this.setChanged();
+    	this.notifyObservers();
+    }
+    
+        public void deselectShape(int shapeIndex){
+        Shape s = this.getShape(shapeIndex);
+        s.deselectShape();
+        this.setChanged();
+    	this.notifyObservers();
     }
     
     public void testModel(){

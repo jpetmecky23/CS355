@@ -37,7 +37,8 @@ public class MouseLis implements java.awt.event.MouseListener{
     
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-
+            Point3D mouseLocation = new Point3D(arg0.getX(), arg0.getY(), 0);
+            Controller.inst().setMouseClick(mouseLocation);
 	}
 
 	@Override

@@ -45,6 +45,16 @@ public class Rectangle extends Shape{
         }
     }
 
+   @Override
+    public Point3D world2Obj(Point3D p) {
+        return super.world2Obj(p); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public boolean isPointInShape(Point3D p) {
+        return super.isPointInShape(p); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     public Point3D getCorner() {
         return UpperLeftCorner;
     }

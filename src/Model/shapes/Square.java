@@ -18,7 +18,7 @@ public class Square extends Shape{
     public Square(Point3D cornerStart, Point3D cornerEnd, Color color){
         super(color);
         if(cornerStart != null){
-            
+                        
         double width = Math.abs((cornerStart.x - cornerEnd.x));
         double height = Math.abs((cornerStart.y - cornerEnd.y));        
         this.size = Math.min(width, height);
@@ -41,9 +41,23 @@ public class Square extends Shape{
             Point3D p = new Point3D(cornerStart.x - size, cornerStart.y, 0);
             this.UpperLeftCorner = p;
         }
+        
+        double centerX = this.UpperLeftCorner.x + (this.size / 2);
+        double centerY = this.UpperLeftCorner.y + (this.size / 2);
+        this.setCenter(new Point3D(centerX, centerY, 0));
         }
     }
-
+   
+    @Override
+    public boolean isPointInShape(Point3D p) {
+        Point3D convertedPoint = this.world2Obj(p);
+        double dfoc = size / 2;//distanceFromObjectCenter
+        if(Math.abs(convertedPoint.x) <= dfoc && Math.abs(convertedPoint.y) <= dfoc){
+            return true;
+        }
+        return false; 
+    }
+    
     public Point3D getCorner() {
         return UpperLeftCorner;
     }
