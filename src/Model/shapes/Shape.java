@@ -34,6 +34,10 @@ public class Shape{
         return false;
     }
     
+    protected double dotProd(Point3D p1, Point3D p2){
+        return (p1.x * p2.x) + (p1.y * p2.y);
+    }
+    
     public Color getColor() {
         return color;
     }   

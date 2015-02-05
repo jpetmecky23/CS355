@@ -178,7 +178,9 @@ public class Controller implements CS355Controller{
     public void setMouseDown(Point3D mouseDown) {
         this.mousePressed = mouseDown;
         this.mouseReleased = null;
+        if(currentShapeType != null){
         this.addShape();
+        }
     }
 
     public Point3D getMouseUp() {
@@ -206,11 +208,11 @@ public class Controller implements CS355Controller{
 
     public void setMouseClick(Point3D mouseClick) {
         this.mouseClick = mouseClick;
-        this.selectShape(mouseClick);
+        if(currentShapeType == null){
+            this.selectShape(mouseClick);
+        }
     }
-    
-    
-    
+
     public void addShape(){
          
            if(Controller.inst().getCurrentShapeType() instanceof Circle){

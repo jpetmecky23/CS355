@@ -26,10 +26,11 @@ public class Circle extends Shape{
 
     @Override
     public boolean isPointInShape(Point3D p) {
-       Point3D convertedPoint = this.world2Obj(p);
-        double X = (convertedPoint.x - center.x);
+       Point3D convertedPoint = this.world2Obj(p);//COnvert to object coords
+       Point3D objectOrigin = new Point3D(0, 0, 0); //Used to make sure the formula make since to me.
+        double X = (convertedPoint.x - objectOrigin.x);
         X = X * X;
-        double Y = (convertedPoint.y - center.y);
+        double Y = (convertedPoint.y - objectOrigin.y);
         Y = Y * Y;
         double sum = X + Y;
         double radisSquared = (this.radis * this.radis);

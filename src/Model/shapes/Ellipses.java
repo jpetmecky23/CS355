@@ -26,7 +26,20 @@ public class Ellipses extends Shape{
    
     @Override
     public boolean isPointInShape(Point3D p) {
-        return super.isPointInShape(p); //To change body of generated methods, choose Tools | Templates.
+        Point3D convertedPoint = this.world2Obj(p);
+        Point3D objectOrigin = new Point3D(0, 0, 0); //Used to make sure the formula make since to me.
+        double X = (convertedPoint.x - objectOrigin.x);
+        X = X / (this.width / 2);//divid by half the width
+        X = X * X;
+        double Y = (convertedPoint.y - objectOrigin.y);
+        Y = Y / (this.height / 2);//divid by half the hieght
+        Y = Y * Y;
+        double sum = X + Y;
+
+        if(sum <= 1){//1 is just part of the formula
+            return true;
+        }
+        return false;
     }
 
     public double getHeight() {

@@ -25,9 +25,27 @@ public class Triangle extends Shape{
     
     @Override
     public boolean isPointInShape(Point3D p) {
-        return super.isPointInShape(p); //To change body of generated methods, choose Tools | Templates.
+        Point3D convertedPoint = this.world2Obj(p);
+        boolean testP1 = testPoint(convertedPoint,this.world2Obj(this.one), this.world2Obj(this.two));
+        boolean testP2 = testPoint(convertedPoint,this.world2Obj(this.two), this.world2Obj(this.three));
+        boolean testP3 = testPoint(convertedPoint,this.world2Obj(this.three),this.world2Obj(this.one));
+        if(testP1 && testP2 && testP3){
+            return true;
+        }
+        return false;
     }
 
+    private boolean testPoint(Point3D convertedPoint, Point3D p1, Point3D p2){
+        Point3D f = subtractPoints(convertedPoint, p1);
+        Point3D g = subtractPoints(p2, p1);
+        double dotProd = dotProd(f, g);
+        return dotProd > 0;
+    }
+    
+    private Point3D subtractPoints(Point3D p1, Point3D p2){
+        return new Point3D(p1.x - p2.x, p1.y - p1.y, 0);
+    }
+    
     public Point3D getOne() {
         return one;
     }
