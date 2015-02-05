@@ -15,32 +15,53 @@ public class Line3D extends Shape
         super(color);
         start = s;
         end = e;
+        this.setCenter();
     }
 
     @Override
-    public boolean isPointInShape(Point3D p) {
-        Point3D convertedPoint = this.world2Obj(p);
+    public Point3D world2Obj(Point3D p) {
+        return p; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
+    
+    @Override
+    public boolean isPointInShape(Point3D q) {
+        Point3D convertedPointq = this.world2Obj(q);
         Point3D convertedStart = this.world2Obj(this.start);
         Point3D convertedEnd = this.world2Obj(this.end);
-        Point3D n = normalize(convertedStart, convertedEnd);
-        Double dotProd = dotProd(convertedPoint, n);
-            if(){
+        Point3D n = unitVector(convertedStart, convertedEnd);
+        double dotProd = dotProd(convertedPointq, n);
+        double d = dotProd(convertedStart, n);
+        double result = Math.abs(dotProd - d);
+        if(result <= 4){
+            if(pointWithInEndPoints(convertedPointq)){
                 return true;
             }
-        
+        }
         return false;
     }  
     
-    private Point3D normalize(Point3D p1, Point3D p2){
-        double X = p2.x - p1.x;
-        double magnitudeX = X * X;
-        double Y = p2.y - p1.y;
-        double magnitudeY = Y * Y;
-        double magnitude = Math.sqrt(magnitudeX + magnitudeY);
-        Point3D p = new Point3D(X / magnitude, Y / magnitudeY, 0);
-        return p;
-    }
+   private boolean pointWithInEndPoints(Point3D convertedPointq){
+        Point3D convertedStart = this.world2Obj(this.start);
+        Point3D convertedEnd = this.world2Obj(this.end);
+        double length = this.normalize(convertedStart, convertedEnd);
+        Point3D unitVector = this.unitVector(convertedStart, convertedEnd);
+        double dotProd = this.dotProd(this.subPoints(convertedPointq, convertedStart), unitVector);
+        
+        if(dotProd <= length){
+            return true;
+        }
+        return false;
+   }
     
+   private void setCenter(){
+      // double x = Math.abs(this.start.x - this.end.x) / 2;
+      // double y = Math.abs(this.start.y - this.end.y) / 2;;
+       //Point3D c = new Point3D(x, y, 0);
+       //this.center = c;
+   }
+   
     public Point3D getStart() {
         return start;
     }

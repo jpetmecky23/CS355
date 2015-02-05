@@ -38,6 +38,27 @@ public class Shape{
         return (p1.x * p2.x) + (p1.y * p2.y);
     }
     
+    protected Point3D subPoints(Point3D p1, Point3D p2){
+        return new Point3D((p1.x - p2.x),(p1.y - p2.y), 0);
+    }
+    
+    protected double normalize(Point3D p1, Point3D p2){
+    double X = p2.x - p1.x;
+    X = X * X;
+    double Y = p2.y - p1.y;
+    Y = Y * Y;
+    double normal = Math.sqrt(X + Y); 
+    return normal;
+    }
+    
+    protected Point3D unitVector(Point3D p1, Point3D p2){
+    double X = p2.x - p1.x;
+    double Y = p2.y - p1.y;
+    double magnitude = normalize(p1, p2);
+    Point3D p = new Point3D(X / magnitude, Y / magnitude, 0);
+    return p;
+    }
+    
     public Color getColor() {
         return color;
     }   
