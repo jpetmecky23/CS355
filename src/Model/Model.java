@@ -6,6 +6,7 @@
 package Model;
 
 import Controller.CS355Controller;
+import Controller.Controller;
 import View.View;
 import View.ViewRefresher;
 import Model.shapes.*;
@@ -83,7 +84,7 @@ import java.util.concurrent.Semaphore;
         int shapeIndex = -1;
         int count = Model.inst().getShapeCount();
         //Trans world coords. to 
-        for(int i = 0; i < count; i++){
+        for(int i = count - 1; i >= 0; i--){
             shape = Model.inst().getShape(i);
             boolean pass = shape.isPointInShape(world);
             if(pass){
@@ -94,9 +95,11 @@ import java.util.concurrent.Semaphore;
         return shapeIndex;
     }
     
-    public void selectShape(int shapeIndex, Color color){
+    public void selectShape(int shapeIndex){
         Shape s = this.getShape(shapeIndex);
-        s.selectShape(color);
+        s.selectShape();
+        GUIFunctions.changeSelectedColor(s.getColor());
+        Controller.inst().setColor(s.getColor());
         this.setChanged();
     	this.notifyObservers();
     }

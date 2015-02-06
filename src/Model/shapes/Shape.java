@@ -6,7 +6,6 @@
 package Model.shapes;
 
 import java.awt.Color;
-import java.awt.Graphics;
 
 /**
  *
@@ -15,11 +14,13 @@ import java.awt.Graphics;
 public class Shape{
     private Color color;
     protected double angle;
+    protected boolean isSelected;
     protected Point3D center;
     
     public Shape(Color color) {
         this.color = color;
         this.angle = 0;
+        this.isSelected = false;
     }
        
     public Point3D world2Obj(Point3D p){        
@@ -83,11 +84,17 @@ public class Shape{
         this.center = center;
     }
         
-    public void selectShape(Color color){
-        this.color = color;
+    public void selectShape(){
+        this.isSelected = true;
     }
     
     public void deselectShape(){
-        
+        this.isSelected = false;
     }
+
+    public boolean isIsSelected() {
+        return isSelected;
+    }
+    
+    
 }

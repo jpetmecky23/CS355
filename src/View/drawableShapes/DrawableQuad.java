@@ -18,18 +18,23 @@ public class DrawableQuad extends DrawableShape{
     private int width;
     private int height;
 
-    public DrawableQuad(int x, int y, int width, int height, Color color) {
+    public DrawableQuad(Color color, double angle, boolean isSelected, int x, int y, int width, int height) {
+        super(color, angle, isSelected);
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-        this.color = color;
     }
     
     @Override
     public void draw(Graphics2D g2d){
         g2d.setColor(color);
         g2d.fillRect(x, y, width, height);
+        
+        if(this.isSelected){
+            g2d.setColor(Color.WHITE);
+            g2d.drawRect(x, y, width, height);
+        }
     }
 
     public int getX() {

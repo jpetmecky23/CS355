@@ -90,7 +90,9 @@ public class Factory {
            double x = (s.getCenter().x - s.getRadis());//Get upper left corner
            double y = (s.getCenter().y - s.getRadis());//Get upper left corner
            Color color = s.getColor();
-           DrawableCircle  dc = new DrawableCircle((int) x, (int) y,(int)  width, (int) height, color);
+           double angle = s.getAngle();
+           boolean isSelected = s.isIsSelected();
+           DrawableCircle  dc = new DrawableCircle(color, angle, isSelected, (int) x, (int) y,(int)  width, (int) height);
            return dc;
        }
        
@@ -100,7 +102,9 @@ public class Factory {
            double x = (s.getCenter().x - (width / 2));//Get upper left corner. See circle for why divide by 2
            double y = (s.getCenter().y - (height / 2));//Get upper left corner. See circle for why divide by 2
            Color color = s.getColor();
-           DrawableCircle  dc = new DrawableCircle((int) x, (int) y, (int) width, (int) height, color);
+           double angle = s.getAngle();
+           boolean isSelected = s.isIsSelected();
+           DrawableCircle  dc = new DrawableCircle(color, angle, isSelected, (int) x, (int) y, (int) width, (int) height);
            return dc;
        }
        
@@ -110,7 +114,9 @@ public class Factory {
            int x2 = (int) s.getEnd().x;
            int y2 = (int) s.getEnd().y;
            Color color = s.getColor();
-           DrawableLine  dl = new DrawableLine(x1, y1, x2, y2, color);
+           double angle = s.getAngle();
+           boolean isSelected = s.isIsSelected();
+           DrawableLine  dl = new DrawableLine(color, angle, isSelected, x1, y1, x2, y2);
            return dl;
        }
        
@@ -120,7 +126,9 @@ public class Factory {
            double width = s.getWidth();
            double height = s.getHeight();
            Color color = s.getColor();
-           DrawableQuad  dq= new DrawableQuad((int) x, (int) y,(int) width, (int) height, color);
+           double angle = s.getAngle();
+           boolean isSelected = s.isIsSelected();
+           DrawableQuad  dq= new DrawableQuad(color, angle, isSelected, (int) x, (int) y,(int) width, (int) height);
            return dq;
        }
        
@@ -131,7 +139,9 @@ public class Factory {
            double width = s.getSize();//Square same width and hight
            double height = s.getSize();
            Color color = s.getColor();
-           DrawableQuad  dq= new DrawableQuad((int) x, (int) y, (int) width, (int) height, color);
+           double angle = s.getAngle();
+           boolean isSelected = s.isIsSelected();
+           DrawableQuad  dq= new DrawableQuad(color, angle, isSelected, (int) x, (int) y, (int) width, (int) height);
            return dq;
            
        }
@@ -142,7 +152,9 @@ public class Factory {
            Point3D p2 = s.getTwo();
            Point3D p3 = s.getThree();
            Color color = s.getColor();
-           DrawableTri  dt= new DrawableTri(p1, p2, p3,color);
+           double angle = s.getAngle();
+           boolean isSelected = s.isIsSelected();
+           DrawableTri  dt= new DrawableTri(color, angle, isSelected, p1, p2, p3);
            return dt;
        }
 }

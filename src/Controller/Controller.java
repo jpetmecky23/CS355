@@ -325,7 +325,7 @@ public class Controller implements CS355Controller{
         Controller.inst().setIocss(shapeIndex);
         
         if(this.iocss > -1){//Indexs less than 0 mean no shape was clicked
-         Model.inst().selectShape(this.iocss, this.shapeColor); 
+        Model.inst().selectShape(this.iocss); 
         }
          //set current shape type
          //set current shape index

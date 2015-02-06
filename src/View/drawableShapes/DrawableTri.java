@@ -19,8 +19,8 @@ public class DrawableTri extends DrawableShape{
     private Point3D p2;
     private Point3D p3;
     
-    public DrawableTri(Point3D p1, Point3D p2, Point3D p3, Color color) {
-        this.color = color;
+    public DrawableTri(Color color, double angle, boolean isSelected, Point3D p1, Point3D p2, Point3D p3) {
+        super(color, angle, isSelected);
         this.p1 = p1;
         this.p2 = p2;
         this.p3 = p3;
@@ -45,6 +45,11 @@ public class DrawableTri extends DrawableShape{
         g2d.setColor(color);
         Polygon p = getPolygon();
         g2d.fillPolygon(p);
+        
+        if(this.isSelected){
+            g2d.setColor(Color.WHITE);
+            g2d.drawPolygon(p);
+        }
         }
     }
     
