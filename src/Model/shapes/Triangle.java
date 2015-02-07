@@ -29,7 +29,6 @@ public class Triangle extends Shape{
         boolean testP1 = testPoint(convertedPoint,this.world2Obj(this.one), this.world2Obj(this.two));
         boolean testP2 = testPoint(convertedPoint,this.world2Obj(this.two), this.world2Obj(this.three));
         boolean testP3 = testPoint(convertedPoint,this.world2Obj(this.three),this.world2Obj(this.one));
-       
         return (testP1 && testP2 && testP3);
     }
 

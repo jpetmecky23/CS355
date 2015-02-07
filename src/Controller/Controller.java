@@ -21,7 +21,6 @@ public class Controller implements CS355Controller{
     private static Controller instance;
     private Point3D mousePressed;
     private Point3D mouseReleased;
-    private Point3D mouseClick;
     private Point3D mouseCurrentLocation;  
     private Color shapeColor;
     private Shape currentShapeType;
@@ -52,7 +51,6 @@ public class Controller implements CS355Controller{
     public Controller() {
         this.mousePressed = null;
         this.mouseReleased = null;
-        this.mouseClick = null;
         this.mouseCurrentLocation = null;
         this.shapeColor = Color.BLACK; 
     }
@@ -61,31 +59,45 @@ public class Controller implements CS355Controller{
     public void colorButtonHit(Color c){
         GUIFunctions.changeSelectedColor(c);
         Controller.inst().setColor(c);
+        if(Controller.inst().getIocss() > -1 && Model.inst().getShapeCount() > 0){
+            Model.inst().changeShapeColor(Controller.inst().getIocss() , c);
+        }        
     }
     
     public void triangleButtonHit(){
         Controller.inst().setCurrentShapeType(new Triangle(null, null));
+        Model.inst().deselectShape(Controller.inst().getIocss());
+        Controller.inst().setIocss(-1);
     }
     
     public void squareButtonHit(){
         Controller.inst().setCurrentShapeType(new Square(null, null, null));
+        Model.inst().deselectShape(Controller.inst().getIocss());
+        Controller.inst().setIocss(-1);
     }
     
     public void rectangleButtonHit(){
         Controller.inst().setCurrentShapeType(new Rectangle(null, null, null));
+        Model.inst().deselectShape(Controller.inst().getIocss());
+        Controller.inst().setIocss(-1);
     }
     
     public void circleButtonHit(){
         Controller.inst().setCurrentShapeType(new Circle(null, null, null));
+        Model.inst().deselectShape(Controller.inst().getIocss());
+        Controller.inst().setIocss(-1);
     }
     
     public void ellipseButtonHit(){
         Controller.inst().setCurrentShapeType(new Ellipses(null, null, null));
+        Model.inst().deselectShape(Controller.inst().getIocss());
+        Controller.inst().setIocss(-1);
     }
 
     public void lineButtonHit(){
         Controller.inst().setCurrentShapeType(new Line3D(null, null, null));// Blank shape placeholder
-        
+        Model.inst().deselectShape(Controller.inst().getIocss());
+        Controller.inst().setIocss(-1);
     }
 
     public void selectButtonHit(){
@@ -189,6 +201,9 @@ public class Controller implements CS355Controller{
 
     public void setMouseUp(Point3D mouseUp) {
         this.mouseReleased = mouseUp;
+        if(currentShapeType == null){
+            this.selectShape(Controller.inst().getMouseUp());
+        }
     } 
 
     public Point3D getMouseCurrentLocation() {
@@ -202,16 +217,6 @@ public class Controller implements CS355Controller{
         }
     }       
 
-    public Point3D getMouseClick() {
-        return mouseClick;
-    }
-
-    public void setMouseClick(Point3D mouseClick) {
-        this.mouseClick = mouseClick;
-        if(currentShapeType == null){
-            this.selectShape(mouseClick);
-        }
-    }
 
     public void addShape(){
          
@@ -317,15 +322,15 @@ public class Controller implements CS355Controller{
      
      public void selectShape(Point3D mouseLocation){
          
-        if(this.iocss > -1){
-            Model.inst().deselectShape(this.iocss);
+        if(Controller.inst().getIocss()  > -1){
+            Model.inst().deselectShape(Controller.inst().getIocss() );
         }
         
         int shapeIndex =  Model.inst().check4ShapeClicked(mouseLocation);
         Controller.inst().setIocss(shapeIndex);
         
-        if(this.iocss > -1){//Indexs less than 0 mean no shape was clicked
-        Model.inst().selectShape(this.iocss); 
+        if(Controller.inst().getIocss()  > -1){//Indexs less than 0 mean no shape was clicked
+        Model.inst().selectShape(Controller.inst().getIocss() ); 
         }
          //set current shape type
          //set current shape index

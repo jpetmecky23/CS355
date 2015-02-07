@@ -105,11 +105,20 @@ import java.util.concurrent.Semaphore;
     }
     
         public void deselectShape(int shapeIndex){
+            if(shapeIndex > -1 && this.getShapeCount() > 0){
+            Shape s = this.getShape(shapeIndex);
+            s.deselectShape();
+            this.setChanged();
+            this.notifyObservers();
+            }
+    }
+        
+        public void changeShapeColor(int shapeIndex, Color color){
         Shape s = this.getShape(shapeIndex);
-        s.deselectShape();
+        s.setColor(color);
         this.setChanged();
     	this.notifyObservers();
-    }
+        }
     
     public void testModel(){
         /*
