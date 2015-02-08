@@ -41,11 +41,10 @@ public class Square extends Shape{
         else {//if((cornerStart.y < cornerEnd.y) && (cornerStart.x > cornerEnd.x)){
             Point3D p = new Point3D(cornerStart.x - size, cornerStart.y, 0);
             this.UpperLeftCorner = p;
-        }
-        
+        }       
         double centerX = this.UpperLeftCorner.x + (this.size / 2);
         double centerY = this.UpperLeftCorner.y + (this.size / 2);
-        this.setCenter(new Point3D(centerX, centerY, 0));
+        this.center = new Point3D(centerX, centerY, 0);
         }
     }
    
@@ -60,6 +59,20 @@ public class Square extends Shape{
         else{
             this.isSelected = false;
             }
+    }
+
+    @Override
+    public void setCenter(Point3D center) {
+        if(this.center != null && this.UpperLeftCorner != null){
+        double x = center.x - this.center.x;//recreate the trans vector for moving the uppper corner point
+        double y = center.y - this.center.y; 
+        Point3D transVec = new Point3D(x, y, 0);//Trans vec
+        x = this.UpperLeftCorner.x + transVec.x;
+        y = this.UpperLeftCorner.y + transVec.y;
+        Point3D p = new Point3D(x, y, 0);
+        this.UpperLeftCorner = p;
+        }
+        this.center = center;
     }
     
     public Point3D getCorner() {

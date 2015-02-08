@@ -64,6 +64,20 @@ public class Rectangle extends Shape{
             }
     }
     
+        @Override
+    public void setCenter(Point3D center) {
+        if(this.center != null && this.UpperLeftCorner != null){
+        double x = center.x - this.center.x;//recreate the trans vector for moving the uppper corner point
+        double y = center.y - this.center.y; 
+        Point3D transVec = new Point3D(x, y, 0);//Trans vec
+        x = this.UpperLeftCorner.x + transVec.x;
+        y = this.UpperLeftCorner.y + transVec.y;
+        Point3D p = new Point3D(x, y, 0);
+        this.UpperLeftCorner = p;
+        }
+        this.center = center;
+    }
+    
     public Point3D getCorner() {
         return UpperLeftCorner;
     }

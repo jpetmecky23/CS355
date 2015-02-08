@@ -32,8 +32,10 @@ public class Shape{
     
     public void translateShape(Point3D transVec){
         if(this.isSelected){
-            this.center.x = this.center.x + transVec.x;
-            this.center.y = this.center.y + transVec.y;
+            double x = this.center.x + transVec.x;
+            double y = this.center.y + transVec.y;
+            Point3D p = new Point3D(x, y, 0);
+            this.setCenter(p);
         }
     }
     

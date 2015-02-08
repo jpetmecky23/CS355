@@ -16,15 +16,7 @@ public class Line3D extends Shape
         super(color);
         start = s;
         end = e;
-        this.setCenter();
     }
-
-    @Override
-    public Point3D world2Obj(Point3D p) {
-        return p; //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
     
     @Override
     public void isPointInShape(Point3D q) {
@@ -45,25 +37,29 @@ public class Line3D extends Shape
             }
         
     }  
+
+    @Override
+    public void translateShape(Point3D transVec) {
+        if(this.isSelected){
+        double x = this.start.x + transVec.x;
+        double y = this.start.y + transVec.y;
+        Point3D p = new Point3D(x, y, 0);
+        this.setStart(p);
+        x = this.end.x + transVec.x;
+        y = this.end.y + transVec.y;
+        p = new Point3D(x, y, 0);
+        this.setEnd(p);
+        }
+    }
+    
+    
     
    private boolean pointWithInEndPoints(Point3D q){
-        /*Point3D convertedStart = this.world2Obj(this.start);
-        Point3D convertedEnd = this.world2Obj(this.end);
-        double length = this.normalize(convertedStart, convertedEnd);
-        Point3D unitVector = this.unitVector(convertedStart, convertedEnd);
-        double dotProd = this.dotProd(this.subPoints(convertedPointq, convertedStart), unitVector);
-        
+        /*
         if(dotProd <= length){
             return true;
         }*/
         return false;
-   }
-    
-   private void setCenter(){
-      // double x = Math.abs(this.start.x - this.end.x) / 2;
-      // double y = Math.abs(this.start.y - this.end.y) / 2;;
-       //Point3D c = new Point3D(x, y, 0);
-       //this.center = c;
    }
    
     public Point3D getStart() {
