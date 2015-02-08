@@ -30,6 +30,13 @@ public class Shape{
         return transPoint;
     }
     
+    public void translateShape(Point3D transVec){
+        if(this.isSelected){
+            this.center.x = this.center.x + transVec.x;
+            this.center.y = this.center.y + transVec.y;
+        }
+    }
+    
     public void isPointInShape(Point3D p){
         //Call world2Obj and the check to see if the point lies within the shape. 
     }

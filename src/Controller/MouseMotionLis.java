@@ -41,8 +41,8 @@ public class MouseMotionLis implements java.awt.event.MouseMotionListener{
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		//Pass the mouse location
+            Point3D mouseLocation = new Point3D(arg0.getX(), arg0.getY(), 0);
+            Controller.inst().setMouseCurrentLocation(mouseLocation);
 	}
 
 }

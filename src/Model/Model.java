@@ -90,8 +90,7 @@ import java.util.concurrent.Semaphore;
     }
     
     public void check4ShapeClicked(Point3D world){
-        int count = Model.inst().getShapeCount();
-        //Trans world coords. to 
+        int count = Model.inst().getShapeCount(); 
         for(int i = count - 1; i >= 0; i--){
             this.container.get(i).isPointInShape(world);
         }
@@ -99,9 +98,7 @@ import java.util.concurrent.Semaphore;
     }
     
     public void changeColorOfSelectedShape(Color c){
-        int count = Model.inst().getShapeCount();
-        Shape s = null;
-        //Trans world coords. to 
+        int count = Model.inst().getShapeCount(); 
         for(int i = count - 1; i >= 0; i--){
             if(this.container.get(i).isIsSelected()){
                 this.container.get(i).setColor(c);
@@ -114,4 +111,11 @@ import java.util.concurrent.Semaphore;
     	this.notifyObservers();
     }
 
+    public void translateShape(Point3D tanslationVec){
+        int count = Model.inst().getShapeCount();
+        for(int i = count - 1; i >= 0; i--){
+            this.container.get(i).translateShape(tanslationVec);
+        } 
+        this.modelChanged();
+    }
 }

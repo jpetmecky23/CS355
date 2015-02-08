@@ -21,7 +21,8 @@ public class Controller implements CS355Controller{
     private static Controller instance;
     private Point3D mousePressed;
     private Point3D mouseReleased;
-    private Point3D mouseCurrentLocation;  
+    private Point3D mouseCurrentLocation;
+    private Point3D mouseDelta;
     private Shape currentShapeType;
             
     public static Controller inst()
@@ -50,6 +51,7 @@ public class Controller implements CS355Controller{
         this.mousePressed = null;
         this.mouseReleased = null;
         this.mouseCurrentLocation = null;
+         this.mouseDelta = new Point3D(0, 0, 0);
         //Model.inst().setSelectColor(Color.yellow);
     }
 
@@ -177,9 +179,14 @@ public class Controller implements CS355Controller{
     }
 
     public void setMouseCurrentLocation(Point3D mouseCurrentLocation) {
+        if(this.mouseCurrentLocation != null){
+        double x = this.mouseCurrentLocation.x - mouseCurrentLocation.x;
+        double y = this.mouseCurrentLocation.y - mouseCurrentLocation.y;      
+        this.mouseDelta = new Point3D(-x, -y, 0);
+        }
         this.mouseCurrentLocation = mouseCurrentLocation;
         if(mouseReleased != null){//only update the shape if the mouse button is pressed down still                       //MouseReleased is set to null in mousedown function.
-            this.updateShape();
+         //   this.updateShape();
         }
     }       
 
@@ -271,6 +278,10 @@ public class Controller implements CS355Controller{
               Color c = Model.inst().getShape(index).getColor();
               Square s = new Square(this.mousePressed, this.mouseCurrentLocation, c);
               Model.inst().setShape(s, index); 
+           }
+            
+           else if(Controller.inst().getCurrentShapeType() == null){
+               Model.inst().translateShape(this.mouseDelta);
            }
     }
     
