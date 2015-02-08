@@ -85,6 +85,7 @@ import java.util.concurrent.Semaphore;
     public void setSelectColor(Color selectColor) {
         this.selectColor = selectColor;
         GUIFunctions.changeSelectedColor(selectColor);
+        this.changeColorOfSelectedShape(selectColor);
         this.modelChanged();
     }
     
@@ -95,6 +96,17 @@ import java.util.concurrent.Semaphore;
             this.container.get(i).isPointInShape(world);
         }
         this.modelChanged();
+    }
+    
+    public void changeColorOfSelectedShape(Color c){
+        int count = Model.inst().getShapeCount();
+        Shape s = null;
+        //Trans world coords. to 
+        for(int i = count - 1; i >= 0; i--){
+            if(this.container.get(i).isIsSelected()){
+                this.container.get(i).setColor(c);
+            }
+        }
     }
     
     public void modelChanged(){
