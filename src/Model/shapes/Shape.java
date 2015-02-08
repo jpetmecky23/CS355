@@ -43,6 +43,10 @@ public class Shape{
         return new Point3D((p1.x - p2.x),(p1.y - p2.y), 0);
     }
     
+    protected Point3D perpVec(Point3D p){
+        return new Point3D(-p.y,p.x, 0);
+    }
+    
     protected double normalize(Point3D p1, Point3D p2){
     double X = p2.x - p1.x;
     X = X * X;

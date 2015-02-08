@@ -27,23 +27,21 @@ public class Line3D extends Shape
     
     @Override
     public boolean isPointInShape(Point3D q) {
-        Point3D convertedPointq = this.world2Obj(q);
-        Point3D convertedStart = this.world2Obj(this.start);
-        Point3D convertedEnd = this.world2Obj(this.end);
-        Point3D n = unitVector(convertedStart, convertedEnd);
-        double dotProd = dotProd(convertedPointq, n);
-        double d = dotProd(convertedStart, n);
-        double result = Math.abs(dotProd - d);
+        Point3D p1 = this.start;
+        Point3D p2 = this.end;
+        double e = Math.abs(((p2.y - p1.y) * q.x) - ((p2.x - p1.x) * q.y) + ((p2.x * p1.y) - (p2.y * p1.x)));
+        double f = this.normalize(p1, p2);
+        double result = e / f;
         if(result <= 4){
-            if(pointWithInEndPoints(convertedPointq)){
+            //if(pointWithInEndPoints(q)){
                 return true;
-            }
+            //}
         }
         return false;
     }  
     
-   private boolean pointWithInEndPoints(Point3D convertedPointq){
-        Point3D convertedStart = this.world2Obj(this.start);
+   private boolean pointWithInEndPoints(Point3D q){
+        /*Point3D convertedStart = this.world2Obj(this.start);
         Point3D convertedEnd = this.world2Obj(this.end);
         double length = this.normalize(convertedStart, convertedEnd);
         Point3D unitVector = this.unitVector(convertedStart, convertedEnd);
@@ -51,7 +49,7 @@ public class Line3D extends Shape
         
         if(dotProd <= length){
             return true;
-        }
+        }*/
         return false;
    }
     

@@ -35,6 +35,7 @@ public class Triangle extends Shape{
     private boolean testPoint(Point3D convertedPoint, Point3D p1, Point3D p2){
         Point3D f = subPoints(convertedPoint, p1);
         Point3D g = subPoints(p2, p1);
+        g = perpVec(g);
         double dotProd = dotProd(f, g);
         return dotProd > 0;
     }
