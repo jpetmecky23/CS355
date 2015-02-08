@@ -5,6 +5,7 @@
  */
 package Model.shapes;
 
+import Model.Model;
 import java.awt.Color;
 
 /**
@@ -24,12 +25,18 @@ public class Triangle extends Shape{
     }
     
     @Override
-    public boolean isPointInShape(Point3D p) {
+    public void isPointInShape(Point3D p) {
         Point3D convertedPoint = this.world2Obj(p);
         boolean testP1 = testPoint(convertedPoint,this.world2Obj(this.one), this.world2Obj(this.two));
         boolean testP2 = testPoint(convertedPoint,this.world2Obj(this.two), this.world2Obj(this.three));
         boolean testP3 = testPoint(convertedPoint,this.world2Obj(this.three),this.world2Obj(this.one));
-        return (testP1 && testP2 && testP3);
+        if(testP1 && testP2 && testP3){
+            this.isSelected = true;
+            Model.inst().setSelectColor(this.getColor());
+        }
+        else{
+            this.isSelected = false;
+            }
     }
 
     private boolean testPoint(Point3D convertedPoint, Point3D p1, Point3D p2){

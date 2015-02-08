@@ -5,6 +5,7 @@
  */
 package Model.shapes;
 
+import Model.Model;
 import java.awt.Color;
 
 /**
@@ -25,7 +26,7 @@ public class Circle extends Shape{
     }
 
     @Override
-    public boolean isPointInShape(Point3D p) {
+    public void isPointInShape(Point3D p) {
        Point3D convertedPoint = this.world2Obj(p);//COnvert to object coords
        Point3D objectOrigin = new Point3D(0, 0, 0); //Used to make sure the formula make since to me.
         double X = (convertedPoint.x - objectOrigin.x);
@@ -35,9 +36,12 @@ public class Circle extends Shape{
         double sum = X + Y;
         double radisSquared = (this.radis * this.radis);
         if(sum <= radisSquared){
-            return true;
+            this.isSelected = true;
+            Model.inst().setSelectColor(this.getColor());
         }
-        return false;
+        else{
+            this.isSelected = false;
+            }
     }
     
     public double getRadis() {

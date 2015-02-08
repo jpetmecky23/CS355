@@ -22,9 +22,7 @@ public class Controller implements CS355Controller{
     private Point3D mousePressed;
     private Point3D mouseReleased;
     private Point3D mouseCurrentLocation;  
-    private Color shapeColor;
     private Shape currentShapeType;
-    private int iocss;//indexOfCurrentlySelectedShape
             
     public static Controller inst()
     {
@@ -52,52 +50,36 @@ public class Controller implements CS355Controller{
         this.mousePressed = null;
         this.mouseReleased = null;
         this.mouseCurrentLocation = null;
-        this.shapeColor = Color.BLACK; 
+        //Model.inst().setSelectColor(Color.yellow);
     }
-    
- 
+
     public void colorButtonHit(Color c){
         GUIFunctions.changeSelectedColor(c);
-        Controller.inst().setColor(c);
-        if(Controller.inst().getIocss() > -1 && Model.inst().getShapeCount() > 0){
-            Model.inst().changeShapeColor(Controller.inst().getIocss() , c);
-        }        
+        Model.inst().setSelectColor(c);
     }
     
     public void triangleButtonHit(){
         Controller.inst().setCurrentShapeType(new Triangle(null, null));
-        Model.inst().deselectShape(Controller.inst().getIocss());
-        Controller.inst().setIocss(-1);
     }
     
     public void squareButtonHit(){
         Controller.inst().setCurrentShapeType(new Square(null, null, null));
-        Model.inst().deselectShape(Controller.inst().getIocss());
-        Controller.inst().setIocss(-1);
     }
     
     public void rectangleButtonHit(){
         Controller.inst().setCurrentShapeType(new Rectangle(null, null, null));
-        Model.inst().deselectShape(Controller.inst().getIocss());
-        Controller.inst().setIocss(-1);
     }
     
     public void circleButtonHit(){
         Controller.inst().setCurrentShapeType(new Circle(null, null, null));
-        Model.inst().deselectShape(Controller.inst().getIocss());
-        Controller.inst().setIocss(-1);
     }
     
     public void ellipseButtonHit(){
         Controller.inst().setCurrentShapeType(new Ellipses(null, null, null));
-        Model.inst().deselectShape(Controller.inst().getIocss());
-        Controller.inst().setIocss(-1);
     }
 
     public void lineButtonHit(){
         Controller.inst().setCurrentShapeType(new Line3D(null, null, null));// Blank shape placeholder
-        Model.inst().deselectShape(Controller.inst().getIocss());
-        Controller.inst().setIocss(-1);
     }
 
     public void selectButtonHit(){
@@ -158,14 +140,6 @@ public class Controller implements CS355Controller{
     public void toggleBackgroundDisplay(){
         
     }
-
-    public Color getColor() {
-        return shapeColor;
-    }
-
-    public void setColor(Color color) {
-        this.shapeColor = color;
-    }
     
     public Shape getCurrentShapeType() {
         return currentShapeType;
@@ -173,14 +147,6 @@ public class Controller implements CS355Controller{
 
     public void setCurrentShapeType(Shape currentShape) {
             this.currentShapeType = currentShape;
-    }
-
-    public int getIocss() {
-        return iocss;
-    }
-
-    public void setIocss(int iocss) {
-        this.iocss = iocss;
     }
        
     public Point3D getMouseDown() {
@@ -221,28 +187,28 @@ public class Controller implements CS355Controller{
     public void addShape(){
          
            if(Controller.inst().getCurrentShapeType() instanceof Circle){
-               Circle c = new Circle(this.mousePressed, this.mousePressed, this.shapeColor);
+               Circle c = new Circle(this.mousePressed, this.mousePressed, Model.inst().getSelectColor());
                Model.inst().addShape(c);
            }
            
            else if(Controller.inst().getCurrentShapeType() instanceof Ellipses){
-               Ellipses c = new Ellipses(this.mousePressed, this.mousePressed, this.shapeColor);
+               Ellipses c = new Ellipses(this.mousePressed, this.mousePressed, Model.inst().getSelectColor());
                Model.inst().addShape(c);
            }
            
            else if(Controller.inst().getCurrentShapeType() instanceof Line3D){
               //ds = processLine((Line3D) s);
-               Line3D l = new Line3D(this.mousePressed, this.mousePressed, this.shapeColor);
+               Line3D l = new Line3D(this.mousePressed, this.mousePressed, Model.inst().getSelectColor());
                Model.inst().addShape(l);
            } 
            
            else if(Controller.inst().getCurrentShapeType() instanceof Rectangle){
-               Rectangle s = new Rectangle(this.mousePressed, this.mousePressed, this.shapeColor);
+               Rectangle s = new Rectangle(this.mousePressed, this.mousePressed, Model.inst().getSelectColor());
                Model.inst().addShape(s);
            }
            
            else if(Controller.inst().getCurrentShapeType() instanceof Square){
-               Square s = new Square(this.mousePressed, this.mousePressed, this.shapeColor);
+               Square s = new Square(this.mousePressed, this.mousePressed, Model.inst().getSelectColor());
                Model.inst().addShape(s);
            }
            
@@ -263,7 +229,7 @@ public class Controller implements CS355Controller{
                }
 
                else{
-                Triangle t = new Triangle(this.mousePressed, this.shapeColor);
+                Triangle t = new Triangle(this.mousePressed, Model.inst().getSelectColor());
                 Model.inst().addShape(t);
                }
            }  
@@ -321,17 +287,8 @@ public class Controller implements CS355Controller{
      }
      
      public void selectShape(Point3D mouseLocation){
-         
-        if(Controller.inst().getIocss()  > -1){
-            Model.inst().deselectShape(Controller.inst().getIocss() );
-        }
-        
-        int shapeIndex =  Model.inst().check4ShapeClicked(mouseLocation);
-        Controller.inst().setIocss(shapeIndex);
-        
-        if(Controller.inst().getIocss()  > -1){//Indexs less than 0 mean no shape was clicked
-        Model.inst().selectShape(Controller.inst().getIocss() ); 
-        }
+         Model.inst().check4ShapeClicked(mouseLocation);
+
          //set current shape type
          //set current shape index
          

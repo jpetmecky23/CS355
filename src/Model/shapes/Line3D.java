@@ -1,5 +1,6 @@
 package Model.shapes;
 
+import Model.Model;
 import java.awt.Color;
 
 /**
@@ -26,7 +27,7 @@ public class Line3D extends Shape
     
     
     @Override
-    public boolean isPointInShape(Point3D q) {
+    public void isPointInShape(Point3D q) {
         Point3D p1 = this.start;
         Point3D p2 = this.end;
         double e = Math.abs(((p2.y - p1.y) * q.x) - ((p2.x - p1.x) * q.y) + ((p2.x * p1.y) - (p2.y * p1.x)));
@@ -34,10 +35,15 @@ public class Line3D extends Shape
         double result = e / f;
         if(result <= 4){
             //if(pointWithInEndPoints(q)){
-                return true;
+                this.isSelected = true;
+                Model.inst().setSelectColor(this.getColor());
+                
             //}
         }
-        return false;
+        else{
+            this.isSelected = false;
+            }
+        
     }  
     
    private boolean pointWithInEndPoints(Point3D q){

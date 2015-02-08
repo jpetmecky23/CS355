@@ -31,6 +31,7 @@ import java.util.concurrent.Semaphore;
  public class Model extends Observable {
     private ArrayList<Shape> container;
     private static Model instance;
+    private Color selectColor;
     
     public static Model inst()
     {
@@ -61,8 +62,7 @@ import java.util.concurrent.Semaphore;
     
     public void addShape(Shape s){
     	container.add(s);
-    	this.setChanged();
-    	this.notifyObservers();
+    	this.modelChanged();
     }
     
     public Shape getShape(int index) {
@@ -71,76 +71,35 @@ import java.util.concurrent.Semaphore;
     
     public void setShape(Shape shape, int index){
         container.set(index, shape);
-        this.setChanged();
-    	this.notifyObservers();
+        this.modelChanged();
     }
     
     public int getShapeCount(){
         return container.size();
     }
- 
-    public int check4ShapeClicked(Point3D world){
-        Shape shape = null;
-        int shapeIndex = -1;
+
+    public Color getSelectColor() {
+        return selectColor;
+    }
+
+    public void setSelectColor(Color selectColor) {
+        this.selectColor = selectColor;
+        GUIFunctions.changeSelectedColor(selectColor);
+        this.modelChanged();
+    }
+    
+    public void check4ShapeClicked(Point3D world){
         int count = Model.inst().getShapeCount();
         //Trans world coords. to 
         for(int i = count - 1; i >= 0; i--){
-            shape = Model.inst().getShape(i);
-            boolean pass = shape.isPointInShape(world);
-            if(pass){
-                shapeIndex = i;
-                return shapeIndex;
-            }
+            this.container.get(i).isPointInShape(world);
         }
-        return shapeIndex;
+        this.modelChanged();
     }
     
-    public void selectShape(int shapeIndex){
-        Shape s = this.getShape(shapeIndex);
-        s.selectShape();
-        GUIFunctions.changeSelectedColor(s.getColor());
-        Controller.inst().setColor(s.getColor());
+    public void modelChanged(){
         this.setChanged();
     	this.notifyObservers();
     }
-    
-        public void deselectShape(int shapeIndex){
-            if(shapeIndex > -1 && this.getShapeCount() > 0){
-            Shape s = this.getShape(shapeIndex);
-            s.deselectShape();
-            this.setChanged();
-            this.notifyObservers();
-            }
-    }
-        
-        public void changeShapeColor(int shapeIndex, Color color){
-        Shape s = this.getShape(shapeIndex);
-        s.setColor(color);
-        this.setChanged();
-    	this.notifyObservers();
-        }
-    
-    public void testModel(){
-        /*
-        Shape s = null;
-        s = new Circle(new Point3D(285, 325, 60), 50, Color.BLUE);
-        addShape(s);
-        
-        s = new Ellipses(new Point3D(140, 420, 60), 30, 20, Color.CYAN);
-        addShape(s);
 
-        s = new Line3D(new Point3D(30, 40, 60), new Point3D(300, 400, 60), Color.YELLOW);
-        addShape(s);
-        
-        //s = new Rectangle(new Point3D(240, 290, 60), 50, 60, Color.PINK);
-       // addShape(s);
-
-        //s = new Square(new Point3D(80, 400, 60), 50, Color.ORANGE);
-       // addShape(s);
-        
-        s = new Triangle(new Point3D(383, 425, 60), new Point3D(100, 30, 60), new Point3D(55, 45, 60), Color.RED);
-        addShape(s);
-                */
-                
-    }
 }

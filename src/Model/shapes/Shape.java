@@ -30,9 +30,8 @@ public class Shape{
         return transPoint;
     }
     
-    public boolean isPointInShape(Point3D p){
-        //Call world2Obj and the check to see if the point lies within the shape.
-        return false;
+    public void isPointInShape(Point3D p){
+        //Call world2Obj and the check to see if the point lies within the shape. 
     }
     
     protected double dotProd(Point3D p1, Point3D p2){
@@ -86,14 +85,6 @@ public class Shape{
 
     public void setCenter(Point3D center) {
         this.center = center;
-    }
-        
-    public void selectShape(){
-        this.isSelected = true;
-    }
-    
-    public void deselectShape(){
-        this.isSelected = false;
     }
 
     public boolean isIsSelected() {

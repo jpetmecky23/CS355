@@ -5,6 +5,7 @@
  */
 package Model.shapes;
 
+import Model.Model;
 import java.awt.Color;
 
 /**
@@ -50,14 +51,17 @@ public class Rectangle extends Shape{
     }
    
     @Override
-    public boolean isPointInShape(Point3D p) {
+    public void isPointInShape(Point3D p) {
         Point3D convertedPoint = this.world2Obj(p);
         double dfocX = this.width / 2;//distanceFromObjectCenter
         double dfocY = this.height / 2;//distanceFromObjectCenter
         if(Math.abs(convertedPoint.x) <= dfocX && Math.abs(convertedPoint.y) <= dfocY){
-            return true;
+          this.isSelected = true;
+          Model.inst().setSelectColor(this.getColor());
         }
-        return false; 
+        else{
+            this.isSelected = false;
+            }
     }
     
     public Point3D getCorner() {

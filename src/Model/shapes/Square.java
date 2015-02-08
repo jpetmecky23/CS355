@@ -5,6 +5,7 @@
  */
 package Model.shapes;
 
+import Model.Model;
 import java.awt.Color;
 
 /**
@@ -49,13 +50,16 @@ public class Square extends Shape{
     }
    
     @Override
-    public boolean isPointInShape(Point3D p) {
+    public void isPointInShape(Point3D p) {
         Point3D convertedPoint = this.world2Obj(p);
         double dfoc = size / 2;//distanceFromObjectCenter
         if(Math.abs(convertedPoint.x) <= dfoc && Math.abs(convertedPoint.y) <= dfoc){
-            return true;
+            this.isSelected = true;
+            Model.inst().setSelectColor(this.getColor());
         }
-        return false; 
+        else{
+            this.isSelected = false;
+            }
     }
     
     public Point3D getCorner() {
