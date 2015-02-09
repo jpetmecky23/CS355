@@ -78,10 +78,21 @@ import java.util.Observable;
         this.modelChanged();
     }
     
-    public void check4ShapeClicked(Point3D world){
+    public void clearSelectedShapes(){
         int count = Model.inst().getShapeCount(); 
         for(int i = count - 1; i >= 0; i--){
-            this.container.get(i).isPointInShape(world);
+           this.container.get(i).setIsSelected(false);//clear selected shapes.
+        }
+    }
+    
+    public void check4ShapeClicked(Point3D world){
+        int count = Model.inst().getShapeCount();
+        clearSelectedShapes();
+        for(int i = count - 1; i >= 0; i--){
+            boolean yes = this.container.get(i).isPointInShape(world);
+            if(yes){
+               break;
+            }
         }
         this.modelChanged();
     }

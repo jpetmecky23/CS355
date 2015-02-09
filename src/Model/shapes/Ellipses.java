@@ -26,7 +26,7 @@ public class Ellipses extends Shape{
     }
    
     @Override
-    public void isPointInShape(Point3D p) {
+    public boolean isPointInShape(Point3D p) {
         Point3D convertedPoint = this.world2Obj(p);
         Point3D objectOrigin = new Point3D(0, 0, 0); //Used to make sure the formula make since to me.
         double X = (convertedPoint.x - objectOrigin.x);
@@ -40,9 +40,11 @@ public class Ellipses extends Shape{
         if(sum <= 1){//1 is just part of the formula
            this.isSelected = true;
            Model.inst().setSelectColor(this.getColor());
+           return true;
         }
         else{
             this.isSelected = false;
+            return false;
             }
     }
 

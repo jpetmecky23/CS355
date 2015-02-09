@@ -43,7 +43,8 @@ public class CS355
     	
         GUIFunctions.createCS355Frame(c,v, ml, mml);
         GUIFunctions.refresh();
-        
+        GUIFunctions.changeSelectedColor(Color.BLUE);
+        Model.inst().setSelectColor(Color.BLUE);//Change default color
         //GUIFunctions.changeSelectedColor(Color.cyan);
         //Model.inst().testModel();
        //GUIFunctions.refresh(); 

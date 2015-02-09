@@ -52,7 +52,6 @@ public class Controller implements CS355Controller{
         this.mouseReleased = null;
         this.mouseCurrentLocation = null;
         this.mouseDelta = new Point3D(0, 0, 0);
-        //Model.inst().setSelectColor(Color.yellow);
     }
 
     public void colorButtonHit(Color c){
@@ -62,30 +61,37 @@ public class Controller implements CS355Controller{
     
     public void triangleButtonHit(){
         Controller.inst().setCurrentShapeType(new Triangle(null, null));
+        Model.inst().clearSelectedShapes();
     }
     
     public void squareButtonHit(){
         Controller.inst().setCurrentShapeType(new Square(null, null, null));
+        Model.inst().clearSelectedShapes();
     }
     
     public void rectangleButtonHit(){
         Controller.inst().setCurrentShapeType(new Rectangle(null, null, null));
+        Model.inst().clearSelectedShapes();
     }
     
     public void circleButtonHit(){
         Controller.inst().setCurrentShapeType(new Circle(null, null, null));
+        Model.inst().clearSelectedShapes();
     }
     
     public void ellipseButtonHit(){
         Controller.inst().setCurrentShapeType(new Ellipses(null, null, null));
+        Model.inst().clearSelectedShapes();
     }
 
     public void lineButtonHit(){
         Controller.inst().setCurrentShapeType(new Line3D(null, null, null));// Blank shape placeholder
+        Model.inst().clearSelectedShapes();
     }
 
     public void selectButtonHit(){
          Controller.inst().setCurrentShapeType(null);// No shape type is currentlly selected
+         Model.inst().clearSelectedShapes();
     }
 
     public void zoomInButtonHit(){

@@ -45,20 +45,31 @@ public class Triangle extends Shape{
 
     
     @Override
-    public void isPointInShape(Point3D p) {
+    public boolean isPointInShape(Point3D p) {
         Point3D convertedPoint = this.world2Obj(p);
+        this.orderPoints();
         boolean testP1 = testPoint(convertedPoint,this.world2Obj(this.one), this.world2Obj(this.two));
         boolean testP2 = testPoint(convertedPoint,this.world2Obj(this.two), this.world2Obj(this.three));
         boolean testP3 = testPoint(convertedPoint,this.world2Obj(this.three),this.world2Obj(this.one));
         if(testP1 && testP2 && testP3){
             this.isSelected = true;
             Model.inst().setSelectColor(this.getColor());
+            return true;
         }
         else{
             this.isSelected = false;
+            return false;
             }
     }
 
+    private void orderPoints(){
+        if(two.y > one.y && three.y < two.y && two.x < three.x){
+            Point3D temp = two;
+            two = three;
+            three = temp;
+        }
+    }
+    
     private boolean testPoint(Point3D convertedPoint, Point3D p1, Point3D p2){
         Point3D f = subPoints(convertedPoint, p1);
         Point3D g = subPoints(p2, p1);

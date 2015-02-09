@@ -49,15 +49,17 @@ public class Square extends Shape{
     }
    
     @Override
-    public void isPointInShape(Point3D p) {
+    public boolean isPointInShape(Point3D p) {
         Point3D convertedPoint = this.world2Obj(p);
         double dfoc = size / 2;//distanceFromObjectCenter
         if(Math.abs(convertedPoint.x) <= dfoc && Math.abs(convertedPoint.y) <= dfoc){
             this.isSelected = true;
             Model.inst().setSelectColor(this.getColor());
+            return true;
         }
         else{
             this.isSelected = false;
+            return false;
             }
     }
 

@@ -19,7 +19,7 @@ public class Line3D extends Shape
     }
     
     @Override
-    public void isPointInShape(Point3D q) {
+    public boolean isPointInShape(Point3D q) {
         Point3D p1 = this.start;
         Point3D p2 = this.end;
         double e = Math.abs(((p2.y - p1.y) * q.x) - ((p2.x - p1.x) * q.y) + ((p2.x * p1.y) - (p2.y * p1.x)));
@@ -29,11 +29,12 @@ public class Line3D extends Shape
             //if(pointWithInEndPoints(q)){
                 this.isSelected = true;
                 Model.inst().setSelectColor(this.getColor());
-                
+                return true;
             //}
         }
         else{
             this.isSelected = false;
+            return false;
             }
         
     }  
