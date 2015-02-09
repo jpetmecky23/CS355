@@ -23,6 +23,26 @@ public class Triangle extends Shape{
         this.two = null;
         this.three = null;
     }
+
+    @Override
+    public void translateShape(Point3D transVec) {
+        if(this.isSelected){
+        double x = this.one.x + transVec.x;
+        double y = this.one.y + transVec.y;
+        Point3D p = new Point3D(x, y, 0);
+        this.setOne(p);
+        x = this.two.x + transVec.x;
+        y = this.two.y + transVec.y;
+        p = new Point3D(x, y, 0);
+        this.setTwo(p);
+        x = this.three.x + transVec.x;
+        y = this.three.y + transVec.y;
+        p = new Point3D(x, y, 0);
+        this.setThree(p);
+        }
+    }
+    
+
     
     @Override
     public void isPointInShape(Point3D p) {

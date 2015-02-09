@@ -34,6 +34,10 @@ public class DrawableCircle extends DrawableShape{
         if(this.isSelected){
             g2d.setColor(Color.WHITE);
             g2d.drawOval(x, y, width, height);
+            int centerX = x + width / 2;
+            int centerY = y + height / 2;
+            g2d.fillOval(centerX - 3, y - 27, 6, 6);
+            g2d.drawLine(centerX, (centerY - height / 2), centerX, y - 25);
         }
     }
 

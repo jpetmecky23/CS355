@@ -51,7 +51,7 @@ public class Controller implements CS355Controller{
         this.mousePressed = null;
         this.mouseReleased = null;
         this.mouseCurrentLocation = null;
-         this.mouseDelta = new Point3D(0, 0, 0);
+        this.mouseDelta = new Point3D(0, 0, 0);
         //Model.inst().setSelectColor(Color.yellow);
     }
 
@@ -161,6 +161,9 @@ public class Controller implements CS355Controller{
         if(currentShapeType != null){
         this.addShape();
         }
+        if(currentShapeType == null){
+            this.selectShape(Controller.inst().getMouseDown());
+        }
     }
 
     public Point3D getMouseUp() {
@@ -169,9 +172,6 @@ public class Controller implements CS355Controller{
 
     public void setMouseUp(Point3D mouseUp) {
         this.mouseReleased = mouseUp;
-        if(currentShapeType == null){
-            this.selectShape(Controller.inst().getMouseUp());
-        }
     } 
 
     public Point3D getMouseCurrentLocation() {

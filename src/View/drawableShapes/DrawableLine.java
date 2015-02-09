@@ -30,6 +30,12 @@ public class DrawableLine extends DrawableShape{
     public void draw(Graphics2D g2d){
         g2d.setColor(color);
         g2d.drawLine(x1, y1, x2, y2);
+        
+        if(this.isSelected){
+            g2d.setColor(Color.WHITE);
+            g2d.fillOval(x1 - 3, y1 - 3, 6, 6);
+            g2d.fillOval(x2 - 3, y2 - 3, 6, 6);
+        }
     }
     
     public int getX1() {

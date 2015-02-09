@@ -23,6 +23,7 @@ public class DrawableShape {
         this.isSelected = isSelected;
     }
     
+    
   public void draw(Graphics2D g2d){
 
     }    

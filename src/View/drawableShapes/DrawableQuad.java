@@ -7,6 +7,7 @@ package View.drawableShapes;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 
 /**
  *
@@ -28,11 +29,20 @@ public class DrawableQuad extends DrawableShape{
     
     @Override
     public void draw(Graphics2D g2d){
+        AffineTransform rotate = new AffineTransform();
+        int centerX = x + width / 2;
+        int centerY = y + height / 2;
+        //rotate.translate(centerX, centerY);
+        rotate.rotate(angle);
+        g2d.setTransform(rotate);
         g2d.setColor(color);
         g2d.fillRect(x, y, width, height);
         
         if(this.isSelected){
             g2d.setColor(Color.WHITE);
+            centerX = x + width / 2;
+            g2d.fillOval(centerX - 3, y - 27, 6, 6);
+            g2d.drawLine(centerX, y, centerX, (y - 25));
             g2d.drawRect(x, y, width, height);
         }
     }
