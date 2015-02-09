@@ -5,23 +5,12 @@
  */
 package Model;
 
-import Controller.CS355Controller;
-import Controller.Controller;
-import View.View;
-import View.ViewRefresher;
 import Model.shapes.*;
 import Shell.GUIFunctions;
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.Observable;
-import java.util.Observer;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.concurrent.Semaphore;
+
 
 
 /**

@@ -34,7 +34,7 @@ public class DrawableQuad extends DrawableShape{
         int centerY = y + height / 2;
         //rotate.translate(centerX, centerY);
         rotate.rotate(angle);
-        g2d.setTransform(rotate);
+     //   g2d.setTransform(rotate);
         g2d.setColor(color);
         g2d.fillRect(x, y, width, height);
         

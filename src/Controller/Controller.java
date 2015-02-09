@@ -185,9 +185,6 @@ public class Controller implements CS355Controller{
         this.mouseDelta = new Point3D(-x, -y, 0);
         }
         this.mouseCurrentLocation = mouseCurrentLocation;
-        if(mouseReleased != null){//only update the shape if the mouse button is pressed down still                       //MouseReleased is set to null in mousedown function.
-         //   this.updateShape();
-        }
     }       
 
 
