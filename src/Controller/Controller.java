@@ -302,13 +302,7 @@ public class Controller implements CS355Controller{
      
      public void selectShape(Point3D mouseLocation){
          Model.inst().check4ShapeClicked(mouseLocation);
-
-         //set current shape type
-         //set current shape index
-         
-         //thoughs
-         //Keep track of current angle here in the controller
-         
+       
      }
 }
 

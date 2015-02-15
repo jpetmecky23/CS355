@@ -66,6 +66,8 @@ public class View implements ViewRefresher {
                 
                 for(int i = 0; i < shapes.size(); i++){
                     shapes.get(i).draw(g2d);//iterate though them and draw them.
-                }              
+                } 
+                
+                //add a function to draw the selected shape handles
             }
 }

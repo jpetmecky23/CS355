@@ -6,6 +6,7 @@
 package Model.shapes;
 
 import Model.Model;
+import Utillities.Tools;
 import java.awt.Color;
 
 /**
@@ -13,7 +14,7 @@ import java.awt.Color;
  * @author James
  */
 public class Triangle extends Shape{
-    private Point3D one;//(I will implemete this when I find that it is benificail)Numbering always starts wil the top and goes clockwise
+    private Point3D one;//(I will implemete this when I find that it is benificail)
     private Point3D two;
     private Point3D three;
     
@@ -71,10 +72,10 @@ public class Triangle extends Shape{
     }
     
     private boolean testPoint(Point3D convertedPoint, Point3D p1, Point3D p2){
-        Point3D f = subPoints(convertedPoint, p1);
-        Point3D g = subPoints(p2, p1);
-        g = perpVec(g);
-        double dotProd = dotProd(f, g);
+        Point3D f = Tools.subPoints(convertedPoint, p1);
+        Point3D g = Tools.subPoints(p2, p1);
+        g = Tools.perpVec(g);
+        double dotProd = Tools.dotProd(f, g);
         return dotProd > 0;
     }
         

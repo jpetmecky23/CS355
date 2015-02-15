@@ -12,7 +12,7 @@ import java.awt.Color;
  * @author James
  */
 public class Shape{
-    private Color color;
+    protected Color color;
     protected double angle;
     protected boolean isSelected;
     protected Point3D center;
@@ -32,44 +32,23 @@ public class Shape{
     
     public void translateShape(Point3D transVec){
         if(this.isSelected){
+            Point3D p = null;
+           // if(){//rotation handle selected
+               //  p = world2Obj(transVec);
+             //  angle = Math.atan2(p.x, p.y); 
+           // }
+           // else{
             double x = this.center.x + transVec.x;
             double y = this.center.y + transVec.y;
-            Point3D p = new Point3D(x, y, 0);
+             p = new Point3D(x, y, 0);
             this.setCenter(p);
+           // }
         }
     }
     
-    public void isPointInShape(Point3D p){
+    public boolean isPointInShape(Point3D p){
         //Call world2Obj and the check to see if the point lies within the shape. 
-    }
-    
-    protected double dotProd(Point3D p1, Point3D p2){
-        return (p1.x * p2.x) + (p1.y * p2.y);
-    }
-    
-    protected Point3D subPoints(Point3D p1, Point3D p2){
-        return new Point3D((p1.x - p2.x),(p1.y - p2.y), 0);
-    }
-    
-    protected Point3D perpVec(Point3D p){
-        return new Point3D(-p.y,p.x, 0);
-    }
-    
-    protected double normalize(Point3D p1, Point3D p2){
-    double X = p2.x - p1.x;
-    X = X * X;
-    double Y = p2.y - p1.y;
-    Y = Y * Y;
-    double normal = Math.sqrt(X + Y); 
-    return normal;
-    }
-    
-    protected Point3D unitVector(Point3D p1, Point3D p2){
-    double X = p2.x - p1.x;
-    double Y = p2.y - p1.y;
-    double magnitude = normalize(p1, p2);
-    Point3D p = new Point3D(X / magnitude, Y / magnitude, 0);
-    return p;
+        return false;
     }
     
     public Color getColor() {
@@ -98,6 +77,10 @@ public class Shape{
 
     public boolean isIsSelected() {
         return isSelected;
+    }
+
+    public void setIsSelected(boolean isSelected) {
+        this.isSelected = isSelected;
     }
     
     

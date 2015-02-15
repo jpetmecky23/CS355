@@ -1,6 +1,7 @@
 package Model.shapes;
 
 import Model.Model;
+import Utillities.Tools;
 import java.awt.Color;
 
 /**
@@ -23,7 +24,7 @@ public class Line3D extends Shape
         Point3D p1 = this.start;
         Point3D p2 = this.end;
         double e = Math.abs(((p2.y - p1.y) * q.x) - ((p2.x - p1.x) * q.y) + ((p2.x * p1.y) - (p2.y * p1.x)));
-        double f = this.normalize(p1, p2);
+        double f = Tools.normalize(p1, p2);
         double result = e / f;
         if(result <= 4){
             //if(pointWithInEndPoints(q)){

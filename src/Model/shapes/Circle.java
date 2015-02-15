@@ -15,12 +15,12 @@ import java.awt.Color;
 public class Circle extends Shape{
     private double radis;
   
-    public Circle(Point3D center, Point3D mouseCurrentLocation, Color color){
+    public Circle(Point3D center, Point3D endPoint, Color color){
         super(color);
         if(center != null){
         this.setCenter(center);
-        double x = Math.abs((center.x - mouseCurrentLocation.x));
-        double y = Math.abs((center.y - mouseCurrentLocation.y));
+        double x = Math.abs((center.x - endPoint.x));
+        double y = Math.abs((center.y - endPoint.y));
         this.radis = Math.sqrt((x * x) + (y * y));//pythagorean therom
         }
     }
