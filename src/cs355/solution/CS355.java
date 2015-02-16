@@ -29,7 +29,7 @@ public class CS355
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) 
+    public static void main(String[] args) throws InterruptedException 
     {
     	// Fill in the parameters below with your controller, view, 
     	//   mouse listener, and mouse motion listener
@@ -47,7 +47,11 @@ public class CS355
         Model.inst().setSelectColor(Color.BLUE);//Change default color
         //GUIFunctions.changeSelectedColor(Color.cyan);
         //Model.inst().testModel();
-       //GUIFunctions.refresh(); 
+        while(true){
+        View.inst().testView();
+        GUIFunctions.refresh(); 
+        Thread.sleep(200);
+        }
         
    
     }

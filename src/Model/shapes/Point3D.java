@@ -20,6 +20,10 @@ public class Point3D //extends Shape
         z = newZ;
     }
 
+    public Point3D(int i, int i0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public double length() 
     {
         return Math.sqrt(x*x+y*y+z*z);

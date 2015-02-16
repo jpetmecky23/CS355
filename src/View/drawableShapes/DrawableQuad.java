@@ -5,6 +5,8 @@
  */
 package View.drawableShapes;
 
+import Model.shapes.Point3D;
+import Utillities.Tools;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -29,14 +31,14 @@ public class DrawableQuad extends DrawableShape{
     
     @Override
     public void draw(Graphics2D g2d){
-        AffineTransform rotate = new AffineTransform();
         int centerX = x + width / 2;
         int centerY = y + height / 2;
-        //rotate.translate(centerX, centerY);
-        rotate.rotate(angle);
-     //   g2d.setTransform(rotate);
+        Point3D center = new Point3D(centerX, centerY, 0);
+        AffineTransform obj2World = Tools.obj2World(angle, center);
+        // set the drawing transformation
+        g2d.setTransform(obj2World);
         g2d.setColor(color);
-        g2d.fillRect(x, y, width, height);
+        g2d.fillRect(-width / 2, -height / 2, width, height);
         
         if(this.isSelected){
             g2d.setColor(Color.WHITE);

@@ -9,7 +9,8 @@ import java.awt.Graphics2D;
 import java.util.Observable;
 import java.awt.Color;
 import Model.Model;
-import Model.shapes.Shape;
+import Model.shapes.Point3D;
+import Model.shapes.Rectangle;
 import Shell.GUIFunctions;
 import View.drawableShapes.DrawableShape;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import java.util.Iterator;
 public class View implements ViewRefresher {
 	private static View instance;
 	private ArrayList<DrawableShape> shapes;
+        boolean pass;//used for testing
 	  
 	 public static View inst()
 	    {
@@ -46,7 +48,8 @@ public class View implements ViewRefresher {
 	    } 
 
 	    public View() {
-	        
+	        this.shapes = new ArrayList();
+                this.pass = true;//used for testing
 	    }
 
 
@@ -59,15 +62,25 @@ public class View implements ViewRefresher {
 
             @Override
             public void refreshView(Graphics2D g2d) {
-                //g2d.setColor(Color.blue);//testing code
-               // g2d.fillRect(5, 5, 50, 500); //testing code
-                
                 shapes = Factory.inst().prepShapes();//Call factory and get a new drawable shapes array
-                
                 for(int i = 0; i < shapes.size(); i++){
                     shapes.get(i).draw(g2d);//iterate though them and draw them.
                 } 
                 
                 //add a function to draw the selected shape handles
+            }
+            
+            public void testView(){
+                Rectangle r = null;
+                if(Model.inst().getShapeCount() == 0){
+                    r = new Rectangle(new Point3D(200, 150, 0), new Point3D(250, 200, 0), Color.GREEN);
+                    Model.inst().addShape(r);
+                }
+                else{
+                r = (Rectangle)Model.inst().getShape(0);
+                r.setAngle(r.getAngle() + Math.PI / 4);
+                Model.inst().setShape(r, 0);
+                }
+
             }
 }
