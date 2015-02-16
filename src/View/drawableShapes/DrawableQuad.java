@@ -30,7 +30,7 @@ public class DrawableQuad extends DrawableShape{
     }
     
     @Override
-    public void draw(Graphics2D g2d){
+    public void drawShape(Graphics2D g2d){
         int centerX = x + width / 2;
         int centerY = y + height / 2;
         Point3D center = new Point3D(centerX, centerY, 0);
@@ -45,7 +45,7 @@ public class DrawableQuad extends DrawableShape{
             centerX = x + width / 2;
             g2d.fillOval(centerX - 3, y - 27, 6, 6);
             g2d.drawLine(centerX, y, centerX, (y - 25));
-            g2d.drawRect(x, y, width, height);
+            g2d.drawRect(-width / 2, -height / 2, width, height);
         }
     }
 

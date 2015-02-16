@@ -24,9 +24,13 @@ public class DrawableShape {
     }
     
     
-  public void draw(Graphics2D g2d){
+  public void drawShape(Graphics2D g2d){
 
-    }    
+    } 
+  
+    public void drawHandles(Graphics2D g2d){
+
+    }
      public Color getColor() {
         return color;
     }

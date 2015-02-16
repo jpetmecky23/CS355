@@ -47,11 +47,11 @@ public class CS355
         Model.inst().setSelectColor(Color.BLUE);//Change default color
         //GUIFunctions.changeSelectedColor(Color.cyan);
         //Model.inst().testModel();
-        while(true){
+       /* while(true){//testing
         View.inst().testView();
         GUIFunctions.refresh(); 
         Thread.sleep(200);
-        }
+        }*/
         
    
     }

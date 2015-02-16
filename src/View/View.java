@@ -64,10 +64,12 @@ public class View implements ViewRefresher {
             public void refreshView(Graphics2D g2d) {
                 shapes = Factory.inst().prepShapes();//Call factory and get a new drawable shapes array
                 for(int i = 0; i < shapes.size(); i++){
-                    shapes.get(i).draw(g2d);//iterate though them and draw them.
+                    shapes.get(i).drawShape(g2d);//iterate though them and draw them.
                 } 
                 
-                //add a function to draw the selected shape handles
+                for(int i = 0; i < shapes.size(); i++){
+                    shapes.get(i).drawHandles(g2d);//iterate though them and draw them.
+                } 
             }
             
             public void testView(){

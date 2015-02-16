@@ -27,7 +27,7 @@ public class DrawableLine extends DrawableShape{
     }
 
     @Override
-    public void draw(Graphics2D g2d){
+    public void drawShape(Graphics2D g2d){
         g2d.setColor(color);
         g2d.drawLine(x1, y1, x2, y2);
         

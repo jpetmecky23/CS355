@@ -28,7 +28,7 @@ public class DrawableTri extends DrawableShape{
 
     
     @Override
-    public void draw(Graphics2D g2d){
+    public void drawShape(Graphics2D g2d){
         if(this.p2 == null){//Don't draw anything if there is only one point
             
         }
