@@ -38,15 +38,33 @@ public class DrawableCircle extends DrawableShape{
         g2d.setTransform(obj2World);
         g2d.setColor(color);
         g2d.fillOval(-width / 2, -height / 2, width, height);;
-        
-        if(this.isSelected){
-            g2d.setColor(Color.WHITE);
-            g2d.drawOval(-width / 2, -height / 2, width, height);;
-            g2d.fillOval(centerX - 3, y - 27, 6, 6);
-            g2d.drawLine(centerX, (centerY - height / 2), centerX, y - 25);
-        }
     }
 
+        @Override
+    public void drawHandles(Graphics2D g2d) {
+        if(this.isSelected){
+            Point3D center = getCenter();
+            AffineTransform obj2World = Tools.obj2World(angle, center);
+            g2d.setTransform(obj2World);
+            g2d.setColor(Color.WHITE);
+            
+            g2d.drawOval(-width / 2, -height / 2, width, height);;
+            g2d.drawRect(-width / 2, -height / 2, width, height);
+            g2d.fillRect((-width / 2) - 3, (-height / 2) - 3, 7, 7);//Top Left            
+            g2d.fillRect((width / 2) - 3, (-height / 2) - 3, 7, 7); //Top Right         
+            g2d.fillRect((width / 2) - 3, (height / 2) - 3, 7, 7);  //Bottom Right        
+            g2d.fillRect((-width / 2) - 3, (height / 2) - 3, 7, 7);//Bottom Left
+            g2d.fillRect(0, (-height / 2) - 20, 7, 7);//Rotation
+        }
+    }
+    
+    public Point3D getCenter(){
+        int centerX = x + width / 2;
+        int centerY = y + height / 2;
+        Point3D center = new Point3D(centerX, centerY, 0);
+        return center;
+    }
+    
     public int getX() {
         return x;
     }
