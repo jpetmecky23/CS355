@@ -65,8 +65,8 @@ public class Square extends Shape{
     @Override
     protected void setupHandles(){
         handles = new ArrayList();
-        Point3D upperLC = new Point3D(this.UpperLeftCorner.x + 3, this.UpperLeftCorner.y + 3, 0);;//Rotation
-        Point3D lowerRC = new Point3D(this.UpperLeftCorner.x + 3, this.UpperLeftCorner.y + 3, 0);
+        Point3D upperLC = new Point3D((this.UpperLeftCorner.x + size / 2), this.UpperLeftCorner.y - 20, 0);;//Rotation
+        Point3D lowerRC = new Point3D(this.UpperLeftCorner.x + size / 2 + 7, this.UpperLeftCorner.y - 13, 0);
         Square s = new Square(upperLC, lowerRC, Color.WHITE);
         handles.add(0, s);
         //g2d.fillRect(0, (-height / 2) - 20, 7, 7);//Rotation
