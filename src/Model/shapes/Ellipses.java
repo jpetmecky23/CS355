@@ -48,6 +48,7 @@ public class Ellipses extends Shape{
             return false;
             }
     }
+    
 
     public double getHeight() {
         return height;

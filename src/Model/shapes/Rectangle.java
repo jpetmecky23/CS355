@@ -8,6 +8,7 @@ package Model.shapes;
 import Model.Model;
 import Utillities.Tools;
 import java.awt.Color;
+import java.util.ArrayList;
 
 /**
  *
@@ -79,6 +80,35 @@ public class Rectangle extends Shape{
         this.UpperLeftCorner = p;
         }
         this.center = center;
+    }
+    
+        @Override
+    protected void setupHandles(){
+        handles = new ArrayList();
+        Point3D upperLC = new Point3D((this.UpperLeftCorner.x + width / 2), this.UpperLeftCorner.y - 20, 0);;//Rotation
+        Point3D lowerRC = new Point3D(this.UpperLeftCorner.x + width / 2 + 7, this.UpperLeftCorner.y - 13, 0);
+        Square s = new Square(upperLC, lowerRC, Color.WHITE);
+        handles.add(0, s);
+        //g2d.fillRect(0, (-height / 2) - 20, 7, 7);//Rotation
+        upperLC = new Point3D(this.UpperLeftCorner.x - 3, this.UpperLeftCorner.y - 3, 0);//TopLeft
+        lowerRC = new Point3D(this.UpperLeftCorner.x + 3, this.UpperLeftCorner.y + 3, 0);
+        s = new Square(upperLC, lowerRC, Color.WHITE);
+        handles.add(1, s);
+        
+        upperLC = new Point3D((this.UpperLeftCorner.x + width) - 3, this.UpperLeftCorner.y - 3, 0);//Top Right
+        lowerRC = new Point3D((this.UpperLeftCorner.x + width) + 3, this.UpperLeftCorner.y  + 3, 0);
+        s = new Square(upperLC, lowerRC, Color.WHITE);
+        handles.add(2, s);
+        
+        upperLC = new Point3D((this.UpperLeftCorner.x + width) - 3, (this.UpperLeftCorner.y + height) - 3, 0);//Bottom Right 
+        lowerRC = new Point3D((this.UpperLeftCorner.x + width) + 3, (this.UpperLeftCorner.y + height) + 3, 0);
+        s = new Square(upperLC, lowerRC, Color.WHITE);
+        handles.add(3, s);
+        
+        upperLC = new Point3D(this.UpperLeftCorner.x - 3, (this.UpperLeftCorner.y + height) - 3, 0);//Bottom Left 
+        lowerRC = new Point3D(this.UpperLeftCorner.x + 3, (this.UpperLeftCorner.y + height) + 3, 0);
+        s = new Square(upperLC, lowerRC, Color.WHITE);
+        handles.add(4, s);
     }
     
     public Point3D getCorner() {

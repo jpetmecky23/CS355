@@ -168,7 +168,7 @@ public class Controller implements CS355Controller{
         this.addShape();
         }
         if(currentShapeType == null){
-            if(!this.wasHandleClicked(Controller.inst().getMouseDown())){	
+            if(!this.wasHandleClicked()){	
             this.selectShape(Controller.inst().getMouseDown());
             }
         }
@@ -286,7 +286,12 @@ public class Controller implements CS355Controller{
            }
             
            else if(Controller.inst().getCurrentShapeType() == null){
+               if(wasHandleClicked()){
+                   this.processHandleClick();
+               }
+               else{
                Model.inst().translateShape(this.mouseDelta);
+               }
            }
     }
     
@@ -306,12 +311,27 @@ public class Controller implements CS355Controller{
          Model.inst().check4ShapeClicked(mouseLocation);      
      }
      
-     public boolean wasHandleClicked(Point3D p){
+     public boolean wasHandleClicked(){
+         Point3D p = this.mouseCurrentLocation;
          int index = Model.inst().getIndexOfSelectedShape();
          if(index > -1){
              Shape s = Model.inst().getShape(index);
              int clickedCorner = Model.inst().getShape(index).clickedHandleIndex(p);
-           if(s instanceof Line3D){
+             if(clickedCorner >= 0){
+                return true; 
+           }
+         }
+         return false;
+    }
+     
+  public void processHandleClick(){
+               Point3D p = this.mouseCurrentLocation;
+         int index = Model.inst().getIndexOfSelectedShape();
+         if(index > -1){
+             Shape s = Model.inst().getShape(index);
+             int clickedCorner = Model.inst().getShape(index).clickedHandleIndex(p);
+             if(clickedCorner >= 0){
+        if(s instanceof Line3D){
                
            } 
            else if(s instanceof Triangle){
@@ -320,31 +340,29 @@ public class Controller implements CS355Controller{
                 if(clickedCorner == 0){
                     s.setColor(Color.yellow);
                     Model.inst().setShape(s, index);
-                    return true;
+                    s.setAngle(this.mouseDelta);
                 }
                 else if(clickedCorner == 1){
                     s.setColor(Color.blue);
                     Model.inst().setShape(s, index);
-                    return true;
                 }
                 else if(clickedCorner == 2){
                     s.setColor(Color.green);
                     Model.inst().setShape(s, index);
-                    return true;
                 }
                 else if(clickedCorner == 3){
                     s.setColor(Color.red);
                     Model.inst().setShape(s, index);
-                    return true;
                 }
                 else if(clickedCorner == 4){
                     s.setColor(Color.pink);
                     Model.inst().setShape(s, index);
-                    return true;
-                }   
-           }
-         }
-         return false;
+                }
+            }
+        }
     }
+  }
 }
+
+
 

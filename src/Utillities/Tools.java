@@ -79,4 +79,13 @@ public abstract class Tools {
         Point3D q = new Point3D(temp.getX(), temp.getY(), 0);
         return q;
     }
+    
+    public static Shape moveShape(Point3D transVec, Shape s){
+            Point3D p = null;
+            double x = s.getCenter().x + transVec.x;
+            double y = s.getCenter().y + transVec.y;
+             p = new Point3D(x, y, 0);
+            s.setCenter(p);
+            return s;
+    }
 }

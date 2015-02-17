@@ -80,7 +80,7 @@ public class View implements ViewRefresher {
                 }
                 else{
                 r = (Rectangle)Model.inst().getShape(0);
-                r.setAngle(r.getAngle() + Math.PI / 4);
+                //r.setAngle(r.getAngle() + Math.PI / 4);I changed set angle to take a Point3D
                 Model.inst().setShape(r, 0);
                 }
 

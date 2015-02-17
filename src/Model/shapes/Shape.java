@@ -5,6 +5,7 @@
  */
 package Model.shapes;
 
+import Model.Model;
 import java.awt.Color;
 import java.util.ArrayList;
 
@@ -25,7 +26,7 @@ public class Shape{
         this.isSelected = false;
         this.handles = new ArrayList();//0 = rotation, 1-4 Start at top left and go clockwise 
     }
-    
+
     public boolean isPointInShape(Point3D p){
         //Call world2Obj and the check to see if the point lies within the shape. 
         return false;
@@ -40,6 +41,7 @@ public class Shape{
         }
         return -1;
     }
+
     public Color getColor() {
         return color;
     }   
@@ -49,8 +51,11 @@ public class Shape{
     public double getAngle() {
         return angle;
     }
-    public void setAngle(double angle) {
+    public void setAngle(Point3D angleVec) {
+        double angle = Math.atan2(angleVec.y, angleVec.x);
         this.angle = angle;
+        this.setupHandles();
+        Model.inst().modelChanged();
     }
     public Point3D getCenter() {
         return center;

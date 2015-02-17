@@ -36,8 +36,7 @@ public class MouseMotionLis implements java.awt.event.MouseMotionListener{
 		// TODO Auto-generated method stub
             Point3D mouseLocation = new Point3D(arg0.getX(), arg0.getY(), 0);
             Controller.inst().setMouseCurrentLocation(mouseLocation);
-            Controller.inst().updateShape();
-            
+            Controller.inst().updateShape();  
 	}
 
 	@Override
