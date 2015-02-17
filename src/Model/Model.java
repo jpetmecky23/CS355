@@ -118,4 +118,13 @@ import java.util.Observable;
         } 
         this.modelChanged();
     }
+    
+    public int getIndexOfSelectedShape(){
+        for(int i = 0; i < this.getShapeCount(); i++){
+            if(this.getShape(i).isIsSelected()){
+                return i;
+            }
+        }
+        return -1;
+    }
 }

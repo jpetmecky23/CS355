@@ -301,8 +301,42 @@ public class Controller implements CS355Controller{
      }
      
      public void selectShape(Point3D mouseLocation){
-         Model.inst().check4ShapeClicked(mouseLocation);
-       
+         Model.inst().check4ShapeClicked(mouseLocation);      
      }
+     
+     public void wasHandleClicked(Point3D p){
+         int index = Model.inst().getIndexOfSelectedShape();
+         if(index > -1){
+             Shape s = Model.inst().getShape(index);
+             int clickedCorner = Model.inst().getShape(index).clickedHandleIndex(p);
+           if(s instanceof Line3D){
+           } 
+           else if(s instanceof Triangle){
+           }
+           else{
+                if(clickedCorner == 0){
+                    s.setColor(Color.yellow);
+                    Model.inst().setShape(s, index);
+                }
+                else if(clickedCorner == 1){
+                    s.setColor(Color.blue);
+                    Model.inst().setShape(s, index);
+                }
+                else if(clickedCorner == 2){
+                    s.setColor(Color.green);
+                    Model.inst().setShape(s, index);
+                }
+                else if(clickedCorner == 3){
+                    s.setColor(Color.red);
+                    Model.inst().setShape(s, index);
+                }
+                else if(clickedCorner == 4){
+                    s.setColor(Color.pink);
+                    Model.inst().setShape(s, index);
+                }
+                
+           }
+         }
+    }
 }
 
