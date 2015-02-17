@@ -65,8 +65,18 @@ public abstract class Tools {
         return obj2World;
     }
     
-    public static Point3D world2Obj(Point3D worldCoord, Point3D objCoord){
-
-        return null;
+    public static Point3D world2Obj(Point3D worldCoord, double angle, Shape s){
+        // create a new transformation (defaults to identity)
+        AffineTransform world2Obj = new AffineTransform();
+        // rotate back from its orientation (last transformation)
+        world2Obj.rotate(- angle);
+        // translate back from its position in the world (first transformation)
+        world2Obj.translate(-s.getCenter().x, -s.getCenter().y);
+        // and transform point from world to object
+        Point2D w = new Point2D.Double(worldCoord.x, worldCoord.y);
+        Point2D o = new Point2D.Double(0, 0);
+        Point2D temp = world2Obj.transform(w, o);
+        Point3D q = new Point3D(temp.getX(), temp.getY(), 0);
+        return q;
     }
 }

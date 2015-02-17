@@ -6,6 +6,7 @@
 package Model.shapes;
 
 import Model.Model;
+import Utillities.Tools;
 import java.awt.Color;
 import java.util.ArrayList;
 
@@ -27,13 +28,15 @@ public class Square extends Shape{
             double centerX = this.UpperLeftCorner.x + (this.size / 2);
             double centerY = this.UpperLeftCorner.y + (this.size / 2);
             this.center = new Point3D(centerX, centerY, 0);
-           // this.setupHandles();
+            if(centerX < 0 || centerY < 0){
+                this.center = null;
+            }
         }
     }
    
     @Override
     public boolean isPointInShape(Point3D p) {
-        Point3D convertedPoint = this.world2Obj(p);
+        Point3D convertedPoint = Tools.world2Obj(p, this.angle, this);
         double dfoc = size / 2;//distanceFromObjectCenter
         
         if(Math.abs(convertedPoint.x) <= dfoc && Math.abs(convertedPoint.y) <= dfoc){
@@ -62,28 +65,28 @@ public class Square extends Shape{
     @Override
     protected void setupHandles(){
         handles = new ArrayList();
-        Point3D upperLC = new Point3D((-size / 2) - 3, (-size / 2) - 3, 0);//Rotation
-        Point3D lowerRC = new Point3D((-size / 2) + 3, (-size / 2) + 3, 0);
+        Point3D upperLC = new Point3D(this.UpperLeftCorner.x + 3, this.UpperLeftCorner.y + 3, 0);;//Rotation
+        Point3D lowerRC = new Point3D(this.UpperLeftCorner.x + 3, this.UpperLeftCorner.y + 3, 0);
         Square s = new Square(upperLC, lowerRC, Color.WHITE);
         handles.add(0, s);
         //g2d.fillRect(0, (-height / 2) - 20, 7, 7);//Rotation
-        upperLC = new Point3D((-size / 2) - 3, (-size / 2) - 3, 0);//TopLeft
-        lowerRC = new Point3D((-size / 2) + 3, (-size / 2) + 3, 0);
+        upperLC = new Point3D(this.UpperLeftCorner.x - 3, this.UpperLeftCorner.y - 3, 0);//TopLeft
+        lowerRC = new Point3D(this.UpperLeftCorner.x + 3, this.UpperLeftCorner.y + 3, 0);
         s = new Square(upperLC, lowerRC, Color.WHITE);
         handles.add(1, s);
         
-        upperLC = new Point3D((size / 2) - 3, (-size / 2) - 3, 0);//Top Right
-        lowerRC = new Point3D((size / 2) + 3, (-size / 2) + 3, 0);
+        upperLC = new Point3D((this.UpperLeftCorner.x + size) - 3, this.UpperLeftCorner.y - 3, 0);//Top Right
+        lowerRC = new Point3D((this.UpperLeftCorner.x + size) + 3, this.UpperLeftCorner.y  + 3, 0);
         s = new Square(upperLC, lowerRC, Color.WHITE);
         handles.add(2, s);
         
-        upperLC = new Point3D((size / 2) - 3, (size / 2) - 3, 0);//Bottom Right 
-        lowerRC = new Point3D((size / 2) + 3, (size / 2) + 3, 0);
+        upperLC = new Point3D((this.UpperLeftCorner.x + size) - 3, (this.UpperLeftCorner.y + size) - 3, 0);//Bottom Right 
+        lowerRC = new Point3D((this.UpperLeftCorner.x + size) + 3, (this.UpperLeftCorner.y + size) + 3, 0);
         s = new Square(upperLC, lowerRC, Color.WHITE);
         handles.add(3, s);
         
-        upperLC = new Point3D((-size / 2) - 3, (size / 2) - 3, 0);//Bottom Left 
-        lowerRC = new Point3D((-size / 2) + 3, (size / 2) + 3, 0);
+        upperLC = new Point3D(this.UpperLeftCorner.x - 3, (this.UpperLeftCorner.y + size) - 3, 0);//Bottom Left 
+        lowerRC = new Point3D(this.UpperLeftCorner.x + 3, (this.UpperLeftCorner.y + size) + 3, 0);
         s = new Square(upperLC, lowerRC, Color.WHITE);
         handles.add(4, s);
     }

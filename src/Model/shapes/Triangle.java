@@ -25,7 +25,7 @@ public class Triangle extends Shape{
         this.three = null;
     }
 
-    @Override
+    /*@Override
     public void translateShape(Point3D transVec) {
         if(this.isSelected){
         double x = this.one.x + transVec.x;
@@ -41,17 +41,17 @@ public class Triangle extends Shape{
         p = new Point3D(x, y, 0);
         this.setThree(p);
         }
-    }
+    }*/
     
 
     
     @Override
     public boolean isPointInShape(Point3D p) {
-        Point3D convertedPoint = this.world2Obj(p);
-        this.orderPoints();
-        boolean testP1 = testPoint(convertedPoint,this.world2Obj(this.one), this.world2Obj(this.two));
-        boolean testP2 = testPoint(convertedPoint,this.world2Obj(this.two), this.world2Obj(this.three));
-        boolean testP3 = testPoint(convertedPoint,this.world2Obj(this.three),this.world2Obj(this.one));
+        Point3D convertedPoint = Tools.world2Obj(p, this.angle, this);
+        this.orderPoints();/*
+        boolean testP1 = testPoint(convertedPoint,Tools.world2Obj(this.one, this.angle), Tools.world2Obj(this.two, this.angle));
+        boolean testP2 = testPoint(convertedPoint,Tools.world2Obj(this.two, this.angle), Tools.world2Obj(this.three, this.angle));
+        boolean testP3 = testPoint(convertedPoint,Tools.world2Obj(this.three, this.angle),Tools.world2Obj(this.one, this.angle));
         if(testP1 && testP2 && testP3){
             this.isSelected = true;
             Model.inst().setSelectColor(this.getColor());
@@ -60,7 +60,8 @@ public class Triangle extends Shape{
         else{
             this.isSelected = false;
             return false;
-            }
+            }*/
+        return false;
     }
 
     private void orderPoints(){

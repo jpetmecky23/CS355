@@ -168,7 +168,9 @@ public class Controller implements CS355Controller{
         this.addShape();
         }
         if(currentShapeType == null){
+            if(!this.wasHandleClicked(Controller.inst().getMouseDown())){	
             this.selectShape(Controller.inst().getMouseDown());
+            }
         }
     }
 
@@ -304,12 +306,13 @@ public class Controller implements CS355Controller{
          Model.inst().check4ShapeClicked(mouseLocation);      
      }
      
-     public void wasHandleClicked(Point3D p){
+     public boolean wasHandleClicked(Point3D p){
          int index = Model.inst().getIndexOfSelectedShape();
          if(index > -1){
              Shape s = Model.inst().getShape(index);
              int clickedCorner = Model.inst().getShape(index).clickedHandleIndex(p);
            if(s instanceof Line3D){
+               
            } 
            else if(s instanceof Triangle){
            }
@@ -317,26 +320,31 @@ public class Controller implements CS355Controller{
                 if(clickedCorner == 0){
                     s.setColor(Color.yellow);
                     Model.inst().setShape(s, index);
+                    return true;
                 }
                 else if(clickedCorner == 1){
                     s.setColor(Color.blue);
                     Model.inst().setShape(s, index);
+                    return true;
                 }
                 else if(clickedCorner == 2){
                     s.setColor(Color.green);
                     Model.inst().setShape(s, index);
+                    return true;
                 }
                 else if(clickedCorner == 3){
                     s.setColor(Color.red);
                     Model.inst().setShape(s, index);
+                    return true;
                 }
                 else if(clickedCorner == 4){
                     s.setColor(Color.pink);
                     Model.inst().setShape(s, index);
-                }
-                
+                    return true;
+                }   
            }
          }
+         return false;
     }
 }
 

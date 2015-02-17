@@ -40,7 +40,7 @@ public class Line3D extends Shape
         
     }  
 
-    @Override
+    /*@Override
     public void translateShape(Point3D transVec) {
         if(this.isSelected){
         double x = this.start.x + transVec.x;
@@ -52,7 +52,7 @@ public class Line3D extends Shape
         p = new Point3D(x, y, 0);
         this.setEnd(p);
         }
-    }
+    }*/
     
     
     

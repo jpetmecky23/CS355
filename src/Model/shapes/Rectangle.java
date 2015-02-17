@@ -6,6 +6,7 @@
 package Model.shapes;
 
 import Model.Model;
+import Utillities.Tools;
 import java.awt.Color;
 
 /**
@@ -52,7 +53,7 @@ public class Rectangle extends Shape{
    
     @Override
     public boolean isPointInShape(Point3D p) {
-        Point3D convertedPoint = this.world2Obj(p);
+        Point3D convertedPoint = Tools.world2Obj(p, this.angle, this);
         double dfocX = this.width / 2;//distanceFromObjectCenter
         double dfocY = this.height / 2;//distanceFromObjectCenter
         if(Math.abs(convertedPoint.x) <= dfocX && Math.abs(convertedPoint.y) <= dfocY){

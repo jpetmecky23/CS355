@@ -114,7 +114,7 @@ import java.util.Observable;
     public void translateShape(Point3D tanslationVec){
         int count = Model.inst().getShapeCount();
         for(int i = count - 1; i >= 0; i--){
-            this.container.get(i).translateShape(tanslationVec);
+            //this.container.get(i).translateShape(tanslationVec);
         } 
         this.modelChanged();
     }
