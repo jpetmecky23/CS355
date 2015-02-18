@@ -73,13 +73,22 @@ public abstract class Tools {
         // translate back from its position in the world (first transformation)
         world2Obj.translate(-s.getCenter().x, -s.getCenter().y);
         // and transform point from world to object
-        Point2D w = new Point2D.Double(worldCoord.x, worldCoord.y);
+        return transform2Point(world2Obj, worldCoord);
+    }
+    
+    public static Point3D transform2Point(AffineTransform aff, Point3D p){
+        Point2D w = new Point2D.Double(p.x, p.y);
         Point2D o = new Point2D.Double(0, 0);
-        Point2D temp = world2Obj.transform(w, o);
+        Point2D temp = aff.transform(w, o);
         Point3D q = new Point3D(temp.getX(), temp.getY(), 0);
         return q;
     }
-    
+    public static Point3D transformHandle(double angle, Point3D p, Point3D center){
+        AffineTransform aff = null;
+        aff = obj2World(angle, center);
+        Point3D q = transform2Point(aff, p);
+        return q;
+    }
     public static Shape moveShape(Point3D transVec, Shape s){
             Point3D p = null;
             double x = s.getCenter().x + transVec.x;
@@ -88,4 +97,5 @@ public abstract class Tools {
             s.setCenter(p);
             return s;
     }
+    
 }

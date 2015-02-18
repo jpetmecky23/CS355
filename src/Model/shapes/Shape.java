@@ -54,7 +54,6 @@ public class Shape{
     public void setAngle(Point3D angleVec) {
         double angle = Math.atan2(angleVec.y, angleVec.x);
         this.angle = angle;
-        this.setupHandles();
         Model.inst().modelChanged();
     }
     public Point3D getCenter() {
@@ -62,6 +61,7 @@ public class Shape{
     }
     public void setCenter(Point3D center) {
         this.center = center;
+         this.setupHandles();
     }
     public boolean isIsSelected() {
         return isSelected;
