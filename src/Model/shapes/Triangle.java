@@ -102,7 +102,6 @@ public class Triangle extends Shape{
 
     public void setThree(Point3D three) {
         this.three = three;
-        this.findCenter();
     }
     
     public boolean isTwoNull(){
@@ -118,11 +117,11 @@ public class Triangle extends Shape{
     }
     return false;
     }
-    
-    public void findCenter(){
+    @Override
+    public Point3D getCenter(){
         double centerX = (this.one.x + this.two.x + this.three.x) / 3; //Find the average
         double centerY = (this.one.y + this.two.y + this.three.y) / 3; //Find the average
         Point3D center = new Point3D(centerX, centerY, 0);
-        this.setCenter(center);
+        return center;
     }
 }

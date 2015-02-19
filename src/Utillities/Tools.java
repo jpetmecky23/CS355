@@ -99,7 +99,7 @@ public abstract class Tools {
         }
         
         else if((cornerStart.y < cornerEnd.y) && (cornerStart.x < cornerEnd.x)){
-            return p;
+            return cornerStart;
         }
         
         else if((cornerStart.y > cornerEnd.y) && (cornerStart.x < cornerEnd.x)){
