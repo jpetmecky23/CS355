@@ -27,7 +27,7 @@ public abstract class Tools {
         return new Point3D(-p.y,p.x, 0);
     }
     
-    public static double normalize(Point3D p1, Point3D p2){
+    public static double normalize(Point3D p1, Point3D p2){//This finds the norm
     double X = p2.x - p1.x;
     X = X * X;
     double Y = p2.y - p1.y;

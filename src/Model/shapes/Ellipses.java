@@ -16,11 +16,11 @@ import java.awt.Color;
 public class Ellipses extends Shape{
     private double height;
     private double width;
-    private Point3D UpperLeftCorner;
+    private Point3D center;
     
-   public  Ellipses(Point3D startPoint, Point3D endPoint, Color color){
+   public  Ellipses(Point3D center, Point3D endPoint, Color color){
        super(color);
-       if(UpperLeftCorner != null){
+       if(center != null){
        this.UpperLeftCorner = Tools.findUpperLeftCornerRec(startPoint, endPoint);
        this.width = 2 * (Math.abs((center.x - endPoint.x)));//Times 2 since these oare radii
        this.height = 2 * (Math.abs((center.y - endPoint.y)));//Times 2 since these oare radii 
