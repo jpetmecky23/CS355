@@ -51,11 +51,17 @@ public class Shape{
     public double getAngle() {
         return angle;
     }
-    public void setAngle(Point3D angleVec) {
-        double angle = Math.atan2(angleVec.y, angleVec.x);
+   // public void setAngle(Point3D angleVec) {
+    //    double angle = Math.atan2(angleVec.y, angleVec.x);
+    //    this.angle = angle;
+    //    Model.inst().modelChanged();
+    //}
+    
+    public void setAngle(double angle) {
         this.angle = angle;
         Model.inst().modelChanged();
     }
+    
     public Point3D getCenter() {
         return center;
     }

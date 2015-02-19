@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Controller.shapes.SquareController;
 import Shell.GUIFunctions;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -182,6 +183,12 @@ public class Controller implements CS355Controller{
         this.mouseReleased = mouseUp;
     } 
 
+    public Point3D getMouseDelta() {
+        return mouseDelta;
+    }
+
+    
+    
     public Point3D getMouseCurrentLocation() {
         return mouseCurrentLocation;
     }
@@ -284,15 +291,6 @@ public class Controller implements CS355Controller{
               Square s = new Square(this.mousePressed, this.mouseCurrentLocation, c);
               Model.inst().setShape(s, index); 
            }
-            
-           else if(Controller.inst().getCurrentShapeType() == null){
-               if(wasHandleClicked()){
-                   this.processHandleClick();
-               }
-               else{
-               Model.inst().translateShape(this.mouseDelta);
-               }
-           }
     }
     
      public void updateTri(){
@@ -316,7 +314,7 @@ public class Controller implements CS355Controller{
          int index = Model.inst().getIndexOfSelectedShape();
          if(index > -1){
              Shape s = Model.inst().getShape(index);
-             int clickedCorner = Model.inst().getShape(index).clickedHandleIndex(p);
+             int clickedCorner = SquareController.checkCorners(s, p);
              if(clickedCorner >= 0){
                 return true; 
            }
@@ -325,38 +323,45 @@ public class Controller implements CS355Controller{
     }
      
   public void processHandleClick(){
-               Point3D p = this.mouseCurrentLocation;
+         Point3D p = this.mouseCurrentLocation;
          int index = Model.inst().getIndexOfSelectedShape();
          if(index > -1){
              Shape s = Model.inst().getShape(index);
-             int clickedCorner = Model.inst().getShape(index).clickedHandleIndex(p);
+             int clickedCorner = SquareController.checkCorners(s, p);
              if(clickedCorner >= 0){
         if(s instanceof Line3D){
                
            } 
            else if(s instanceof Triangle){
            }
-           else{
+           else if (s instanceof Square){
+              Square square = (Square) s;
                 if(clickedCorner == 0){
-                    s.setColor(Color.yellow);
-                    Model.inst().setShape(s, index);
-                    s.setAngle(this.mouseDelta);
+                    square.setColor(Color.yellow);
+                    Model.inst().setShape(square, index);
+                    square.setAngle(square.getAngle() + Math.PI / 8);
                 }
                 else if(clickedCorner == 1){
-                    s.setColor(Color.blue);
-                    Model.inst().setShape(s, index);
+                    square.setCorner(p);       
+                    double size = Math.min(this.mouseDelta.x, this.mouseDelta.y);
+                    square.setSize((int) (square.getSize() + size));
+                    Model.inst().setShape(square, index);
                 }
                 else if(clickedCorner == 2){
-                    s.setColor(Color.green);
-                    Model.inst().setShape(s, index);
+                    square.setColor(Color.green);
+                    double x = Math.abs(this.mouseDelta.x);
+                    double y = Math.abs(this.mouseDelta.y);
+                    double size = Math.min(x, y);
+                    square.setSize((int) (square.getSize() + size));
+                    Model.inst().setShape(square, index);
                 }
                 else if(clickedCorner == 3){
-                    s.setColor(Color.red);
-                    Model.inst().setShape(s, index);
+                    square.setColor(Color.red);
+                    Model.inst().setShape(square, index);
                 }
                 else if(clickedCorner == 4){
-                    s.setColor(Color.pink);
-                    Model.inst().setShape(s, index);
+                    square.setColor(Color.pink);
+                    Model.inst().setShape(square, index);
                 }
             }
         }

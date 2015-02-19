@@ -28,7 +28,7 @@ public class Ellipses extends Shape{
    
     @Override
     public boolean isPointInShape(Point3D p) {
-        Point3D convertedPoint = Tools.world2Obj(p, this.angle, this);
+        Point3D convertedPoint = Tools.world2Obj(p, this);
         Point3D objectOrigin = new Point3D(0, 0, 0); //Used to make sure the formula make since to me.
         double X = (convertedPoint.x - objectOrigin.x);
         X = X / (this.width / 2);//divid by half the width

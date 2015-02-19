@@ -47,7 +47,7 @@ public class Triangle extends Shape{
     
     @Override
     public boolean isPointInShape(Point3D p) {
-        Point3D convertedPoint = Tools.world2Obj(p, this.angle, this);
+        Point3D convertedPoint = Tools.world2Obj(p, this);
         this.orderPoints();/*
         boolean testP1 = testPoint(convertedPoint,Tools.world2Obj(this.one, this.angle), Tools.world2Obj(this.two, this.angle));
         boolean testP2 = testPoint(convertedPoint,Tools.world2Obj(this.two, this.angle), Tools.world2Obj(this.three, this.angle));

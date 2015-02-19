@@ -54,7 +54,7 @@ public class Rectangle extends Shape{
    
     @Override
     public boolean isPointInShape(Point3D p) {
-        Point3D convertedPoint = Tools.world2Obj(p, this.angle, this);
+        Point3D convertedPoint = Tools.world2Obj(p, this);
         double dfocX = this.width / 2;//distanceFromObjectCenter
         double dfocY = this.height / 2;//distanceFromObjectCenter
         if(Math.abs(convertedPoint.x) <= dfocX && Math.abs(convertedPoint.y) <= dfocY){

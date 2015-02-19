@@ -65,11 +65,11 @@ public abstract class Tools {
         return obj2World;
     }
     
-    public static Point3D world2Obj(Point3D worldCoord, double angle, Shape s){
+    public static Point3D world2Obj(Point3D worldCoord, Shape s){
         // create a new transformation (defaults to identity)
         AffineTransform world2Obj = new AffineTransform();
         // rotate back from its orientation (last transformation)
-        world2Obj.rotate(- angle);
+        world2Obj.rotate(- s.getAngle());
         // translate back from its position in the world (first transformation)
         world2Obj.translate(-s.getCenter().x, -s.getCenter().y);
         // and transform point from world to object
@@ -83,12 +83,7 @@ public abstract class Tools {
         Point3D q = new Point3D(temp.getX(), temp.getY(), 0);
         return q;
     }
-    public static Point3D transformHandle(double angle, Point3D p, Point3D center){
-        AffineTransform aff = null;
-        aff = obj2World(angle, center);
-        Point3D q = transform2Point(aff, p);
-        return q;
-    }
+    
     public static Shape moveShape(Point3D transVec, Shape s){
             Point3D p = null;
             double x = s.getCenter().x + transVec.x;

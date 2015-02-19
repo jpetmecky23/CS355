@@ -7,6 +7,9 @@ package Controller.shapes;
 
 import Model.shapes.Point3D;
 import Model.shapes.Shape;
+import Model.shapes.Square;
+import Utillities.Tools;
+import java.awt.Color;
 
 /**
  *
@@ -14,7 +17,9 @@ import Model.shapes.Shape;
  */
 public class SquareController {
     
-    public static int checkCorners(Shape s, Point3D mouseClicked){
+    public static int checkCorners(Shape shape, Point3D mouseClicked){
+       Square s = (Square) shape;
+        mouseClicked = Tools.world2Obj(mouseClicked, s);
         if(checkRotation(s, mouseClicked)){
             return 0;
         }
@@ -39,28 +44,53 @@ public class SquareController {
         }
     } 
     
-    public static boolean checkRotation(Shape s, Point3D mouseClicked){
-        
+    public static boolean checkRotation(Square s, Point3D mouseClicked){
+        Point3D upperLC = new Point3D(-3, (- s.getSize() / 2) - 20, 0);
+        Point3D lowerRC = new Point3D(3, (- s.getSize() / 2) - 13, 0);
+        Square handle = new Square(upperLC, lowerRC, Color.WHITE);
+        if(handle.isPointInShape(mouseClicked)){
+            return true;
+        }
         return false;
     }
     
-    public static boolean checkTopLeft(Shape s, Point3D mouseClicked){
-        
+    public static boolean checkTopLeft(Square s, Point3D mouseClicked){
+        Point3D upperLC = new Point3D((- s.getSize() / 2) - 3, (- s.getSize() / 2) - 3, 0);
+        Point3D lowerRC = new Point3D((- s.getSize() / 2) + 3, (- s.getSize() / 2) + 3, 0);
+        Square handle = new Square(upperLC, lowerRC, Color.WHITE);
+        if(handle.isPointInShape(mouseClicked)){
+            return true;
+        }
         return false;
     }
         
-    public static boolean checkTopRight(Shape s, Point3D mouseClicked){
-        
+    public static boolean checkTopRight(Square s, Point3D mouseClicked){
+        Point3D upperLC = new Point3D((s.getSize() / 2) - 3, (- s.getSize() / 2) - 3, 0);
+        Point3D lowerRC = new Point3D((s.getSize() / 2) + 3, (- s.getSize() / 2) + 3, 0);
+        Square handle = new Square(upperLC, lowerRC, Color.WHITE);
+        if(handle.isPointInShape(mouseClicked)){
+            return true;
+        }
         return false;
     }
             
-    public static boolean checkBottomRight(Shape s, Point3D mouseClicked){
-        
+    public static boolean checkBottomRight(Square s, Point3D mouseClicked){
+        Point3D upperLC = new Point3D((s.getSize() / 2) - 3, (s.getSize() / 2) - 3, 0);
+        Point3D lowerRC = new Point3D((s.getSize() / 2) + 3, (s.getSize() / 2) + 3, 0);
+        Square handle = new Square(upperLC, lowerRC, Color.WHITE);
+        if(handle.isPointInShape(mouseClicked)){
+            return true;
+        }
         return false;
     }
             
-    public static boolean checkBottomLeft(Shape s, Point3D mouseClicked){
-        
+    public static boolean checkBottomLeft(Square s, Point3D mouseClicked){
+        Point3D upperLC = new Point3D((- s.getSize() / 2) - 3, (s.getSize() / 2) - 3, 0);
+        Point3D lowerRC = new Point3D((- s.getSize() / 2) + 3, (s.getSize() / 2) + 3, 0);
+        Square handle = new Square(upperLC, lowerRC, Color.WHITE);
+        if(handle.isPointInShape(mouseClicked)){
+            return true;
+        }
         return false;
     }
 }

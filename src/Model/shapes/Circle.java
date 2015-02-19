@@ -28,7 +28,7 @@ public class Circle extends Shape{
 
     @Override
     public boolean isPointInShape(Point3D p) {
-       Point3D convertedPoint = Tools.world2Obj(p, this.angle, this);//COnvert to object coords
+       Point3D convertedPoint = Tools.world2Obj(p, this);//COnvert to object coords
        Point3D objectOrigin = new Point3D(0, 0, 0); //Used to make sure the formula make since to me.
         double X = (convertedPoint.x - objectOrigin.x);
         X = X * X;

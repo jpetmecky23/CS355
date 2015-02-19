@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Model;
 import Model.shapes.Point3D;
 import java.awt.event.MouseEvent;
 
@@ -36,13 +37,22 @@ public class MouseMotionLis implements java.awt.event.MouseMotionListener{
 		// TODO Auto-generated method stub
             Point3D mouseLocation = new Point3D(arg0.getX(), arg0.getY(), 0);
             Controller.inst().setMouseCurrentLocation(mouseLocation);
-            Controller.inst().updateShape();  
+                         
+           if(Controller.inst().getCurrentShapeType() == null){
+               if(Controller.inst().wasHandleClicked()){
+                   Controller.inst().processHandleClick();
+               }
+               else{
+                 Model.inst().translateShape(Controller.inst().getMouseDelta());
+               }
+           }
+           else{
+            Controller.inst().updateShape(); 
+           }
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
-            Point3D mouseLocation = new Point3D(arg0.getX(), arg0.getY(), 0);
-            Controller.inst().setMouseCurrentLocation(mouseLocation);
 	}
 
 }
