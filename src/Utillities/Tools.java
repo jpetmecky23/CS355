@@ -92,5 +92,44 @@ public abstract class Tools {
             s.setCenter(p);
             return s;
     }
+    public static Point3D findUpperLeftCornerSqu(Point3D cornerStart, Point3D cornerEnd, double size){
+        if((cornerStart.y > cornerEnd.y) && (cornerStart.x > cornerEnd.x)){
+            Point3D p = new Point3D(cornerStart.x - size, cornerStart.y - size, 0);
+            return p;
+        }
+        
+        else if((cornerStart.y < cornerEnd.y) && (cornerStart.x < cornerEnd.x)){
+            return p;
+        }
+        
+        else if((cornerStart.y > cornerEnd.y) && (cornerStart.x < cornerEnd.x)){
+            Point3D p = new Point3D(cornerStart.x, cornerStart.y - size, 0);
+            return p;
+        }
+        
+        else {//if((cornerStart.y < cornerEnd.y) && (cornerStart.x > cornerEnd.x)){
+            Point3D p = new Point3D(cornerStart.x - size, cornerStart.y, 0);
+            return p;
+        }  
+    }  
     
+    public static Point3D findUpperLeftCornerRec(Point3D cornerStart, Point3D cornerEnd){
+    if((cornerStart.y > cornerEnd.y) && (cornerStart.x > cornerEnd.x)){
+        return cornerEnd;
+    }
+
+    else if((cornerStart.y < cornerEnd.y) && (cornerStart.x < cornerEnd.x)){
+        return cornerStart;
+    }
+
+    else if((cornerStart.y > cornerEnd.y) && (cornerStart.x < cornerEnd.x)){
+        Point3D p = new Point3D(cornerStart.x, cornerEnd.y, 0);
+         return p;
+    }
+
+    else {//if((cornerStart.y < cornerEnd.y) && (cornerStart.x > cornerEnd.x)){
+        Point3D p = new Point3D(cornerEnd.x, cornerStart.y, 0);
+        return p;
+    }
+    }
 }

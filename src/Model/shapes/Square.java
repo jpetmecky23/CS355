@@ -8,7 +8,6 @@ package Model.shapes;
 import Model.Model;
 import Utillities.Tools;
 import java.awt.Color;
-import java.util.ArrayList;
 
 /**
  *
@@ -16,7 +15,6 @@ import java.util.ArrayList;
  */
 public class Square extends Shape{
     private Point3D UpperLeftCorner;
-    private Point3D lowerLeftCorner;
     private double size;
     
     public Square(Point3D cornerStart, Point3D cornerEnd, Color color){
@@ -25,13 +23,7 @@ public class Square extends Shape{
             double width = Math.abs((cornerStart.x - cornerEnd.x));
             double height = Math.abs((cornerStart.y - cornerEnd.y));        
             this.size = Math.min(width, height);
-            this.setUpperLeftCorner(cornerStart, cornerEnd);
-            double centerX = this.UpperLeftCorner.x + (this.size / 2);
-            double centerY = this.UpperLeftCorner.y + (this.size / 2);
-            this.center = new Point3D(centerX, centerY, 0);
-           // if(centerX < 0 || centerY < 0){
-           //     this.center = null;
-           // }
+            this.UpperLeftCorner = Tools.findUpperLeftCornerSqu(cornerStart, cornerEnd, this.size);
         }
     }
    
@@ -51,19 +43,16 @@ public class Square extends Shape{
             }
     }
     @Override
-    public void setCenter(Point3D center) {
-        if(this.center != null && this.UpperLeftCorner != null){
-        double x = center.x - this.center.x;//recreate the trans vector for moving the uppper corner point
-        double y = center.y - this.center.y; 
-        Point3D transVec = new Point3D(x, y, 0);//Trans vec
-        x = this.UpperLeftCorner.x + transVec.x;
-        y = this.UpperLeftCorner.y + transVec.y;
+    public void move(Point3D transVec) {
+        if(this.UpperLeftCorner != null){
+        double x = this.UpperLeftCorner.x + transVec.x;
+        double y = this.UpperLeftCorner.y + transVec.y;
         Point3D p = new Point3D(x, y, 0);
         this.UpperLeftCorner = p;
         }
     }
     
-   /* @Override
+    @Override
     public Point3D getCenter(){
         if(this.UpperLeftCorner != null){
         double x = this.UpperLeftCorner.x + this.getSize() / 2;
@@ -72,28 +61,8 @@ public class Square extends Shape{
         return p;
         }
         return null;
-    }*/
+    }
     
-    private void setUpperLeftCorner(Point3D cornerStart, Point3D cornerEnd){
-        if((cornerStart.y > cornerEnd.y) && (cornerStart.x > cornerEnd.x)){
-            Point3D p = new Point3D(cornerStart.x - size, cornerStart.y - size, 0);
-            this.UpperLeftCorner = p;
-        }
-        
-        else if((cornerStart.y < cornerEnd.y) && (cornerStart.x < cornerEnd.x)){
-            this.UpperLeftCorner = cornerStart;
-        }
-        
-        else if((cornerStart.y > cornerEnd.y) && (cornerStart.x < cornerEnd.x)){
-            Point3D p = new Point3D(cornerStart.x, cornerStart.y - size, 0);
-            this.UpperLeftCorner = p;
-        }
-        
-        else {//if((cornerStart.y < cornerEnd.y) && (cornerStart.x > cornerEnd.x)){
-            Point3D p = new Point3D(cornerStart.x - size, cornerStart.y, 0);
-            this.UpperLeftCorner = p;
-        }  
-    }  
     public Point3D getCorner() {
         return UpperLeftCorner;
     }
@@ -105,5 +74,8 @@ public class Square extends Shape{
     }
     public void setSize(int size) {
         this.size = size;
+    }
+    public void resize(int size){
+         this.size = this.size + size;
     }
 }
