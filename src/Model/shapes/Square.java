@@ -35,9 +35,6 @@ public class Square extends Shape{
             Model.inst().setSelectColor(this.getColor());
             return true;
         }
-        else if(sc.checkBottomLeft(this, convertedPoint) || sc.checkBottomRight(this, convertedPoint) || sc.checkRotation(this, convertedPoint) || sc.checkTopLeft(this, convertedPoint) || sc.checkTopRight(this, convertedPoint)){
-            return true;
-        }
         else{
             this.isSelected = false;
             return false;
