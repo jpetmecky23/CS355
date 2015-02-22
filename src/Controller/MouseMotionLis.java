@@ -43,7 +43,7 @@ public class MouseMotionLis implements java.awt.event.MouseMotionListener{
                    Controller.inst().processHandleClick();
                }
                else{
-                 Model.inst().translateShape(Controller.inst().getMouseDelta());
+                 //Model.inst().translateShape(Controller.inst().getMouseDelta());
                }
            }
            else{

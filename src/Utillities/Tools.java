@@ -84,14 +84,6 @@ public abstract class Tools {
         return q;
     }
     
-    public static Shape moveShape(Point3D transVec, Shape s){
-            Point3D p = null;
-            double x = s.getCenter().x + transVec.x;
-            double y = s.getCenter().y + transVec.y;
-             p = new Point3D(x, y, 0);
-            s.setCenter(p);
-            return s;
-    }
     public static Point3D findUpperLeftCornerSqu(Point3D cornerStart, Point3D cornerEnd, double size){
         if((cornerStart.y > cornerEnd.y) && (cornerStart.x > cornerEnd.x)){
             Point3D p = new Point3D(cornerStart.x - size, cornerStart.y - size, 0);

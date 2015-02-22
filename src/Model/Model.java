@@ -7,7 +7,6 @@ package Model;
 
 import Model.shapes.*;
 import Shell.GUIFunctions;
-import Utillities.Tools;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -46,8 +45,7 @@ import java.util.Observable;
     } 
 
     public Model() {
-        this.container = new ArrayList();
-          
+        this.container = new ArrayList();     
     }
     
     public void addShape(Shape s){
@@ -110,14 +108,6 @@ import java.util.Observable;
     public void modelChanged(){
         this.setChanged();
     	this.notifyObservers();
-    }
-
-    public void translateShape(Point3D tanslationVec){
-        int index = this.getIndexOfSelectedShape();
-        Shape s = this.container.get(index);
-        s = Tools.moveShape(tanslationVec, s);
-        this.setShape(s, index);
-        this.modelChanged();
     }
     
     public int getIndexOfSelectedShape(){

@@ -16,15 +16,13 @@ import java.awt.Color;
 public class Ellipses extends Shape{
     private double height;
     private double width;
-    private Point3D center;
+    private Point3D UpperLeftCorner;
     
-   public  Ellipses(Point3D center, Point3D endPoint, Color color){
+   public  Ellipses(Point3D startPoint, Point3D endPoint, Color color){
        super(color);
-       if(center != null){
        this.UpperLeftCorner = Tools.findUpperLeftCornerRec(startPoint, endPoint);
-       this.width = 2 * (Math.abs((center.x - endPoint.x)));//Times 2 since these oare radii
-       this.height = 2 * (Math.abs((center.y - endPoint.y)));//Times 2 since these oare radii 
-       }
+       this.width = Math.abs((startPoint.x - endPoint.x));
+       this.height = Math.abs((startPoint.y - endPoint.y));
     }
    
    
@@ -52,28 +50,31 @@ public class Ellipses extends Shape{
             }
     }
     @Override
-    public void move(Point3D transVec) {
+    public Point3D getCenter(){
         if(this.UpperLeftCorner != null){
-        double x = this.UpperLeftCorner.x + transVec.x;
-        double y = this.UpperLeftCorner.y + transVec.y;
+        double x = this.UpperLeftCorner.x + this.getWidth() / 2;
+        double y = this.UpperLeftCorner.y + this.getHeight() / 2;
         Point3D p = new Point3D(x, y, 0);
-        this.UpperLeftCorner = p;
+        return p;
         }
+        return null;
     }
+    public Point3D getUpperLeftCorner() {
+        return UpperLeftCorner;
+    }
+    public void setUpperLeftCorner(Point3D UpperLeftCorner) {
+        this.UpperLeftCorner = UpperLeftCorner;
+    }  
     public double getHeight() {
         return height;
     }
-    public void setHeight(int height) {
+    public void setHeight(double height) {
         this.height = height;
     }
     public double getWidth() {
         return width;
     }
-    public void setWidth(int width) {
+    public void setWidth(double width) {
         this.width = width;
-    }
-    public void resize(int width, int hieght){
-        this.width = this.width + width;
-        this.height = this.height + height;
     }
 }

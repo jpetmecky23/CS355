@@ -55,97 +55,101 @@ public class Controller implements CS355Controller{
         this.mouseDelta = new Point3D(0, 0, 0);
     }
 
+    @Override
     public void colorButtonHit(Color c){
         GUIFunctions.changeSelectedColor(c);
         Model.inst().setSelectColor(c);
     }
     
+    @Override
     public void triangleButtonHit(){
         Controller.inst().setCurrentShapeType(new Triangle(null, null));
         Model.inst().clearSelectedShapes();
     }
     
+    @Override
     public void squareButtonHit(){
         Controller.inst().setCurrentShapeType(new Square(null, null, null));
         Model.inst().clearSelectedShapes();
     }
     
+    @Override
     public void rectangleButtonHit(){
         Controller.inst().setCurrentShapeType(new Rectangle(null, null, null));
         Model.inst().clearSelectedShapes();
     }
-    
+    @Override
     public void circleButtonHit(){
         Controller.inst().setCurrentShapeType(new Circle(null, null, null));
         Model.inst().clearSelectedShapes();
     }
-    
+    @Override
     public void ellipseButtonHit(){
         Controller.inst().setCurrentShapeType(new Ellipses(null, null, null));
         Model.inst().clearSelectedShapes();
     }
-
+    @Override
     public void lineButtonHit(){
         Controller.inst().setCurrentShapeType(new Line3D(null, null, null));// Blank shape placeholder
         Model.inst().clearSelectedShapes();
     }
-
+    @Override
     public void selectButtonHit(){
          Controller.inst().setCurrentShapeType(null);// No shape type is currentlly selected
          Model.inst().clearSelectedShapes();
     }
-
+    @Override
     public void zoomInButtonHit(){
     }
-
+    @Override
     public void zoomOutButtonHit(){
         
     }
-
+    @Override
     public void hScrollbarChanged(int value){
         
     }
-
+    @Override
     public void vScrollbarChanged(int value){
         
     }
-
+    @Override
     public void toggle3DModelDisplay(){
         
     }
-
+    @Override
     public void keyPressed(Iterator<Integer> iterator){
         
     }
-
+    @Override
     public void doEdgeDetection(){
         
     }
-
+    @Override
     public void doSharpen(){
         
     }
-
+    @Override
     public void doMedianBlur(){
         
     }
-
+    @Override
     public void doUniformBlur(){
         
     }
-
+    @Override
     public void doChangeContrast(int contrastAmountNum){
         
     }
-
+    @Override
     public void doChangeBrightness(int brightnessAmountNum){
         
     }
-
+    @Override
     public void doLoadImage(BufferedImage openImage){
         
     }
-
+    @Override
     public void toggleBackgroundDisplay(){
         
     }
@@ -153,15 +157,13 @@ public class Controller implements CS355Controller{
     public Shape getCurrentShapeType() {
         return currentShapeType;
     }
-
     public void setCurrentShapeType(Shape currentShape) {
             this.currentShapeType = currentShape;
     }
-       
+    
     public Point3D getMouseDown() {
         return mousePressed;
     }
-
     public void setMouseDown(Point3D mouseDown) {
         this.mousePressed = mouseDown;
         this.mouseReleased = null;
@@ -178,21 +180,15 @@ public class Controller implements CS355Controller{
     public Point3D getMouseUp() {
         return mouseReleased;
     }
-
     public void setMouseUp(Point3D mouseUp) {
         this.mouseReleased = mouseUp;
     } 
-
     public Point3D getMouseDelta() {
         return mouseDelta;
-    }
-
-    
-    
+    } 
     public Point3D getMouseCurrentLocation() {
         return mouseCurrentLocation;
     }
-
     public void setMouseCurrentLocation(Point3D mouseCurrentLocation) {
         if(this.mouseCurrentLocation != null){
         double x = this.mouseCurrentLocation.x - mouseCurrentLocation.x;
@@ -201,8 +197,6 @@ public class Controller implements CS355Controller{
         }
         this.mouseCurrentLocation = mouseCurrentLocation;
     }       
-
-
     public void addShape(){
          
            if(Controller.inst().getCurrentShapeType() instanceof Circle){
@@ -309,18 +303,7 @@ public class Controller implements CS355Controller{
          Model.inst().check4ShapeClicked(mouseLocation);      
      }
      
-     public boolean wasHandleClicked(){
-         Point3D p = this.mouseCurrentLocation;
-         int index = Model.inst().getIndexOfSelectedShape();
-         if(index > -1){
-             Shape s = Model.inst().getShape(index);
-             int clickedCorner = SquareController.checkCorners(s, p);
-             if(clickedCorner >= 0){
-                return true; 
-           }
-         }
-         return false;
-    }
+
      
   public void processHandleClick(){
          Point3D p = this.mouseCurrentLocation;
@@ -342,7 +325,7 @@ public class Controller implements CS355Controller{
                     square.setAngle(square.getAngle() + Math.PI / 8);
                 }
                 else if(clickedCorner == 1){
-                    square.setCorner(p);       
+                    square.setUpperLeftCorner(p);       
                     double size = Math.min(this.mouseDelta.x, this.mouseDelta.y);
                     square.setSize((int) (square.getSize() + size));
                     Model.inst().setShape(square, index);

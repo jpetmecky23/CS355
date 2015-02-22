@@ -26,32 +26,8 @@ public class Square extends Shape{
             this.UpperLeftCorner = Tools.findUpperLeftCornerSqu(cornerStart, cornerEnd, this.size);
         }
     }
-   
-    @Override
-    public boolean isPointInShape(Point3D p) {
-        Point3D convertedPoint = Tools.world2Obj(p, this);
-        double dfoc = size / 2;//distanceFromObjectCenter
-        
-        if(Math.abs(convertedPoint.x) <= dfoc && Math.abs(convertedPoint.y) <= dfoc){
-            this.isSelected = true;
-            Model.inst().setSelectColor(this.getColor());
-            return true;
-        }
-        else{
-            this.isSelected = false;
-            return false;
-            }
-    }
-    @Override
-    public void move(Point3D transVec) {
-        if(this.UpperLeftCorner != null){
-        double x = this.UpperLeftCorner.x + transVec.x;
-        double y = this.UpperLeftCorner.y + transVec.y;
-        Point3D p = new Point3D(x, y, 0);
-        this.UpperLeftCorner = p;
-        }
-    }
-    
+
+
     @Override
     public Point3D getCenter(){
         if(this.UpperLeftCorner != null){
@@ -62,11 +38,10 @@ public class Square extends Shape{
         }
         return null;
     }
-    
-    public Point3D getCorner() {
+    public Point3D getUpperLeftCorner() {
         return UpperLeftCorner;
     }
-    public void setCorner(Point3D Corner) {
+    public void setUpperLeftCorner(Point3D Corner) {
         this.UpperLeftCorner = Corner;
     }
     public double getSize() {
@@ -74,8 +49,5 @@ public class Square extends Shape{
     }
     public void setSize(int size) {
         this.size = size;
-    }
-    public void resize(int size){
-         this.size = this.size + size;
     }
 }

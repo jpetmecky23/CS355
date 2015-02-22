@@ -8,8 +8,6 @@ package Model.shapes;
 import Model.Model;
 import Utillities.Tools;
 import java.awt.Color;
-import java.util.ArrayList;
-
 /**
  *
  * @author James
@@ -46,18 +44,17 @@ public class Rectangle extends Shape{
             return false;
             }
     }
-    
     @Override
-    public void move(Point3D transVec) {
+    public Point3D getCenter(){
         if(this.UpperLeftCorner != null){
-        double x = this.UpperLeftCorner.x + transVec.x;
-        double y = this.UpperLeftCorner.y + transVec.y;
+        double x = this.UpperLeftCorner.x + this.getWidth() / 2;
+        double y = this.UpperLeftCorner.y + this.getHeight() / 2;
         Point3D p = new Point3D(x, y, 0);
-        this.UpperLeftCorner = p;
+        return p;
         }
+        return null;
     }
- 
-    public Point3D getCorner() {
+    public Point3D getUpperLeftCorner() {
         return UpperLeftCorner;
     }
     public void setUpperLeftCorner(Point3D Corner) {
@@ -66,17 +63,13 @@ public class Rectangle extends Shape{
     public double getHeight() {
         return height;
     }
-    public void setHeight(int height) {
+    public void setHeight(double height) {
         this.height = height;
     }
     public double getWidth() {
         return width;
     }
-    public void setWidth(int width) {
+    public void setWidth(double width) {
         this.width = width;
-    }
-    public void resize(int width, int hieght){
-        this.width = this.width + width;
-        this.height = this.height + height;
     }
 }

@@ -44,8 +44,6 @@ public class Shape{
     public Point3D getCenter() {
         return null;
     }
-    public void move(Point3D transVec) {
-    }
     
     public boolean isIsSelected() {
         return isSelected;

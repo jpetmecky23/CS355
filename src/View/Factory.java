@@ -121,8 +121,8 @@ public class Factory {
        }
        
        public DrawableQuad processRec(Rectangle s){
-           double x = s.getCorner().x;
-           double y = s.getCorner().y;
+           double x = s.getUpperLeftCorner().x;
+           double y = s.getUpperLeftCorner().y;
            double width = s.getWidth();
            double height = s.getHeight();
            Color color = s.getColor();
@@ -134,8 +134,8 @@ public class Factory {
        
        public DrawableQuad processSquare(Square s){
 
-           double x = s.getCorner().x;
-           double y = s.getCorner().y;
+           double x = s.getUpperLeftCorner().x;
+           double y = s.getUpperLeftCorner().y;
            double width = s.getSize();//Square same width and hight
            double height = s.getSize();
            Color color = s.getColor();

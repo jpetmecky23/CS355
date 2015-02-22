@@ -15,14 +15,15 @@ import java.awt.Color;
  */
 public class Circle extends Shape{
     private double radis;
-  
-    public Circle(Point3D center, Point3D endPoint, Color color){
+    private Point3D UpperLeftCorner;
+    
+    public Circle(Point3D startPoint, Point3D endPoint, Color color){
         super(color);
-        if(center != null){
-        this.setCenter(center);
-        double x = Math.abs((center.x - endPoint.x));
-        double y = Math.abs((center.y - endPoint.y));
-        this.radis = Math.sqrt((x * x) + (y * y));//pythagorean therom
+        if(startPoint != null){
+        double width = Math.abs((startPoint.x - endPoint.x));
+        double height = Math.abs((startPoint.y - endPoint.y));        
+        this.radis = Math.min(width, height);
+        this.UpperLeftCorner = Tools.findUpperLeftCornerSqu(startPoint, startPoint, this.radis);
         }
     }
 
@@ -45,13 +46,27 @@ public class Circle extends Shape{
             this.isSelected = false;
             return false;
             }
+    }  
+    @Override
+    public Point3D getCenter(){
+        if(this.UpperLeftCorner != null){
+        double x = this.UpperLeftCorner.x + this.radis;
+        double y = this.UpperLeftCorner.y + this.radis;
+        Point3D p = new Point3D(x, y, 0);
+        return p;
+        }
+        return null;
     }
-    
+    public Point3D getUpperLeftCorner() {
+        return UpperLeftCorner;
+    }
+    public void setUpperLeftCorner(Point3D Corner) {
+        this.UpperLeftCorner = Corner;
+    }
     public double getRadis() {
         return radis;
     }
-
-    public void setRadis(int radis) {
+    public void setRadis(double radis) {
         this.radis = radis;
     }  
     

@@ -5,6 +5,7 @@
  */
 package Controller.shapes;
 
+import Model.Model;
 import Model.shapes.Point3D;
 import Model.shapes.Shape;
 import Model.shapes.Square;
@@ -15,7 +16,23 @@ import java.awt.Color;
  *
  * @author James
  */
-public class SquareController {
+public class  SquareController extends ShapeController{
+    
+
+    public boolean isPointInShape(Square s, Point3D p) {
+        Point3D convertedPoint = Tools.world2Obj(p, s);
+        double dfoc = s.getSize() / 2;//distanceFromObjectCenter
+        
+        if(Math.abs(convertedPoint.x) <= dfoc && Math.abs(convertedPoint.y) <= dfoc){
+            s.setIsSelected(true);
+            Model.inst().setSelectColor(s.getColor());
+            return true;
+        }
+        else{
+            s.setIsSelected(false);
+            return false;
+            }
+    } 
     
     public static int checkCorners(Shape shape, Point3D mouseClicked){
        Square s = (Square) shape;
@@ -93,4 +110,21 @@ public class SquareController {
         }
         return false;
     }
+   
+    public static Square resize(Square s, Point3D newPoint){
+        return null;
+    }
+    
+    public static Square rotate(Square s, Point3D newPoint){
+        return null;
+    }
+    
+    public static Square move(Square s, Point3D transVec){
+        double x = s.getUpperLeftCorner().x + transVec.x;
+        double y = s.getUpperLeftCorner().y + transVec.y;
+        Point3D p = new Point3D(x, y, 0);
+        s.setUpperLeftCorner(p);
+        return s;
+    }
+    
 }
