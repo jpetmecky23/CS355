@@ -5,6 +5,9 @@
  */
 package Controller.shapes;
 
+import Model.shapes.Point3D;
+import Model.shapes.Shape;
+
 
 /**
  *
@@ -12,4 +15,11 @@ package Controller.shapes;
  */
 public class ShapeController {
 
+    public ShapeController() {
+    }
+    
+    
+   public Shape processClick(Shape shape, Point3D mousePressed, Point3D mouseCurrentLocation) {
+        return null;
+    } 
 }

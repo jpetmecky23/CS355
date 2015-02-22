@@ -5,8 +5,6 @@
  */
 package Model.shapes;
 
-import Controller.shapes.SquareController;
-import Model.Model;
 import Utillities.Tools;
 import java.awt.Color;
 
@@ -14,32 +12,26 @@ import java.awt.Color;
  *
  * @author James
  */
-public class Square extends Shape{
+public class Handle extends Shape{
     private Point3D UpperLeftCorner;
     private double size;
     
-    public Square(Point3D cornerStart, Point3D cornerEnd, Color color){
-        super(color);
+    public  Handle(Point3D cornerStart, Point3D cornerEnd, Color c){
+        super(c);
         if(cornerStart != null){                   
                this.rebuild(cornerStart, cornerEnd);
         }
     }
 
-    @Override
     public boolean isPointInShape(Point3D p) {
         Point3D convertedPoint = Tools.world2Obj(p, this);
-        SquareController sc = new SquareController();
         double dfoc = size / 2;//distanceFromObjectCenter
+        
         if(Math.abs(convertedPoint.x) <= dfoc && Math.abs(convertedPoint.y) <= dfoc){
-            this.isSelected = true;
-            Model.inst().setSelectColor(this.getColor());
-            return true;
-        }
-        else if(sc.checkBottomLeft(this, convertedPoint) || sc.checkBottomRight(this, convertedPoint) || sc.checkRotation(this, convertedPoint) || sc.checkTopLeft(this, convertedPoint) || sc.checkTopRight(this, convertedPoint)){
+
             return true;
         }
         else{
-            this.isSelected = false;
             return false;
             }
     } 
@@ -76,3 +68,5 @@ public class Square extends Shape{
         this.size = this.size + size;
     }
 }
+
+

@@ -44,6 +44,7 @@ public class Shape{
     public Point3D getCenter() {
         return null;
     }
+
     
     public boolean isIsSelected() {
         return isSelected;

@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Controller.shapes.ShapeController;
 import Controller.shapes.SquareController;
 import Shell.GUIFunctions;
 import java.awt.Color;
@@ -250,7 +251,32 @@ public class Controller implements CS355Controller{
     }
     
     public void updateShape(){
-            if(Controller.inst().getCurrentShapeType() instanceof Circle){
+        //Have this check the currentlly selected shape
+        //then pass the mousePressed and MouseCurrentLocation into the shape controller
+        //the shape controller will then modify the shape accorrdingly.
+        int index = Model.inst().getShapeCount() - 1;
+        if(this.currentShapeType != null){
+        Shape s = Model.inst().getShape(index);
+        ShapeController sc = new SquareController(); 
+        s = sc.processClick(s, this.mousePressed, this.mouseCurrentLocation);
+        Model.inst().setShape(s, index);
+        }
+
+        else if(index > -1 && index == Model.inst().getShapeCount() - 1){
+        Shape s = Model.inst().getShape(index);
+        ShapeController sc = new SquareController(); 
+        s = sc.processClick(s, this.mousePressed, this.mouseCurrentLocation);
+        Model.inst().setShape(s, index); 
+        }
+        
+        /*else if(index > -1 && index != Model.inst().getShapeCount() - 1){
+        Shape s = Model.inst().getShape(index);
+        ShapeController sc = new SquareController(); 
+        s = sc.processClick(s, s.getUpperLeftCorner(), this.mouseCurrentLocation);
+        Model.inst().setShape(s, index); 
+        }*/
+        
+           /* if(Controller.inst().getCurrentShapeType() instanceof Circle){
               int index = Model.inst().getShapeCount() - 1;//last shape in array
               Color c = Model.inst().getShape(index).getColor();
               Circle circle = new Circle(this.mousePressed, this.mouseCurrentLocation, c);
@@ -280,11 +306,13 @@ public class Controller implements CS355Controller{
            }
            
            else if(Controller.inst().getCurrentShapeType() instanceof Square){
-              int index = Model.inst().getShapeCount() - 1;//last shape in array
+              
               Color c = Model.inst().getShape(index).getColor();
-              Square s = new Square(this.mousePressed, this.mouseCurrentLocation, c);
+              SquareController sc = new SquareController();
+              
+              s = sc.processClick(this.mousePressed, this.mouseCurrentLocation);
               Model.inst().setShape(s, index); 
-           }
+           }*/
     }
     
      public void updateTri(){
@@ -303,14 +331,25 @@ public class Controller implements CS355Controller{
          Model.inst().check4ShapeClicked(mouseLocation);      
      }
      
-
-     
-  public void processHandleClick(){
-         Point3D p = this.mouseCurrentLocation;
+     public boolean wasHandleClicked(){
+        /* Point3D p = this.mouseCurrentLocation;
          int index = Model.inst().getIndexOfSelectedShape();
          if(index > -1){
              Shape s = Model.inst().getShape(index);
              int clickedCorner = SquareController.checkCorners(s, p);
+             if(clickedCorner >= 0){
+                return true; 
+           }
+         }*/
+         return false;
+    }
+     
+  public void processHandleClick(){
+        Point3D p = this.mouseCurrentLocation;
+         int index = Model.inst().getIndexOfSelectedShape();
+        /* if(index > -1){
+             Shape s = Model.inst().getShape(index);
+           //  int clickedCorner = SquareController.checkCorners(s, p);
              if(clickedCorner >= 0){
         if(s instanceof Line3D){
                
@@ -348,7 +387,7 @@ public class Controller implements CS355Controller{
                 }
             }
         }
-    }
+    }*/
   }
 }
 
