@@ -23,7 +23,7 @@ public class  SquareController extends ShapeController{
     public SquareController() {
     }
     
-    @Override
+   /* @Override
     public Shape processClick(Shape shape, Point3D mousePressed, Point3D mouseCurrentLocation) {
         Square sq = (Square) shape;
         sq = this.checkCorners(sq, mousePressed, mouseCurrentLocation);
@@ -43,8 +43,8 @@ public class  SquareController extends ShapeController{
            double x = mousePressed.x - s.getSize();
            double y = mousePressed.y - s.getSize();
            Point3D upperLeftCorner = new Point3D(x, y, 0);
-           s = new Square(upperLeftCorner, mouseCurrentLocation, s.getColor());
-            s.setColor(Color.yellow);
+
+           s.setColor(Color.yellow);
         }
         else if(checkTopLeft(s, convertedMouseClicked) && s.isIsSelected()){
           //  double x = mousePressed.x + s.getSize();
@@ -142,6 +142,6 @@ public class  SquareController extends ShapeController{
         Point3D p = new Point3D(x, y, 0);
         s.setUpperLeftCorner(p);
         return s;
-    }
+    }*/
     
 }

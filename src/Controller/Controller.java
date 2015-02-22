@@ -23,9 +23,9 @@ public class Controller implements CS355Controller{
     private static Controller instance;
     private Point3D mousePressed;
     private Point3D mouseReleased;
+    private Point3D mousePrevLocation;
     private Point3D mouseCurrentLocation;
-    private Point3D mouseDelta;
-    private Shape currentShapeType;
+    private ControllerState currentState;
             
     public static Controller inst()
     {
@@ -53,50 +53,47 @@ public class Controller implements CS355Controller{
         this.mousePressed = null;
         this.mouseReleased = null;
         this.mouseCurrentLocation = null;
-        this.mouseDelta = new Point3D(0, 0, 0);
+        this.mousePrevLocation = null;
     }
 
-    @Override
+
     public void colorButtonHit(Color c){
         GUIFunctions.changeSelectedColor(c);
         Model.inst().setSelectColor(c);
     }
     
-    @Override
     public void triangleButtonHit(){
-        Controller.inst().setCurrentShapeType(new Triangle(null, null));
+        Controller.inst().setState(ControllerState.Triangle);
         Model.inst().clearSelectedShapes();
     }
     
-    @Override
     public void squareButtonHit(){
-        Controller.inst().setCurrentShapeType(new Square(null, null, null));
+        Controller.inst().setState(ControllerState.Square);
         Model.inst().clearSelectedShapes();
     }
     
-    @Override
     public void rectangleButtonHit(){
-        Controller.inst().setCurrentShapeType(new Rectangle(null, null, null));
+        Controller.inst().setState(ControllerState.Rectangle);
         Model.inst().clearSelectedShapes();
     }
-    @Override
+
     public void circleButtonHit(){
-        Controller.inst().setCurrentShapeType(new Circle(null, null, null));
+        Controller.inst().setState(ControllerState.Circle);
         Model.inst().clearSelectedShapes();
     }
-    @Override
+ 
     public void ellipseButtonHit(){
-        Controller.inst().setCurrentShapeType(new Ellipses(null, null, null));
+        Controller.inst().setState(ControllerState.Ellipses);
         Model.inst().clearSelectedShapes();
     }
-    @Override
+    
     public void lineButtonHit(){
-        Controller.inst().setCurrentShapeType(new Line3D(null, null, null));// Blank shape placeholder
+        Controller.inst().setState(ControllerState.Line);
         Model.inst().clearSelectedShapes();
     }
-    @Override
+
     public void selectButtonHit(){
-         Controller.inst().setCurrentShapeType(null);// No shape type is currentlly selected
+         Controller.inst().setState(ControllerState.ModingShape);
          Model.inst().clearSelectedShapes();
     }
     @Override
@@ -155,27 +152,26 @@ public class Controller implements CS355Controller{
         
     }
     
-    public Shape getCurrentShapeType() {
-        return currentShapeType;
+    public ControllerState getState(){
+        return this.currentState;
     }
-    public void setCurrentShapeType(Shape currentShape) {
-            this.currentShapeType = currentShape;
+    public void setState(ControllerState state){
+        this.currentState = state;
     }
-    
     public Point3D getMouseDown() {
         return mousePressed;
     }
     public void setMouseDown(Point3D mouseDown) {
         this.mousePressed = mouseDown;
         this.mouseReleased = null;
-        if(currentShapeType != null){
+        if(this != null){
         this.addShape();
         }
-        if(currentShapeType == null){
-            if(!this.wasHandleClicked()){	
-            this.selectShape(Controller.inst().getMouseDown());
-            }
-        }
+       // if(currentShapeType == null){
+       //     if(!this.wasHandleClicked()){	
+        //    this.selectShape(Controller.inst().getMouseDown());
+        //    }
+       // }
     }
 
     public Point3D getMouseUp() {
@@ -184,9 +180,9 @@ public class Controller implements CS355Controller{
     public void setMouseUp(Point3D mouseUp) {
         this.mouseReleased = mouseUp;
     } 
-    public Point3D getMouseDelta() {
-        return mouseDelta;
-    } 
+    //public Point3D getMouseDelta() {
+    //    return mouseDelta;
+    //} 
     public Point3D getMouseCurrentLocation() {
         return mouseCurrentLocation;
     }
@@ -194,39 +190,39 @@ public class Controller implements CS355Controller{
         if(this.mouseCurrentLocation != null){
         double x = this.mouseCurrentLocation.x - mouseCurrentLocation.x;
         double y = this.mouseCurrentLocation.y - mouseCurrentLocation.y;      
-        this.mouseDelta = new Point3D(-x, -y, 0);
+        //this.mouseDelta = new Point3D(-x, -y, 0);
         }
         this.mouseCurrentLocation = mouseCurrentLocation;
     }       
     public void addShape(){
          
-           if(Controller.inst().getCurrentShapeType() instanceof Circle){
+           if(Controller.inst().getState() == ControllerState.Circle){
                Circle c = new Circle(this.mousePressed, this.mousePressed, Model.inst().getSelectColor());
                Model.inst().addShape(c);
            }
            
-           else if(Controller.inst().getCurrentShapeType() instanceof Ellipses){
+           else if(Controller.inst().getState() == ControllerState.Ellipses){
                Ellipses c = new Ellipses(this.mousePressed, this.mousePressed, Model.inst().getSelectColor());
                Model.inst().addShape(c);
            }
            
-           else if(Controller.inst().getCurrentShapeType() instanceof Line3D){
+           else if(Controller.inst().getState() == ControllerState.Line){
               //ds = processLine((Line3D) s);
                Line3D l = new Line3D(this.mousePressed, this.mousePressed, Model.inst().getSelectColor());
                Model.inst().addShape(l);
            } 
            
-           else if(Controller.inst().getCurrentShapeType() instanceof Rectangle){
+           else if(Controller.inst().getState() == ControllerState.Ellipses){
                Rectangle s = new Rectangle(this.mousePressed, this.mousePressed, Model.inst().getSelectColor());
                Model.inst().addShape(s);
            }
            
-           else if(Controller.inst().getCurrentShapeType() instanceof Square){
+           else if(Controller.inst().getState() == ControllerState.Circle){
                Square s = new Square(this.mousePressed, this.mousePressed, Model.inst().getSelectColor());
                Model.inst().addShape(s);
            }
            
-           else if(Controller.inst().getCurrentShapeType() instanceof Triangle){
+           else if(Controller.inst().getState() == ControllerState.Triangle){
                int index = Model.inst().getShapeCount() - 1;//last shape in array
                boolean updateShape = false;
                boolean isTriangle =  false;
@@ -254,7 +250,7 @@ public class Controller implements CS355Controller{
         //Have this check the currentlly selected shape
         //then pass the mousePressed and MouseCurrentLocation into the shape controller
         //the shape controller will then modify the shape accorrdingly.
-        int index = Model.inst().getShapeCount() - 1;
+       /* int index = Model.inst().getShapeCount() - 1;
         if(this.currentShapeType != null){
         Shape s = Model.inst().getShape(index);
         ShapeController sc = new SquareController(); 
@@ -269,28 +265,28 @@ public class Controller implements CS355Controller{
         Model.inst().setShape(s, index); 
         }
         
-        /*else if(index > -1 && index != Model.inst().getShapeCount() - 1){
+        else if(index > -1 && index != Model.inst().getShapeCount() - 1){
         Shape s = Model.inst().getShape(index);
         ShapeController sc = new SquareController(); 
         s = sc.processClick(s, s.getUpperLeftCorner(), this.mouseCurrentLocation);
         Model.inst().setShape(s, index); 
         }*/
         
-           /* if(Controller.inst().getCurrentShapeType() instanceof Circle){
+            if(Controller.inst().getState() == ControllerState.Circle){
               int index = Model.inst().getShapeCount() - 1;//last shape in array
               Color c = Model.inst().getShape(index).getColor();
               Circle circle = new Circle(this.mousePressed, this.mouseCurrentLocation, c);
               Model.inst().setShape(circle, index);
            }
            
-           else if(Controller.inst().getCurrentShapeType() instanceof Ellipses){
+           else if(Controller.inst().getState() == ControllerState.Ellipses){
               int index = Model.inst().getShapeCount() - 1;//last shape in array
               Color c = Model.inst().getShape(index).getColor();
               Ellipses e = new Ellipses(this.mousePressed, this.mouseCurrentLocation, c);
               Model.inst().setShape(e, index);
            }
            
-           else if(Controller.inst().getCurrentShapeType() instanceof Line3D){
+           else if(Controller.inst().getState() == ControllerState.Line){
               //ds = processLine((Line3D) s);
               int index = Model.inst().getShapeCount() - 1;//last shape in array
               Color c = Model.inst().getShape(index).getColor();
@@ -298,21 +294,19 @@ public class Controller implements CS355Controller{
               Model.inst().setShape(l, index);
            } 
            
-           else if(Controller.inst().getCurrentShapeType() instanceof Rectangle){
+           else if(Controller.inst().getState() == ControllerState.Rectangle){
               int index = Model.inst().getShapeCount() - 1;//last shape in array
               Color c = Model.inst().getShape(index).getColor();
               Rectangle r = new Rectangle(this.mousePressed, this.mouseCurrentLocation, c);
               Model.inst().setShape(r, index);
            }
            
-           else if(Controller.inst().getCurrentShapeType() instanceof Square){
-              
+           else if(Controller.inst().getState() == ControllerState.Square){
+              int index = Model.inst().getShapeCount() - 1;//last shape in array
               Color c = Model.inst().getShape(index).getColor();
-              SquareController sc = new SquareController();
-              
-              s = sc.processClick(this.mousePressed, this.mouseCurrentLocation);
+              Square s = new Square(this.mousePressed, this.mouseCurrentLocation, c);
               Model.inst().setShape(s, index); 
-           }*/
+           }
     }
     
      public void updateTri(){
@@ -330,66 +324,7 @@ public class Controller implements CS355Controller{
      public void selectShape(Point3D mouseLocation){
          Model.inst().check4ShapeClicked(mouseLocation);      
      }
-     
-     public boolean wasHandleClicked(){
-        /* Point3D p = this.mouseCurrentLocation;
-         int index = Model.inst().getIndexOfSelectedShape();
-         if(index > -1){
-             Shape s = Model.inst().getShape(index);
-             int clickedCorner = SquareController.checkCorners(s, p);
-             if(clickedCorner >= 0){
-                return true; 
-           }
-         }*/
-         return false;
-    }
-     
-  public void processHandleClick(){
-        Point3D p = this.mouseCurrentLocation;
-         int index = Model.inst().getIndexOfSelectedShape();
-        /* if(index > -1){
-             Shape s = Model.inst().getShape(index);
-           //  int clickedCorner = SquareController.checkCorners(s, p);
-             if(clickedCorner >= 0){
-        if(s instanceof Line3D){
-               
-           } 
-           else if(s instanceof Triangle){
-           }
-           else if (s instanceof Square){
-              Square square = (Square) s;
-                if(clickedCorner == 0){
-                    square.setColor(Color.yellow);
-                    Model.inst().setShape(square, index);
-                    square.setAngle(square.getAngle() + Math.PI / 8);
-                }
-                else if(clickedCorner == 1){
-                    square.setUpperLeftCorner(p);       
-                    double size = Math.min(this.mouseDelta.x, this.mouseDelta.y);
-                    square.setSize((int) (square.getSize() + size));
-                    Model.inst().setShape(square, index);
-                }
-                else if(clickedCorner == 2){
-                    square.setColor(Color.green);
-                    double x = Math.abs(this.mouseDelta.x);
-                    double y = Math.abs(this.mouseDelta.y);
-                    double size = Math.min(x, y);
-                    square.setSize((int) (square.getSize() + size));
-                    Model.inst().setShape(square, index);
-                }
-                else if(clickedCorner == 3){
-                    square.setColor(Color.red);
-                    Model.inst().setShape(square, index);
-                }
-                else if(clickedCorner == 4){
-                    square.setColor(Color.pink);
-                    Model.inst().setShape(square, index);
-                }
-            }
-        }
-    }*/
   }
-}
 
 
 
