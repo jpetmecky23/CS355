@@ -164,14 +164,6 @@ public class Controller implements CS355Controller{
     public void setMouseDown(Point3D mouseDown) {
         this.mousePressed = mouseDown;
         this.mouseReleased = null;
-        if(this != null){
-        this.addShape();
-        }
-       // if(currentShapeType == null){
-       //     if(!this.wasHandleClicked()){	
-        //    this.selectShape(Controller.inst().getMouseDown());
-        //    }
-       // }
     }
 
     public Point3D getMouseUp() {
@@ -212,12 +204,12 @@ public class Controller implements CS355Controller{
                Model.inst().addShape(l);
            } 
            
-           else if(Controller.inst().getState() == ControllerState.Ellipses){
+           else if(Controller.inst().getState() == ControllerState.Rectangle){
                Rectangle s = new Rectangle(this.mousePressed, this.mousePressed, Model.inst().getSelectColor());
                Model.inst().addShape(s);
            }
            
-           else if(Controller.inst().getState() == ControllerState.Circle){
+           else if(Controller.inst().getState() == ControllerState.Square){
                Square s = new Square(this.mousePressed, this.mousePressed, Model.inst().getSelectColor());
                Model.inst().addShape(s);
            }
@@ -323,6 +315,15 @@ public class Controller implements CS355Controller{
      
      public void selectShape(Point3D mouseLocation){
          Model.inst().check4ShapeClicked(mouseLocation);      
+     }
+     
+     public void modifyShape(){
+       int index = Model.inst().getIndexOfSelectedShape();
+       if(index > -1){
+       Shape shape = Model.inst().getShape(index);
+       shape.modifyShape(mousePressed, mouseCurrentLocation);
+       Model.inst().setShape(shape, index);
+        }
      }
   }
 

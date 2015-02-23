@@ -72,4 +72,91 @@ public class Rectangle extends Shape{
     public void setWidth(double width) {
         this.width = width;
     }
+    public boolean checkRotation(Point3D mouseClicked){
+        Point3D upperLC = new Point3D(-3, (- this.getHeight() / 2) - 20, 0);
+        Point3D lowerRC = new Point3D(3, (- this.getHeight() / 2) - 13, 0);
+        Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
+        if(handle.isPointInShape(mouseClicked)){
+            return true;
+        }
+        return false;
+    }
+    public boolean checkTopLeft(Point3D mouseClicked){
+        Point3D upperLC = new Point3D((- this.getWidth() / 2) - 3, (- this.getHeight() / 2) - 3, 0);
+        Point3D lowerRC = new Point3D((- this.getWidth() / 2) + 3, (- this.getHeight() / 2) + 3, 0);
+        Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
+        if(handle.isPointInShape(mouseClicked)){
+            return true;
+        }
+        return false;
+    }    
+    public boolean checkTopRight(Point3D mouseClicked){
+        Point3D upperLC = new Point3D((this.getWidth() / 2) - 3, (- this.getHeight() / 2) - 3, 0);
+        Point3D lowerRC = new Point3D((this.getWidth() / 2) + 3, (- this.getHeight() / 2) + 3, 0);
+        Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
+        if(handle.isPointInShape(mouseClicked)){
+            return true;
+        }
+        return false;
+    }        
+    public boolean checkBottomRight(Point3D mouseClicked){
+        Point3D upperLC = new Point3D((this.getWidth() / 2) - 3, (this.getHeight() / 2) - 3, 0);
+        Point3D lowerRC = new Point3D((this.getWidth() / 2) + 3, (this.getHeight() / 2) + 3, 0);
+        Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
+        if(handle.isPointInShape(mouseClicked)){
+            return true;
+        }
+        return false;
+    }        
+    public boolean checkBottomLeft(Point3D mouseClicked){
+        Point3D upperLC = new Point3D((- this.getWidth() / 2) - 3, (this.getHeight() / 2) - 3, 0);
+        Point3D lowerRC = new Point3D((- this.getWidth() / 2) + 3, (this.getHeight() / 2) + 3, 0);
+        Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
+        if(handle.isPointInShape(mouseClicked)){
+            return true;
+        }
+        return false;
+    }
+    @Override
+    public  void modifyShape(Point3D mousePressed, Point3D mouseCurrentLocation){
+        Point3D convertedMouseClicked = Tools.world2Obj(mouseCurrentLocation, this);
+        if(this.isIsSelected()){
+        if(checkRotation(convertedMouseClicked)){
+           // s = this.rotate(s, mousePressed, mouseCurrentLocation);
+            this.setColor(Color.blue);
+        }
+        //
+        
+        else if(checkBottomRight(convertedMouseClicked) && this.isIsSelected()){
+           //double x = mousePressed.x - this.getSize();
+          // double y = mousePressed.y - this.getSize();
+          // Point3D upperLeftCorner = new Point3D(x, y, 0);
+
+           this.setColor(Color.yellow);
+        }
+        else if(checkTopLeft(convertedMouseClicked) && this.isIsSelected()){
+          //  double x = mousePressed.x + s.getSize();
+          //  double y = mousePressed.y + s.getSize();
+          //  Point3D bottomRightCorner = new Point3D(x, y, 0);
+          //   s = new Square(bottomRightCorner, mouseCurrentLocation, s.getColor());
+            this.setColor(Color.green);
+        }
+                
+        else if(checkTopRight(convertedMouseClicked)&& this.isIsSelected() ){
+           // double x = mousePressed.x  - this.getSize();
+            //double y = mousePressed.y  + this.getSize();
+           //Point3D bottomLeftCorner = new Point3D(x, y, 0);
+            //s = new Square(bottomLeftCorner, mouseCurrentLocation, this.getColor());
+            this.setColor(Color.pink);
+        }
+
+        else if(checkBottomLeft(convertedMouseClicked)&& this.isIsSelected() ){
+          //  double x = mousePressed.x + this.getSize();
+          //  double y = mousePressed.y - this.getSize();
+           // Point3D topRightCorner = new Point3D(x, y, 0);
+           // s = new Square(topRightCorner, mouseCurrentLocation, this.getColor());
+            this.setColor(Color.red);
+        }
+        }
+    } 
 }

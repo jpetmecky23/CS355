@@ -67,9 +67,53 @@ public class Square extends Shape{
     }
     public void setSize(int size) {
         this.size = size;
-    }
-    
+    }   
     public void resetSize(double size) {
         this.size = this.size + size;
     }
+    /*public boolean checkRotation(Square s, Point3D mouseClicked){
+        Point3D upperLC = new Point3D(-3, (- s.getSize() / 2) - 20, 0);
+        Point3D lowerRC = new Point3D(3, (- s.getSize() / 2) - 13, 0);
+        Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
+        if(handle.isPointInShape(mouseClicked)){
+            return true;
+        }
+        return false;
+    }
+    public boolean checkTopLeft(Square s, Point3D mouseClicked){
+        Point3D upperLC = new Point3D((- s.getSize() / 2) - 3, (- s.getSize() / 2) - 3, 0);
+        Point3D lowerRC = new Point3D((- s.getSize() / 2) + 3, (- s.getSize() / 2) + 3, 0);
+        Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
+        if(handle.isPointInShape(mouseClicked)){
+            return true;
+        }
+        return false;
+    }    
+    public boolean checkTopRight(Square s, Point3D mouseClicked){
+        Point3D upperLC = new Point3D((s.getSize() / 2) - 3, (- s.getSize() / 2) - 3, 0);
+        Point3D lowerRC = new Point3D((s.getSize() / 2) + 3, (- s.getSize() / 2) + 3, 0);
+        Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
+        if(handle.isPointInShape(mouseClicked)){
+            return true;
+        }
+        return false;
+    }        
+    public boolean checkBottomRight(Square s, Point3D mouseClicked){
+        Point3D upperLC = new Point3D((s.getSize() / 2) - 3, (s.getSize() / 2) - 3, 0);
+        Point3D lowerRC = new Point3D((s.getSize() / 2) + 3, (s.getSize() / 2) + 3, 0);
+        Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
+        if(handle.isPointInShape(mouseClicked)){
+            return true;
+        }
+        return false;
+    }        
+    public boolean checkBottomLeft(Square s, Point3D mouseClicked){
+        Point3D upperLC = new Point3D((- s.getSize() / 2) - 3, (s.getSize() / 2) - 3, 0);
+        Point3D lowerRC = new Point3D((- s.getSize() / 2) + 3, (s.getSize() / 2) + 3, 0);
+        Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
+        if(handle.isPointInShape(mouseClicked)){
+            return true;
+        }
+        return false;
+    }*/
 }

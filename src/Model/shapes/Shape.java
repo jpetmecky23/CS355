@@ -52,4 +52,8 @@ public class Shape{
     public void setIsSelected(boolean isSelected) {
         this.isSelected = isSelected;
     }
+    
+    public void checkCorners(Point3D mousePressed, Point3D mouseCurrentLocation){
+        
+    }
 }
