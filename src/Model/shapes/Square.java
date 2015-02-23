@@ -5,6 +5,7 @@
  */
 package Model.shapes;
 
+import Controller.ModAction;
 import Controller.shapes.SquareController;
 import Model.Model;
 import Utillities.Tools;
@@ -116,13 +117,41 @@ public class Square extends Shape{
         }
         return false;
     }
+        @Override
+    public ModAction getModAction(Point3D mouseDown){
+        Point3D converted = Tools.world2Obj(mouseDown, this);
+         if(this.isIsSelected()){
+        if(checkRotation(mouseDown)){
+            return ModAction.Rotate;
+        }
+        else if(checkBottomRight(converted)){
+            return ModAction.BottomRight;
+        }
+        else if(checkTopLeft(converted)){
+            return ModAction.TopLeft;
+        }
+                
+        else if(checkTopRight(converted)){
+            return ModAction.TopRight;
+        }
+
+        else if(checkBottomLeft(converted)){
+            return ModAction.BottomLeft;
+        }
+        else if(this.isPointInShape(mouseDown)){
+            return ModAction.Moving;
+        }
+        return ModAction.NoAction;
+        }
+        return ModAction.NoAction; 
+    }
     @Override
-    public  boolean modifyShape(Point3D mousePrevLocation, Point3D mouseCurrentLocation){
+    public  boolean modifyShape(Point3D mousePrevLocation, Point3D mouseCurrentLocation, ModAction modAction){
         Point3D convertedCurrent = Tools.world2Obj(mouseCurrentLocation, this);
         Point3D convertedPrev = Tools.world2Obj(mousePrevLocation, this);
         Point3D delta = Tools.findDelta(convertedPrev, convertedCurrent);
         if(this.isIsSelected()){
-        if(checkRotation(convertedCurrent)){
+        if(modAction == ModAction.Rotate){
             double deltaAngle = Math.atan2(mouseCurrentLocation.x - mousePrevLocation.x, mouseCurrentLocation.y - mousePrevLocation.y);
             double newAngle = this.getAngle() + deltaAngle;
             //this.setAngle(newAngle);
@@ -130,7 +159,7 @@ public class Square extends Shape{
         }
         //
         
-        else if(checkBottomRight(convertedPrev)){
+        else if(modAction == ModAction.BottomRight){
             double x = this.getSize() + delta.x;
             double y = this.getSize() + delta.y;
             if(x > 0 && y > 0){
@@ -139,7 +168,7 @@ public class Square extends Shape{
             return true;
             }
         }
-        else if(checkTopLeft(convertedPrev)){
+        else if(modAction == ModAction.TopLeft){
             double x = this.getSize() - delta.x;
             double y = this.getSize() - delta.y;
             if(x > 0 && y > 0){
@@ -151,7 +180,7 @@ public class Square extends Shape{
             }
         }
                 
-        else if(checkTopRight(convertedPrev)){
+        else if(modAction == ModAction.TopRight){
             double x = this.getSize() + delta.x;
             double y = this.getSize() - delta.y;
             if(x > 0 && y > 0){
@@ -163,7 +192,7 @@ public class Square extends Shape{
             }
         }
 
-        else if(checkBottomLeft(convertedPrev)){
+        else if(modAction == ModAction.BottomLeft){
             double x = this.getSize() - delta.x;
             double y = this.getSize() + delta.y;
             if(x > 0 && y > 0){
@@ -174,7 +203,7 @@ public class Square extends Shape{
             return true;
             }
         }
-        else if(this.isPointInShape(mousePrevLocation)){
+        else if(modAction == ModAction.Moving){
             //move shape
             if(delta != null){
             double x = this.getUpperLeftCorner().x + delta.x;

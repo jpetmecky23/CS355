@@ -182,6 +182,7 @@ public class Controller implements CS355Controller{
     }
     public void setMouseUp(Point3D mouseUp) {
         this.mouseReleased = mouseUp;
+        this.modAction = ModAction.NoAction;
     }  
     public Point3D getMousePrevLocation() {
         return mousePrevLocation;
@@ -303,15 +304,22 @@ public class Controller implements CS355Controller{
          Model.inst().check4ShapeClicked(mouseLocation);      
      }
      
-     public boolean getModActionFromShape(){
-         return false;
+     public ModAction getModActionFromShape(){
+       int index = Model.inst().getIndexOfSelectedShape();
+       if(index > -1){
+       Shape shape = Model.inst().getShape(index);
+       ModAction newModAction = shape.getModAction(this.getMouseDown());
+      this.setModAction(newModAction);
+        return newModAction;
+        }
+       return ModAction.NoAction;
      }
      
      public boolean modifyShape(){
        int index = Model.inst().getIndexOfSelectedShape();
        if(index > -1){
        Shape shape = Model.inst().getShape(index);
-       boolean wasModified = shape.modifyShape(mousePrevLocation, mouseCurrentLocation);
+       boolean wasModified = shape.modifyShape(mousePrevLocation, mouseCurrentLocation, this.getModAction());
        Model.inst().setShape(shape, index);
        return wasModified;
         }

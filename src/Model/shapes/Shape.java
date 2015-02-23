@@ -55,7 +55,7 @@ public class Shape{
   public ModAction getModAction(Point3D mouseDown){
   return ModAction.NoAction;
   } 
-    public boolean modifyShape(Point3D mousePressed, Point3D mouseCurrentLocation){
+    public boolean modifyShape(Point3D mousePressed, Point3D mouseCurrentLocation, ModAction modAction){
         return false;
     }
 }

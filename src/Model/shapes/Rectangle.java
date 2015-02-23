@@ -122,14 +122,14 @@ public class Rectangle extends Shape{
     public ModAction getModAction(Point3D mouseDown){
         Point3D converted = Tools.world2Obj(mouseDown, this);
          if(this.isIsSelected()){
-        if(checkRotation(converted)){
+        if(checkRotation(mouseDown)){
             return ModAction.Rotate;
         }
         else if(checkBottomRight(converted)){
             return ModAction.BottomRight;
         }
         else if(checkTopLeft(converted)){
-            return ModAction.BottomLeft;
+            return ModAction.TopLeft;
         }
                 
         else if(checkTopRight(converted)){
@@ -139,29 +139,29 @@ public class Rectangle extends Shape{
         else if(checkBottomLeft(converted)){
             return ModAction.BottomLeft;
         }
-        else if(this.isPointInShape(converted)){
+        else if(this.isPointInShape(mouseDown)){
             return ModAction.Moving;
         }
         return ModAction.NoAction;
         }
-        return ModAction.NoAction;
-    } 
+        return ModAction.NoAction; 
     }
     
+
     @Override
     public boolean modifyShape(Point3D mousePrevLocation, Point3D mouseCurrentLocation, ModAction modAction){
-        /*Point3D convertedCurrent = Tools.world2Obj(mouseCurrentLocation, this);
+        Point3D convertedCurrent = Tools.world2Obj(mouseCurrentLocation, this);
         Point3D convertedPrev = Tools.world2Obj(mousePrevLocation, this);
         Point3D delta = Tools.findDelta(convertedPrev, convertedCurrent);
         if(this.isIsSelected()){
-        if(ModAction.Rotate){
+        if(modAction == ModAction.Rotate){
             double deltaAngle = Math.atan2(mouseCurrentLocation.x - mousePrevLocation.x, mouseCurrentLocation.y - mousePrevLocation.y);
             double newAngle = this.getAngle() + deltaAngle;
             //this.setAngle(newAngle);
             return true;
         }
 
-        else if(ModAction.BottomRight){
+        else if(modAction == ModAction.BottomRight){
             double x = this.getWidth() + delta.x;
             double y = this.getHeight() + delta.y;
             if(x > 0 && y > 0){
@@ -170,7 +170,7 @@ public class Rectangle extends Shape{
             return true;
             }
         }
-        else if(ModAction.TopLeft){
+        else if(modAction == ModAction.TopLeft){
             double x = this.getWidth() - delta.x;
             double y = this.getHeight() - delta.y;
             if(x > 0 && y > 0){
@@ -182,7 +182,7 @@ public class Rectangle extends Shape{
             }
         }
                 
-        else if(ModAction.TopRigth)){
+        else if(modAction == ModAction.TopRight){
             double x = this.getWidth() + delta.x;
             double y = this.getHeight() - delta.y;
             if(x > 0 && y > 0){
@@ -194,7 +194,7 @@ public class Rectangle extends Shape{
             }
         }
 
-        else if(ModAction.BottomLeft){
+        else if(modAction == ModAction.BottomLeft){
             double x = this.getWidth() - delta.x;
             double y = this.getHeight() + delta.y;
             if(x > 0 && y > 0){
@@ -205,7 +205,7 @@ public class Rectangle extends Shape{
             return true;
             }
         }
-        else if(ModAction.Moving){
+        else if(modAction == ModAction.Moving){
             //move shape
             if(delta != null){
             double x = this.getUpperLeftCorner().x + delta.x;
@@ -216,7 +216,7 @@ public class Rectangle extends Shape{
             }
         }
         return false;
-        }*/
+        }
         return false;
     } 
 }
