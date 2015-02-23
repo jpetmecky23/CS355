@@ -104,4 +104,13 @@ public abstract class Tools {
         return p;
     }
     }
+    public static Point3D findDelta(Point3D mousePrevLocation, Point3D mouseCurrentLocation){
+        if(mouseCurrentLocation != null && mousePrevLocation != null){
+        double x = mouseCurrentLocation.x - mousePrevLocation.x;
+        double y = mouseCurrentLocation.y - mousePrevLocation.y;      
+        Point3D mouseDelta = new Point3D(x, y, 0);
+        return mouseDelta;
+        }
+        return null;
+    }
 }

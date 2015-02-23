@@ -165,25 +165,23 @@ public class Controller implements CS355Controller{
         this.mousePressed = mouseDown;
         this.mouseReleased = null;
     }
-
     public Point3D getMouseUp() {
         return mouseReleased;
     }
     public void setMouseUp(Point3D mouseUp) {
         this.mouseReleased = mouseUp;
-    } 
-    //public Point3D getMouseDelta() {
-    //    return mouseDelta;
-    //} 
+    }  
+    public Point3D getMousePrevLocation() {
+        return mousePrevLocation;
+    }
+    public void setMousePrevLocation(Point3D mousePrevLocation) {
+        this.mousePrevLocation = mousePrevLocation;
+    }
     public Point3D getMouseCurrentLocation() {
         return mouseCurrentLocation;
     }
     public void setMouseCurrentLocation(Point3D mouseCurrentLocation) {
-        if(this.mouseCurrentLocation != null){
-        double x = this.mouseCurrentLocation.x - mouseCurrentLocation.x;
-        double y = this.mouseCurrentLocation.y - mouseCurrentLocation.y;      
-        //this.mouseDelta = new Point3D(-x, -y, 0);
-        }
+        this.setMousePrevLocation(this.mouseCurrentLocation);
         this.mouseCurrentLocation = mouseCurrentLocation;
     }       
     public void addShape(){
@@ -239,31 +237,7 @@ public class Controller implements CS355Controller{
     }
     
     public void updateShape(){
-        //Have this check the currentlly selected shape
-        //then pass the mousePressed and MouseCurrentLocation into the shape controller
-        //the shape controller will then modify the shape accorrdingly.
-       /* int index = Model.inst().getShapeCount() - 1;
-        if(this.currentShapeType != null){
-        Shape s = Model.inst().getShape(index);
-        ShapeController sc = new SquareController(); 
-        s = sc.processClick(s, this.mousePressed, this.mouseCurrentLocation);
-        Model.inst().setShape(s, index);
-        }
 
-        else if(index > -1 && index == Model.inst().getShapeCount() - 1){
-        Shape s = Model.inst().getShape(index);
-        ShapeController sc = new SquareController(); 
-        s = sc.processClick(s, this.mousePressed, this.mouseCurrentLocation);
-        Model.inst().setShape(s, index); 
-        }
-        
-        else if(index > -1 && index != Model.inst().getShapeCount() - 1){
-        Shape s = Model.inst().getShape(index);
-        ShapeController sc = new SquareController(); 
-        s = sc.processClick(s, s.getUpperLeftCorner(), this.mouseCurrentLocation);
-        Model.inst().setShape(s, index); 
-        }*/
-        
             if(Controller.inst().getState() == ControllerState.Circle){
               int index = Model.inst().getShapeCount() - 1;//last shape in array
               Color c = Model.inst().getShape(index).getColor();

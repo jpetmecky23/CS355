@@ -118,23 +118,25 @@ public class Rectangle extends Shape{
         return false;
     }
     @Override
-    public  void modifyShape(Point3D mousePressed, Point3D mouseCurrentLocation){
-        Point3D convertedMouseClicked = Tools.world2Obj(mouseCurrentLocation, this);
+    public  void modifyShape(Point3D mousePrevLocation, Point3D mouseCurrentLocation){
+        Point3D convertedCurrent = Tools.world2Obj(mouseCurrentLocation, this);
+        Point3D convertedPrev = Tools.world2Obj(mousePrevLocation, this);
+        Point3D delta = Tools.findDelta(convertedPrev, convertedCurrent);
         if(this.isIsSelected()){
-        if(checkRotation(convertedMouseClicked)){
+        if(checkRotation(convertedCurrent)){
            // s = this.rotate(s, mousePressed, mouseCurrentLocation);
             this.setColor(Color.blue);
         }
         //
         
-        else if(checkBottomRight(convertedMouseClicked) && this.isIsSelected()){
+        else if(checkBottomRight(convertedCurrent) && this.isIsSelected()){
            //double x = mousePressed.x - this.getSize();
           // double y = mousePressed.y - this.getSize();
           // Point3D upperLeftCorner = new Point3D(x, y, 0);
 
            this.setColor(Color.yellow);
         }
-        else if(checkTopLeft(convertedMouseClicked) && this.isIsSelected()){
+        else if(checkTopLeft(convertedCurrent) && this.isIsSelected()){
           //  double x = mousePressed.x + s.getSize();
           //  double y = mousePressed.y + s.getSize();
           //  Point3D bottomRightCorner = new Point3D(x, y, 0);
@@ -142,7 +144,7 @@ public class Rectangle extends Shape{
             this.setColor(Color.green);
         }
                 
-        else if(checkTopRight(convertedMouseClicked)&& this.isIsSelected() ){
+        else if(checkTopRight(convertedCurrent)&& this.isIsSelected() ){
            // double x = mousePressed.x  - this.getSize();
             //double y = mousePressed.y  + this.getSize();
            //Point3D bottomLeftCorner = new Point3D(x, y, 0);
@@ -150,12 +152,19 @@ public class Rectangle extends Shape{
             this.setColor(Color.pink);
         }
 
-        else if(checkBottomLeft(convertedMouseClicked)&& this.isIsSelected() ){
+        else if(checkBottomLeft(convertedCurrent)&& this.isIsSelected() ){
           //  double x = mousePressed.x + this.getSize();
           //  double y = mousePressed.y - this.getSize();
            // Point3D topRightCorner = new Point3D(x, y, 0);
            // s = new Square(topRightCorner, mouseCurrentLocation, this.getColor());
             this.setColor(Color.red);
+        }
+        else{
+            //move shape
+            double x = this.getUpperLeftCorner().x - delta.x;
+            double y = this.getUpperLeftCorner().y - delta.y;
+            Point3D newCorner = new Point3D(x, y, 0);
+            this.setUpperLeftCorner(newCorner);
         }
         }
     } 

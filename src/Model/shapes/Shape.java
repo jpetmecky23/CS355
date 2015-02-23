@@ -53,7 +53,7 @@ public class Shape{
         this.isSelected = isSelected;
     }
     
-    public void checkCorners(Point3D mousePressed, Point3D mouseCurrentLocation){
+    public void modifyShape(Point3D mousePressed, Point3D mouseCurrentLocation){
         
     }
 }
