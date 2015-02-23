@@ -130,41 +130,44 @@ public class Rectangle extends Shape{
         //
         
         else if(checkBottomRight(convertedCurrent) && this.isIsSelected()){
-           //double x = mousePressed.x - this.getSize();
-          // double y = mousePressed.y - this.getSize();
-          // Point3D upperLeftCorner = new Point3D(x, y, 0);
-
-           this.setColor(Color.yellow);
+            double x = this.getWidth() + delta.x;
+            double y = this.getHeight() + delta.y;
+            this.setWidth(x);
+            this.setHeight(y);
+            this.setColor(Color.yellow);
         }
         else if(checkTopLeft(convertedCurrent) && this.isIsSelected()){
-          //  double x = mousePressed.x + s.getSize();
-          //  double y = mousePressed.y + s.getSize();
-          //  Point3D bottomRightCorner = new Point3D(x, y, 0);
-          //   s = new Square(bottomRightCorner, mouseCurrentLocation, s.getColor());
+            double x = this.getWidth() - delta.x;
+            double y = this.getHeight() - delta.y;
+            this.setWidth(x);
+            this.setHeight(y);
+            Point3D ulc = new Point3D(this.UpperLeftCorner.x + delta.x, this.UpperLeftCorner.y + delta.y, 0);
+            this.setUpperLeftCorner(ulc);
             this.setColor(Color.green);
         }
                 
         else if(checkTopRight(convertedCurrent)&& this.isIsSelected() ){
-           // double x = mousePressed.x  - this.getSize();
-            //double y = mousePressed.y  + this.getSize();
-           //Point3D bottomLeftCorner = new Point3D(x, y, 0);
-            //s = new Square(bottomLeftCorner, mouseCurrentLocation, this.getColor());
+            double x = this.getWidth() + delta.x;
+            double y = this.getHeight() - delta.y;
+            this.setWidth(x);
+            this.setHeight(y);
+            Point3D ulc = new Point3D(this.UpperLeftCorner.x, this.UpperLeftCorner.y + delta.y, 0);
+            this.setUpperLeftCorner(ulc);
             this.setColor(Color.pink);
         }
 
         else if(checkBottomLeft(convertedCurrent)&& this.isIsSelected() ){
-          //  double x = mousePressed.x + this.getSize();
-          //  double y = mousePressed.y - this.getSize();
-           // Point3D topRightCorner = new Point3D(x, y, 0);
-           // s = new Square(topRightCorner, mouseCurrentLocation, this.getColor());
+
             this.setColor(Color.red);
         }
         else{
             //move shape
-            double x = this.getUpperLeftCorner().x - delta.x;
-            double y = this.getUpperLeftCorner().y - delta.y;
+            if(delta != null){
+            double x = this.getUpperLeftCorner().x + delta.x;
+            double y = this.getUpperLeftCorner().y + delta.y;
             Point3D newCorner = new Point3D(x, y, 0);
-            this.setUpperLeftCorner(newCorner);
+            //this.setUpperLeftCorner(newCorner);
+            }
         }
         }
     } 
