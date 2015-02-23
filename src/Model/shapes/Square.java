@@ -65,55 +65,127 @@ public class Square extends Shape{
     public double getSize() {
         return size;
     }
-    public void setSize(int size) {
+    public void setSize(double size) {
         this.size = size;
     }   
     public void resetSize(double size) {
         this.size = this.size + size;
     }
-    /*public boolean checkRotation(Square s, Point3D mouseClicked){
-        Point3D upperLC = new Point3D(-3, (- s.getSize() / 2) - 20, 0);
-        Point3D lowerRC = new Point3D(3, (- s.getSize() / 2) - 13, 0);
+    public boolean checkRotation(Point3D mouseClicked){
+        Point3D upperLC = new Point3D(-3, (- this.getSize() / 2) - 20, 0);
+        Point3D lowerRC = new Point3D(3, (- this.getSize() / 2) - 13, 0);
         Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
         if(handle.isPointInShape(mouseClicked)){
             return true;
         }
         return false;
     }
-    public boolean checkTopLeft(Square s, Point3D mouseClicked){
-        Point3D upperLC = new Point3D((- s.getSize() / 2) - 3, (- s.getSize() / 2) - 3, 0);
-        Point3D lowerRC = new Point3D((- s.getSize() / 2) + 3, (- s.getSize() / 2) + 3, 0);
+    public boolean checkTopLeft(Point3D mouseClicked){
+        Point3D upperLC = new Point3D((- this.getSize() / 2) - 3, (- this.getSize() / 2) - 3, 0);
+        Point3D lowerRC = new Point3D((- this.getSize() / 2) + 3, (- this.getSize() / 2) + 3, 0);
         Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
         if(handle.isPointInShape(mouseClicked)){
             return true;
         }
         return false;
     }    
-    public boolean checkTopRight(Square s, Point3D mouseClicked){
-        Point3D upperLC = new Point3D((s.getSize() / 2) - 3, (- s.getSize() / 2) - 3, 0);
-        Point3D lowerRC = new Point3D((s.getSize() / 2) + 3, (- s.getSize() / 2) + 3, 0);
+    public boolean checkTopRight(Point3D mouseClicked){
+        Point3D upperLC = new Point3D((this.getSize() / 2) - 3, (- this.getSize() / 2) - 3, 0);
+        Point3D lowerRC = new Point3D((this.getSize() / 2) + 3, (- this.getSize() / 2) + 3, 0);
         Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
         if(handle.isPointInShape(mouseClicked)){
             return true;
         }
         return false;
     }        
-    public boolean checkBottomRight(Square s, Point3D mouseClicked){
-        Point3D upperLC = new Point3D((s.getSize() / 2) - 3, (s.getSize() / 2) - 3, 0);
-        Point3D lowerRC = new Point3D((s.getSize() / 2) + 3, (s.getSize() / 2) + 3, 0);
+    public boolean checkBottomRight(Point3D mouseClicked){
+        Point3D upperLC = new Point3D((this.getSize() / 2) - 3, (this.getSize() / 2) - 3, 0);
+        Point3D lowerRC = new Point3D((this.getSize() / 2) + 3, (this.getSize() / 2) + 3, 0);
         Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
         if(handle.isPointInShape(mouseClicked)){
             return true;
         }
         return false;
     }        
-    public boolean checkBottomLeft(Square s, Point3D mouseClicked){
-        Point3D upperLC = new Point3D((- s.getSize() / 2) - 3, (s.getSize() / 2) - 3, 0);
-        Point3D lowerRC = new Point3D((- s.getSize() / 2) + 3, (s.getSize() / 2) + 3, 0);
+    public boolean checkBottomLeft( Point3D mouseClicked){
+        Point3D upperLC = new Point3D((- this.getSize() / 2) - 3, (this.getSize() / 2) - 3, 0);
+        Point3D lowerRC = new Point3D((- this.getSize() / 2) + 3, (this.getSize() / 2) + 3, 0);
         Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
         if(handle.isPointInShape(mouseClicked)){
             return true;
         }
         return false;
-    }*/
+    }
+    @Override
+    public  boolean modifyShape(Point3D mousePrevLocation, Point3D mouseCurrentLocation){
+        Point3D convertedCurrent = Tools.world2Obj(mouseCurrentLocation, this);
+        Point3D convertedPrev = Tools.world2Obj(mousePrevLocation, this);
+        Point3D delta = Tools.findDelta(convertedPrev, convertedCurrent);
+        if(this.isIsSelected()){
+        if(checkRotation(convertedCurrent)){
+            double deltaAngle = Math.atan2(mouseCurrentLocation.x - mousePrevLocation.x, mouseCurrentLocation.y - mousePrevLocation.y);
+            double newAngle = this.getAngle() + deltaAngle;
+            //this.setAngle(newAngle);
+            return true;
+        }
+        //
+        
+        else if(checkBottomRight(convertedPrev)){
+            double x = this.getSize() + delta.x;
+            double y = this.getSize() + delta.y;
+            if(x > 0 && y > 0){
+            double newSize = Math.min(x, y);
+            this.setSize(newSize);
+            return true;
+            }
+        }
+        else if(checkTopLeft(convertedPrev)){
+            double x = this.getSize() - delta.x;
+            double y = this.getSize() - delta.y;
+            if(x > 0 && y > 0){
+            double newSize = Math.min(x, y);
+            this.setSize(newSize);
+            Point3D ulc = new Point3D(this.UpperLeftCorner.x + delta.x, this.UpperLeftCorner.y + delta.y, 0);
+            this.setUpperLeftCorner(ulc);
+            return true;
+            }
+        }
+                
+        else if(checkTopRight(convertedPrev)){
+            double x = this.getSize() + delta.x;
+            double y = this.getSize() - delta.y;
+            if(x > 0 && y > 0){
+            double newSize = Math.min(x, y);
+            this.setSize(newSize);
+            Point3D ulc = new Point3D(this.UpperLeftCorner.x, this.UpperLeftCorner.y + delta.y, 0);
+            this.setUpperLeftCorner(ulc);
+            return true;
+            }
+        }
+
+        else if(checkBottomLeft(convertedPrev)){
+            double x = this.getSize() - delta.x;
+            double y = this.getSize() + delta.y;
+            if(x > 0 && y > 0){
+            double newSize = Math.min(x, y);
+            this.setSize(newSize);
+            Point3D ulc = new Point3D(this.UpperLeftCorner.x + delta.x, this.UpperLeftCorner.y, 0);
+            this.setUpperLeftCorner(ulc);
+            return true;
+            }
+        }
+        else if(this.isPointInShape(mousePrevLocation)){
+            //move shape
+            if(delta != null){
+            double x = this.getUpperLeftCorner().x + delta.x;
+            double y = this.getUpperLeftCorner().y + delta.y;
+            Point3D newCorner = new Point3D(x, y, 0);
+            this.setUpperLeftCorner(newCorner);
+            return true;
+            }
+        }
+        return false;
+        }
+        return false;
+    } 
 }

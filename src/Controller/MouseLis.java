@@ -62,8 +62,11 @@ public class MouseLis implements java.awt.event.MouseListener{
                 Controller.inst().addShape();
                 }
             else if(Controller.inst().getState() == ControllerState.ModingShape){
+             boolean willBeModified = Controller.inst().getModActionFromShape();
+             if(!willBeModified){
              Controller.inst().selectShape(Controller.inst().getMouseDown());
-             Controller.inst().modifyShape();
+             }
+             
          }
 
 	}

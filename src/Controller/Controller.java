@@ -26,6 +26,7 @@ public class Controller implements CS355Controller{
     private Point3D mousePrevLocation;
     private Point3D mouseCurrentLocation;
     private ControllerState currentState;
+    private ModAction modAction;
             
     public static Controller inst()
     {
@@ -158,6 +159,15 @@ public class Controller implements CS355Controller{
     public void setState(ControllerState state){
         this.currentState = state;
     }
+
+    public ModAction getModAction() {
+        return modAction;
+    }
+
+    public void setModAction(ModAction modAction) {
+        this.modAction = modAction;
+    }
+    
     public Point3D getMouseDown() {
         return mousePressed;
     }
@@ -293,13 +303,19 @@ public class Controller implements CS355Controller{
          Model.inst().check4ShapeClicked(mouseLocation);      
      }
      
-     public void modifyShape(){
+     public boolean getModActionFromShape(){
+         return false;
+     }
+     
+     public boolean modifyShape(){
        int index = Model.inst().getIndexOfSelectedShape();
        if(index > -1){
        Shape shape = Model.inst().getShape(index);
-       shape.modifyShape(mousePrevLocation, mouseCurrentLocation);
+       boolean wasModified = shape.modifyShape(mousePrevLocation, mouseCurrentLocation);
        Model.inst().setShape(shape, index);
+       return wasModified;
         }
+       return false;
      }
   }
 

@@ -5,6 +5,7 @@
  */
 package Model.shapes;
 
+import Controller.ModAction;
 import Model.Model;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -39,7 +40,6 @@ public class Shape{
     }  
     public void setAngle(double angle) {
         this.angle = angle;
-        Model.inst().modelChanged();
     }    
     public Point3D getCenter() {
         return null;
@@ -52,8 +52,10 @@ public class Shape{
     public void setIsSelected(boolean isSelected) {
         this.isSelected = isSelected;
     }
-    
-    public void modifyShape(Point3D mousePressed, Point3D mouseCurrentLocation){
-        
+  public ModAction getModAction(Point3D mouseDown){
+  return ModAction.NoAction;
+  } 
+    public boolean modifyShape(Point3D mousePressed, Point3D mouseCurrentLocation){
+        return false;
     }
 }

@@ -5,6 +5,7 @@
  */
 package Model.shapes;
 
+import Controller.ModAction;
 import Model.Model;
 import Utillities.Tools;
 import java.awt.Color;
@@ -73,8 +74,8 @@ public class Rectangle extends Shape{
         this.width = width;
     }
     public boolean checkRotation(Point3D mouseClicked){
-        Point3D upperLC = new Point3D(-3, (- this.getHeight() / 2) - 20, 0);
-        Point3D lowerRC = new Point3D(3, (- this.getHeight() / 2) - 13, 0);
+        Point3D upperLC = new Point3D(-5, (- this.getHeight() / 2) - 20, 0);
+        Point3D lowerRC = new Point3D(5, (- this.getHeight() / 2) - 13, 0);
         Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
         if(handle.isPointInShape(mouseClicked)){
             return true;
@@ -118,57 +119,104 @@ public class Rectangle extends Shape{
         return false;
     }
     @Override
-    public  void modifyShape(Point3D mousePrevLocation, Point3D mouseCurrentLocation){
-        Point3D convertedCurrent = Tools.world2Obj(mouseCurrentLocation, this);
+    public ModAction getModAction(Point3D mouseDown){
+        Point3D converted = Tools.world2Obj(mouseDown, this);
+         if(this.isIsSelected()){
+        if(checkRotation(converted)){
+            return ModAction.Rotate;
+        }
+        else if(checkBottomRight(converted)){
+            return ModAction.BottomRight;
+        }
+        else if(checkTopLeft(converted)){
+            return ModAction.BottomLeft;
+        }
+                
+        else if(checkTopRight(converted)){
+            return ModAction.TopRight;
+        }
+
+        else if(checkBottomLeft(converted)){
+            return ModAction.BottomLeft;
+        }
+        else if(this.isPointInShape(converted)){
+            return ModAction.Moving;
+        }
+        return ModAction.NoAction;
+        }
+        return ModAction.NoAction;
+    } 
+    }
+    
+    @Override
+    public boolean modifyShape(Point3D mousePrevLocation, Point3D mouseCurrentLocation, ModAction modAction){
+        /*Point3D convertedCurrent = Tools.world2Obj(mouseCurrentLocation, this);
         Point3D convertedPrev = Tools.world2Obj(mousePrevLocation, this);
         Point3D delta = Tools.findDelta(convertedPrev, convertedCurrent);
         if(this.isIsSelected()){
-        if(checkRotation(convertedCurrent)){
-           // s = this.rotate(s, mousePressed, mouseCurrentLocation);
-            this.setColor(Color.blue);
+        if(ModAction.Rotate){
+            double deltaAngle = Math.atan2(mouseCurrentLocation.x - mousePrevLocation.x, mouseCurrentLocation.y - mousePrevLocation.y);
+            double newAngle = this.getAngle() + deltaAngle;
+            //this.setAngle(newAngle);
+            return true;
         }
-        //
-        
-        else if(checkBottomRight(convertedCurrent) && this.isIsSelected()){
+
+        else if(ModAction.BottomRight){
             double x = this.getWidth() + delta.x;
             double y = this.getHeight() + delta.y;
+            if(x > 0 && y > 0){
             this.setWidth(x);
             this.setHeight(y);
-            this.setColor(Color.yellow);
+            return true;
+            }
         }
-        else if(checkTopLeft(convertedCurrent) && this.isIsSelected()){
+        else if(ModAction.TopLeft){
             double x = this.getWidth() - delta.x;
             double y = this.getHeight() - delta.y;
+            if(x > 0 && y > 0){
             this.setWidth(x);
             this.setHeight(y);
             Point3D ulc = new Point3D(this.UpperLeftCorner.x + delta.x, this.UpperLeftCorner.y + delta.y, 0);
             this.setUpperLeftCorner(ulc);
-            this.setColor(Color.green);
+            return true;
+            }
         }
                 
-        else if(checkTopRight(convertedCurrent)&& this.isIsSelected() ){
+        else if(ModAction.TopRigth)){
             double x = this.getWidth() + delta.x;
             double y = this.getHeight() - delta.y;
+            if(x > 0 && y > 0){
             this.setWidth(x);
             this.setHeight(y);
             Point3D ulc = new Point3D(this.UpperLeftCorner.x, this.UpperLeftCorner.y + delta.y, 0);
             this.setUpperLeftCorner(ulc);
-            this.setColor(Color.pink);
+            return true;
+            }
         }
 
-        else if(checkBottomLeft(convertedCurrent)&& this.isIsSelected() ){
-
-            this.setColor(Color.red);
+        else if(ModAction.BottomLeft){
+            double x = this.getWidth() - delta.x;
+            double y = this.getHeight() + delta.y;
+            if(x > 0 && y > 0){
+            this.setWidth(x);
+            this.setHeight(y);
+            Point3D ulc = new Point3D(this.UpperLeftCorner.x + delta.x, this.UpperLeftCorner.y, 0);
+            this.setUpperLeftCorner(ulc);
+            return true;
+            }
         }
-        else{
+        else if(ModAction.Moving){
             //move shape
             if(delta != null){
             double x = this.getUpperLeftCorner().x + delta.x;
             double y = this.getUpperLeftCorner().y + delta.y;
             Point3D newCorner = new Point3D(x, y, 0);
-            //this.setUpperLeftCorner(newCorner);
+            this.setUpperLeftCorner(newCorner);
+            return true;
             }
         }
-        }
+        return false;
+        }*/
+        return false;
     } 
 }
