@@ -154,7 +154,7 @@ public class Square extends Shape{
         if(modAction == ModAction.Rotate){
             double deltaAngle = Math.atan2(mouseCurrentLocation.x - mousePrevLocation.x, mouseCurrentLocation.y - mousePrevLocation.y);
             double newAngle = this.getAngle() + deltaAngle;
-            //this.setAngle(newAngle);
+            this.setAngle(newAngle);
             return true;
         }
         //
@@ -172,9 +172,10 @@ public class Square extends Shape{
             double x = this.getSize() - delta.x;
             double y = this.getSize() - delta.y;
             if(x > 0 && y > 0){
-            double newSize = Math.min(x, y);
+            double newSize = Math.max(x, y);
             this.setSize(newSize);
-            Point3D ulc = new Point3D(this.UpperLeftCorner.x + delta.x, this.UpperLeftCorner.y + delta.y, 0);
+            double offset = Math.min(delta.x, delta.y);
+            Point3D ulc = new Point3D(this.UpperLeftCorner.x + offset, this.UpperLeftCorner.y + offset, 0);
             this.setUpperLeftCorner(ulc);
             return true;
             }
@@ -182,10 +183,8 @@ public class Square extends Shape{
                 
         else if(modAction == ModAction.TopRight){
             double x = this.getSize() + delta.x;
-            double y = this.getSize() - delta.y;
-            if(x > 0 && y > 0){
-            double newSize = Math.min(x, y);
-            this.setSize(newSize);
+            if(x > 0){
+            this.setSize(x);
             Point3D ulc = new Point3D(this.UpperLeftCorner.x, this.UpperLeftCorner.y + delta.y, 0);
             this.setUpperLeftCorner(ulc);
             return true;
@@ -193,11 +192,9 @@ public class Square extends Shape{
         }
 
         else if(modAction == ModAction.BottomLeft){
-            double x = this.getSize() - delta.x;
             double y = this.getSize() + delta.y;
-            if(x > 0 && y > 0){
-            double newSize = Math.min(x, y);
-            this.setSize(newSize);
+            if(y > 0){
+            this.setSize(y);
             Point3D ulc = new Point3D(this.UpperLeftCorner.x + delta.x, this.UpperLeftCorner.y, 0);
             this.setUpperLeftCorner(ulc);
             return true;
