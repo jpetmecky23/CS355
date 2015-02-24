@@ -117,7 +117,7 @@ public abstract class Tools {
     
     public static double findAngleDelta(Point3D mouseCurrentLocation){
         Point3D mouseDown = Controller.inst().getMouseDown();
-        double angle = Math.atan2(mouseCurrentLocation.x - mouseDown.x, mouseCurrentLocation.y - mouseDown.y);
+        double angle = Math.atan2(mouseDown.x - mouseCurrentLocation.x, mouseDown.y - mouseCurrentLocation.y);
         return angle;
     }
 }

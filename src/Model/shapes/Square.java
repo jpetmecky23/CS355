@@ -6,7 +6,6 @@
 package Model.shapes;
 
 import Controller.ModAction;
-import Controller.shapes.SquareController;
 import Model.Model;
 import Utillities.Tools;
 import java.awt.Color;
@@ -29,7 +28,6 @@ public class Square extends Shape{
     @Override
     public boolean isPointInShape(Point3D p) {
         Point3D convertedPoint = Tools.world2Obj(p, this);
-        SquareController sc = new SquareController();
         double dfoc = size / 2;//distanceFromObjectCenter
         if(Math.abs(convertedPoint.x) <= dfoc && Math.abs(convertedPoint.y) <= dfoc){
             this.isSelected = true;
@@ -152,8 +150,8 @@ public class Square extends Shape{
         Point3D delta = Tools.findDelta(convertedPrev, convertedCurrent);
         if(this.isIsSelected()){
         if(modAction == ModAction.Rotate){
-            double deltaAngle = Math.atan2(mouseCurrentLocation.x - mousePrevLocation.x, mouseCurrentLocation.y - mousePrevLocation.y);
-            double newAngle = this.getAngle() + deltaAngle;
+            double deltaAngle = Tools.findAngleDelta(mouseCurrentLocation);
+            double newAngle = deltaAngle;
             this.setAngle(newAngle);
             return true;
         }

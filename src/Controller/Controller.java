@@ -5,8 +5,6 @@
  */
 package Controller;
 
-import Controller.shapes.ShapeController;
-import Controller.shapes.SquareController;
 import Shell.GUIFunctions;
 import java.awt.Color;
 import java.awt.image.BufferedImage;

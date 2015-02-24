@@ -156,8 +156,8 @@ public class Rectangle extends Shape{
         Point3D delta = Tools.findDelta(convertedPrev, convertedCurrent);
         if(this.isIsSelected()){
         if(modAction == ModAction.Rotate){
-            double deltaAngle = Math.atan2(mouseCurrentLocation.x - mousePrevLocation.x, mouseCurrentLocation.y - mousePrevLocation.y);
-            double newAngle = this.getAngle() + deltaAngle;
+            double deltaAngle = Tools.findAngleDelta(mouseCurrentLocation);
+            double newAngle = deltaAngle;
             this.setAngle(newAngle);
             return true;
         }
