@@ -122,7 +122,7 @@ public class Rectangle extends Shape{
     public ModAction getModAction(Point3D mouseDown){
         Point3D converted = Tools.world2Obj(mouseDown, this);
          if(this.isIsSelected()){
-        if(checkRotation(mouseDown)){
+        if(checkRotation(converted)){
             return ModAction.Rotate;
         }
         else if(checkBottomRight(converted)){
@@ -157,7 +157,7 @@ public class Rectangle extends Shape{
         if(modAction == ModAction.Rotate){
             double deltaAngle = Math.atan2(mouseCurrentLocation.x - mousePrevLocation.x, mouseCurrentLocation.y - mousePrevLocation.y);
             double newAngle = this.getAngle() + deltaAngle;
-            //this.setAngle(newAngle);
+            this.setAngle(newAngle);
             return true;
         }
 

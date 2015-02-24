@@ -121,7 +121,7 @@ public class Square extends Shape{
     public ModAction getModAction(Point3D mouseDown){
         Point3D converted = Tools.world2Obj(mouseDown, this);
          if(this.isIsSelected()){
-        if(checkRotation(mouseDown)){
+        if(checkRotation(converted)){
             return ModAction.Rotate;
         }
         else if(checkBottomRight(converted)){

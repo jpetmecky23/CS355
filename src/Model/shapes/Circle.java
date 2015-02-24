@@ -5,6 +5,7 @@
  */
 package Model.shapes;
 
+import Controller.ModAction;
 import Model.Model;
 import Utillities.Tools;
 import java.awt.Color;
@@ -70,4 +71,145 @@ public class Circle extends Shape{
         this.radis = radis;
     }  
     
+        public boolean checkRotation(Point3D mouseClicked){
+        Point3D upperLC = new Point3D(-3, (- this.getRadis()) - 20, 0);
+        Point3D lowerRC = new Point3D(3, (- this.getRadis()) - 13, 0);
+        Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
+        if(handle.isPointInShape(mouseClicked)){
+            return true;
+        }
+        return false;
+    }
+    public boolean checkTopLeft(Point3D mouseClicked){
+        Point3D upperLC = new Point3D((- this.getRadis()) - 3, (- this.getRadis()) - 3, 0);
+        Point3D lowerRC = new Point3D((- this.getRadis()) + 3, (- this.getRadis()) + 3, 0);
+        Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
+        if(handle.isPointInShape(mouseClicked)){
+            return true;
+        }
+        return false;
+    }    
+    public boolean checkTopRight(Point3D mouseClicked){
+        Point3D upperLC = new Point3D((this.getRadis()) - 3, (this.getRadis()) - 3, 0);
+        Point3D lowerRC = new Point3D((this.getRadis()) + 3, (this.getRadis()) + 3, 0);
+        Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
+        if(handle.isPointInShape(mouseClicked)){
+            return true;
+        }
+        return false;
+    }        
+    public boolean checkBottomRight(Point3D mouseClicked){
+        Point3D upperLC = new Point3D((this.getRadis()) - 3, (this.getRadis()) - 3, 0);
+        Point3D lowerRC = new Point3D((this.getRadis()) + 3, (this.getRadis()) + 3, 0);
+        Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
+        if(handle.isPointInShape(mouseClicked)){
+            return true;
+        }
+        return false;
+    }        
+    public boolean checkBottomLeft( Point3D mouseClicked){
+        Point3D upperLC = new Point3D((- this.getRadis()) - 3, (this.getRadis()) - 3, 0);
+        Point3D lowerRC = new Point3D((- this.getRadis()) + 3, (this.getRadis()) + 3, 0);
+        Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
+        if(handle.isPointInShape(mouseClicked)){
+            return true;
+        }
+        return false;
+    }
+    
+     @Override
+    public ModAction getModAction(Point3D mouseDown){
+        Point3D converted = Tools.world2Obj(mouseDown, this);
+         if(this.isIsSelected()){
+        if(checkRotation(converted)){
+            return ModAction.Rotate;
+        }
+        else if(checkBottomRight(converted)){
+            return ModAction.BottomRight;
+        }
+        else if(checkTopLeft(converted)){
+            return ModAction.TopLeft;
+        }
+                
+        else if(checkTopRight(converted)){
+            return ModAction.TopRight;
+        }
+
+        else if(checkBottomLeft(converted)){
+            return ModAction.BottomLeft;
+        }
+        else if(this.isPointInShape(mouseDown)){
+            return ModAction.Moving;
+        }
+        return ModAction.NoAction;
+        }
+        return ModAction.NoAction; 
+    }
+    @Override
+    public  boolean modifyShape(Point3D mousePrevLocation, Point3D mouseCurrentLocation, ModAction modAction){
+        Point3D convertedCurrent = Tools.world2Obj(mouseCurrentLocation, this);
+        Point3D convertedPrev = Tools.world2Obj(mousePrevLocation, this);
+        Point3D delta = Tools.findDelta(convertedPrev, convertedCurrent);
+        if(this.isIsSelected()){
+        if(modAction == ModAction.Rotate){
+               //Do nothing. It's a circle
+            return true;
+        }
+        //
+        
+        else if(modAction == ModAction.BottomRight){
+            double x = this.getRadis() + delta.x;
+            double y = this.getRadis() + delta.y;
+            if(x > 0 && y > 0){
+            double newSize = Math.min(x, y);
+            this.setRadis(newSize);
+            return true;
+            }
+        }
+        else if(modAction == ModAction.TopLeft){
+            double x = this.getRadis() - delta.x;
+            double y = this.getRadis() - delta.y;
+            if(x > 0 && y > 0){
+            double newSize = Math.max(x, y);
+            this.setRadis(newSize);
+            double offset = Math.min(delta.x, delta.y);
+            Point3D ulc = new Point3D(this.UpperLeftCorner.x + offset, this.UpperLeftCorner.y + offset, 0);
+            this.setUpperLeftCorner(ulc);
+            return true;
+            }
+        }
+                
+        else if(modAction == ModAction.TopRight){
+            double x = this.getRadis() + delta.x;
+            if(x > 0){
+            this.setRadis(x);
+            Point3D ulc = new Point3D(this.UpperLeftCorner.x, this.UpperLeftCorner.y + delta.y, 0);
+            this.setUpperLeftCorner(ulc);
+            return true;
+            }
+        }
+
+        else if(modAction == ModAction.BottomLeft){
+            double y = this.getRadis() + delta.y;
+            if(y > 0){
+            this.setRadis(y);
+            Point3D ulc = new Point3D(this.UpperLeftCorner.x + delta.x, this.UpperLeftCorner.y, 0);
+            this.setUpperLeftCorner(ulc);
+            return true;
+            }
+        }
+        else if(modAction == ModAction.Moving){
+            //move shape
+            if(delta != null){
+            double x = this.getUpperLeftCorner().x + delta.x;
+            double y = this.getUpperLeftCorner().y + delta.y;
+            Point3D newCorner = new Point3D(x, y, 0);
+            this.setUpperLeftCorner(newCorner);
+            return true;
+            }
+        }
+        return false;
+        }
+        return false;
+    }
 }
