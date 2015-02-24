@@ -151,10 +151,12 @@ public class Factory {
            Point3D p1 = s.getOne();
            Point3D p2 = s.getTwo();
            Point3D p3 = s.getThree();
+           Point3D center = s.getCenter();
            Color color = s.getColor();
            double angle = s.getAngle();
            boolean isSelected = s.isIsSelected();
            DrawableTri  dt= new DrawableTri(color, angle, isSelected, p1, p2, p3);
+           dt.setCenter(center);
            return dt;
        }
 }

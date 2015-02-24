@@ -5,6 +5,7 @@
  */
 package Utillities;
 
+import Controller.Controller;
 import Model.shapes.Point3D;
 import Model.shapes.Shape;
 import java.awt.geom.AffineTransform;
@@ -112,5 +113,11 @@ public abstract class Tools {
         return mouseDelta;
         }
         return null;
+    }
+    
+    public static double findAngleDelta(Point3D mouseCurrentLocation){
+        Point3D mouseDown = Controller.inst().getMouseDown();
+        double angle = Math.atan2(mouseCurrentLocation.x - mouseDown.x, mouseCurrentLocation.y - mouseDown.y);
+        return angle;
     }
 }

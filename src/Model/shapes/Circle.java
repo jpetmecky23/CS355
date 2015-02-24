@@ -71,7 +71,7 @@ public class Circle extends Shape{
         this.radis = radis;
     }  
     
-        public boolean checkRotation(Point3D mouseClicked){
+    public boolean checkRotation(Point3D mouseClicked){
         Point3D upperLC = new Point3D(-3, (- this.getRadis()) - 20, 0);
         Point3D lowerRC = new Point3D(3, (- this.getRadis()) - 13, 0);
         Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);

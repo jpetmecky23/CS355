@@ -142,6 +142,7 @@ public class Rectangle extends Shape{
         else if(this.isPointInShape(mouseDown)){
             return ModAction.Moving;
         }
+        
         return ModAction.NoAction;
         }
         return ModAction.NoAction; 

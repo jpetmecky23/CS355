@@ -6,9 +6,11 @@
 package View.drawableShapes;
 
 import Model.shapes.Point3D;
+import Utillities.Tools;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
+import java.awt.geom.AffineTransform;
 
 /**
  *
@@ -18,6 +20,7 @@ public class DrawableTri extends DrawableShape{
     private Point3D p1;
     private Point3D p2;
     private Point3D p3;
+    private Point3D center;
     
     public DrawableTri(Color color, double angle, boolean isSelected, Point3D p1, Point3D p2, Point3D p3) {
         super(color, angle, isSelected);
@@ -42,6 +45,8 @@ public class DrawableTri extends DrawableShape{
         g2d.drawLine(x1, y1, x2, y2);
         }
         else{
+       // AffineTransform obj2World = Tools.obj2World(angle, center);
+       // g2d.setTransform(obj2World);
         g2d.setColor(color);
         Polygon p = getPolygon();
         g2d.fillPolygon(p);
@@ -50,6 +55,17 @@ public class DrawableTri extends DrawableShape{
             g2d.setColor(Color.WHITE);
             g2d.drawPolygon(p);
         }
+        }
+    }
+    
+    @Override
+    public void drawHandles(Graphics2D g2d) {
+            if(this.isSelected){
+            g2d.setColor(Color.WHITE);
+            g2d.fillOval((int)p1.x - 10, (int)p1.y - 10, 6, 6);//rotation
+            g2d.fillOval((int)p1.x - 3, (int)p1.y - 3, 6, 6);
+            g2d.fillOval((int)p2.x - 3, (int)p2.y - 3, 6, 6);
+            g2d.fillOval((int)p3.x - 3, (int)p3.y - 3, 6, 6);
         }
     }
     
@@ -95,4 +111,13 @@ public class DrawableTri extends DrawableShape{
     public void setP3(Point3D p3) {
         this.p3 = p3;
     }
+
+    public Point3D getCenter() {
+        return center;
+    }
+
+    public void setCenter(Point3D center) {
+        this.center = center;
+    }
+    
 }

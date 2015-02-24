@@ -10,5 +10,5 @@ package Controller;
  * @author James
  */
 public enum ModAction {
-    TopLeft, TopRight, BottomLeft, BottomRight, Rotate, Moving, NoAction
+    TopLeft, TopRight, BottomLeft, BottomRight, Rotate, Moving, NoAction, MoveLineEnd, MoveLineStart, triPointOne, triPointTwo, triPointThree
 }

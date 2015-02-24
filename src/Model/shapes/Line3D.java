@@ -1,5 +1,6 @@
 package Model.shapes;
 
+import Controller.ModAction;
 import Model.Model;
 import Utillities.Tools;
 import java.awt.Color;
@@ -27,42 +28,85 @@ public class Line3D extends Shape
         double f = Tools.normalize(p1, p2);
         double result = e / f;
         if(result <= 4){
-            //if(pointWithInEndPoints(q)){
                 this.isSelected = true;
                 Model.inst().setSelectColor(this.getColor());
                 return true;
-            //}
         }
         else{
             this.isSelected = false;
             return false;
             }
-        
     }  
-
-    /*@Override
-    public void translateShape(Point3D transVec) {
-        if(this.isSelected){
-        double x = this.start.x + transVec.x;
-        double y = this.start.y + transVec.y;
-        Point3D p = new Point3D(x, y, 0);
-        this.setStart(p);
-        x = this.end.x + transVec.x;
-        y = this.end.y + transVec.y;
-        p = new Point3D(x, y, 0);
-        this.setEnd(p);
-        }
-    }*/
     
-    
-    
-   private boolean pointWithInEndPoints(Point3D q){
-        /*
-        if(dotProd <= length){
+    public boolean checkStart(Point3D mouseDown){
+        Point3D upperLC = new Point3D(this.getStart().x - 3, this.getStart().y - 3, 0);
+        Point3D lowerRC = new Point3D(this.getStart().x + 3, this.getStart().y + 3, 0);
+        Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
+        if(handle.isPointInShape(mouseDown)){
             return true;
-        }*/
+        }
         return false;
-   }
+    }
+
+    public boolean checkEnd(Point3D mouseDown){
+        Point3D upperLC = new Point3D(this.getEnd().x - 3, this.getEnd().y - 3, 0);
+        Point3D lowerRC = new Point3D(this.getEnd().x + 3, this.getEnd().y + 3, 0);
+        Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
+        if(handle.isPointInShape(mouseDown)){
+            return true;
+        }
+        return false;
+    }
+
+     @Override
+    public ModAction getModAction(Point3D mouseDown){
+         if(this.isIsSelected()){
+        if(checkStart(mouseDown)){
+            return ModAction.MoveLineStart;
+        }
+        else if(checkEnd(mouseDown)){
+            return ModAction.MoveLineEnd;
+        }
+        else{
+            return ModAction.NoAction;
+        }
+         }
+         return ModAction.NoAction;
+    }
+    @Override
+    public boolean modifyShape(Point3D mousePrevLocation, Point3D mouseCurrentLocation, ModAction modAction) {
+        Point3D delta = Tools.findDelta(mousePrevLocation, mouseCurrentLocation);
+        
+        if(modAction == ModAction.MoveLineStart){
+            double x = this.start.x + delta.x;
+            double y = this.start.y + delta.y;
+            Point3D p = new Point3D(x, y, 0);
+            this.setStart(p);
+          return true;  
+        }
+        
+        else if(modAction == ModAction.MoveLineEnd){
+            double x = this.end.x + delta.x;
+            double y = this.end.y + delta.y;
+            Point3D p = new Point3D(x, y, 0);
+            this.setEnd(p);
+            return true;
+        }
+        else if(modAction == ModAction.Moving){
+            double x = this.start.x + delta.x;
+            double y = this.start.y + delta.y;
+            Point3D p = new Point3D(x, y, 0);
+            this.setStart(p);
+            x = this.end.x + delta.x;
+            y = this.end.y + delta.y;
+            p = new Point3D(x, y, 0);
+            this.setEnd(p);
+            return true;
+        }
+        
+        return false;
+    }
+    
    
     public Point3D getStart() {
         return start;
