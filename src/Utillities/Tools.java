@@ -41,24 +41,35 @@ public abstract class Tools {
     return p;
     }   
     public static AffineTransform obj2World(double angle, Point3D obj){
+        double mX0 = Math.cos(angle);
+        double mY0 = -Math.sin(angle);
+        double mX1 = Math.sin(angle);
+        double mY1 = Math.cos(angle);
+        double mX2 = obj.x;
+        double mY2 = obj.y;
         // create a new transformation (defaults to identity)
-        AffineTransform obj2World = new AffineTransform();
-        // translate to its position in the world (last transformation)
-        obj2World.translate(obj.x, obj.y);
-        // rotate to its orientation (first transformation)
-        obj2World.rotate(angle);
+        AffineTransform obj2World = new AffineTransform(mX0, mY0, mX1, mY1, mX2, mY2);
         return obj2World;
     }   
     public static Point3D world2Obj(Point3D worldCoord, Shape s){
+        double angle = s.getAngle();
+        Point3D center = s.getCenter();
+        double mX0 = Math.cos(-angle);
+        double mY0 = Math.sin(-angle);
+        double mX1 = -Math.sin(-angle);
+        double mY1 = Math.cos(-angle);
+        double mX2 = -center.x;
+        double mY2 = -center.y;
         // create a new transformation (defaults to identity)
-        AffineTransform world2Obj = new AffineTransform();
-        // rotate back from its orientation (last transformation)
-        world2Obj.rotate(- s.getAngle());
-        // translate back from its position in the world (first transformation)
-        world2Obj.translate(-s.getCenter().x, -s.getCenter().y);
-        // and transform point from world to object
+        AffineTransform world2Obj = new AffineTransform(mX0, mY0, mX1, mY1, mX2, mY2);
         return transform2Point(world2Obj, worldCoord);
-    }   
+    }
+    public static Point3D world2View(){
+        return null;
+    }
+    public static Point3D view2World(){
+        return null;
+    }
     public static Point3D transform2Point(AffineTransform aff, Point3D p){
         Point2D w = new Point2D.Double(p.x, p.y);
         Point2D o = new Point2D.Double(0, 0);
@@ -113,8 +124,7 @@ public abstract class Tools {
         return mouseDelta;
         }
         return null;
-    }
-    
+    }  
     public static double findAngleDelta(Point3D mouseCurrentLocation){
         Point3D mouseDown = Controller.inst().getMouseDown();
         double angle = Math.atan2(mouseDown.x - mouseCurrentLocation.x, mouseDown.y - mouseCurrentLocation.y);
