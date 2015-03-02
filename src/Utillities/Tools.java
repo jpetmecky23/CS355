@@ -42,8 +42,8 @@ public abstract class Tools {
     }   
     public static AffineTransform obj2World(double angle, Point3D obj){
         double mX0 = Math.cos(angle);
-        double mY0 = -Math.sin(angle);
-        double mX1 = Math.sin(angle);
+        double mY0 = Math.sin(angle);
+        double mX1 = -Math.sin(angle);
         double mY1 = Math.cos(angle);
         double mX2 = obj.x;
         double mY2 = obj.y;
@@ -51,24 +51,35 @@ public abstract class Tools {
         AffineTransform obj2World = new AffineTransform(mX0, mY0, mX1, mY1, mX2, mY2);
         return obj2World;
     }   
-    public static Point3D world2Obj(Point3D worldCoord, Shape s){
-        double angle = s.getAngle();
-        Point3D center = s.getCenter();
+    public static AffineTransform world2Obj(double angle, Point3D center){
         double mX0 = Math.cos(-angle);
-        double mY0 = Math.sin(-angle);
-        double mX1 = -Math.sin(-angle);
+        double mY0 = -Math.sin(-angle);
+        double mX1 = Math.sin(-angle);
         double mY1 = Math.cos(-angle);
         double mX2 = -center.x;
         double mY2 = -center.y;
         // create a new transformation (defaults to identity)
-        AffineTransform world2Obj = new AffineTransform(mX0, mY0, mX1, mY1, mX2, mY2);
-        return transform2Point(world2Obj, worldCoord);
+        return  new AffineTransform(mX0, mY0, mX1, mY1, mX2, mY2);
     }
-    public static Point3D world2View(){
-        return null;
+    public static AffineTransform world2View(double scale, Point3D offset){
+        double mX0 = scale;
+        double mY0 = 0;
+        double mX1 = 0;
+        double mY1 = scale;
+        double mX2 = -offset.x * scale;
+        double mY2 = -offset.y * scale;
+        // create a new transformation
+        return  new AffineTransform(mX0, mY0, mX1, mY1, mX2, mY2);
     }
-    public static Point3D view2World(){
-        return null;
+    public static AffineTransform view2World(double scale, Point3D offset){
+        double mX0 = 1 / scale;
+        double mY0 = 0;
+        double mX1 = 0;
+        double mY1 = 1 / scale;
+        double mX2 = offset.x;
+        double mY2 = offset.y;
+        // create a new transformation
+        return  new AffineTransform(mX0, mY0, mX1, mY1, mX2, mY2);
     }
     public static Point3D transform2Point(AffineTransform aff, Point3D p){
         Point2D w = new Point2D.Double(p.x, p.y);

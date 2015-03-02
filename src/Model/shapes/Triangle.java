@@ -30,11 +30,16 @@ public class Triangle extends Shape{
     
     @Override
     public boolean isPointInShape(Point3D p) {
-        Point3D convertedPoint = Tools.world2Obj(p, this);
+        AffineTransform world2Obj = Tools.world2Obj(this.angle, this.getCenter());
+        Point3D convertedPoint = Tools.transform2Point(world2Obj, p);
+        Point3D convertedOne = Tools.transform2Point(world2Obj, this.one);
+        Point3D convertedTwo = Tools.transform2Point(world2Obj, this.two);
+        Point3D convertedThree = Tools.transform2Point(world2Obj, this.three);;
+        
         this.orderPoints();
-        boolean testP1 = testPoint(convertedPoint,Tools.world2Obj(this.one, this), Tools.world2Obj(this.two, this));
-        boolean testP2 = testPoint(convertedPoint,Tools.world2Obj(this.two, this), Tools.world2Obj(this.three, this));
-        boolean testP3 = testPoint(convertedPoint,Tools.world2Obj(this.three, this),Tools.world2Obj(this.one, this));
+        boolean testP1 = testPoint(convertedPoint, convertedOne, convertedTwo);
+        boolean testP2 = testPoint(convertedPoint, convertedTwo, convertedThree);
+        boolean testP3 = testPoint(convertedPoint, convertedThree, convertedOne);
         if(testP1 && testP2 && testP3){
             this.isSelected = true;
             Model.inst().setSelectColor(this.getColor());

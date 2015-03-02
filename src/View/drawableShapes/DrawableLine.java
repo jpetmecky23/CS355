@@ -5,8 +5,12 @@
  */
 package View.drawableShapes;
 
+import Controller.Controller;
+import Model.shapes.Point3D;
+import Utillities.Tools;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 
 /**
  *
@@ -28,6 +32,8 @@ public class DrawableLine extends DrawableShape{
 
     @Override
     public void drawShape(Graphics2D g2d){
+        AffineTransform world2View = Tools.world2View(Controller.inst().getZoom(), Controller.inst().getViewOffset());
+        g2d.setTransform(world2View);//Done differentlly than the other shapes since lines don't have centers
         g2d.setColor(color);
         g2d.drawLine(x1, y1, x2, y2);
        

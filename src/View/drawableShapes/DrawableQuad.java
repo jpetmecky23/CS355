@@ -5,6 +5,7 @@
  */
 package View.drawableShapes;
 
+import Controller.Controller;
 import Model.shapes.Point3D;
 import Utillities.Tools;
 import java.awt.Color;
@@ -31,9 +32,7 @@ public class DrawableQuad extends DrawableShape{
     
     @Override
     public void drawShape(Graphics2D g2d){
-        Point3D center = getCenter();
-        AffineTransform obj2World = Tools.obj2World(angle, center);
-        g2d.setTransform(obj2World);
+        g2d.setTransform(getTransform());
         g2d.setColor(color);
         g2d.fillRect(-width / 2, -height / 2, width, height);
     }
@@ -41,9 +40,7 @@ public class DrawableQuad extends DrawableShape{
     @Override
     public void drawHandles(Graphics2D g2d) {
         if(this.isSelected){
-            Point3D center = getCenter();
-            AffineTransform obj2World = Tools.obj2World(angle, center);
-            g2d.setTransform(obj2World);
+           g2d.setTransform(getTransform());
             g2d.setColor(Color.WHITE);
             
             g2d.drawRect(-width / 2, -height / 2, width, height);
@@ -55,6 +52,7 @@ public class DrawableQuad extends DrawableShape{
         }
     }
 
+    @Override
     public Point3D getCenter(){
         int centerX = x + width / 2;
         int centerY = y + height / 2;

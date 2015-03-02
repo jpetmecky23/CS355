@@ -1,6 +1,5 @@
 package Controller;
 
-import Model.Model;
 import Model.shapes.Point3D;
 import java.awt.event.MouseEvent;
 
@@ -36,6 +35,7 @@ public class MouseMotionLis implements java.awt.event.MouseMotionListener{
 	public void mouseDragged(MouseEvent arg0) {
 		// TODO Auto-generated method stub
             Point3D mouseLocation = new Point3D(arg0.getX(), arg0.getY(), 0);
+            mouseLocation = MouseLis.view2World(mouseLocation);
             Controller.inst().setMouseCurrentLocation(mouseLocation);
             if(Controller.inst().getState() != ControllerState.ModingShape){
                 Controller.inst().updateShape(); 

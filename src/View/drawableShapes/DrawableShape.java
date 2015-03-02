@@ -5,8 +5,12 @@
  */
 package View.drawableShapes;
 
+import Controller.Controller;
+import Model.shapes.Point3D;
+import Utillities.Tools;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 
 /**
  *
@@ -43,6 +47,9 @@ public class DrawableShape {
         return angle;
     }
 
+    public Point3D getCenter(){
+        return null;
+    }
     public void setAngle(double angle) {
         this.angle = angle;
     }
@@ -55,5 +62,11 @@ public class DrawableShape {
         this.isSelected = isSelected;
     }
     
-    
+    public AffineTransform getTransform(){
+        Point3D center = getCenter();
+        AffineTransform obj2World = Tools.obj2World(angle, center);
+        AffineTransform world2View = Tools.world2View(Controller.inst().getZoom(), Controller.inst().getViewOffset());
+       world2View.concatenate(obj2World);
+       return world2View;
+    }
 }

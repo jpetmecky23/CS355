@@ -25,6 +25,8 @@ public class Controller implements CS355Controller{
     private Point3D mouseCurrentLocation;
     private ControllerState currentState;
     private ModAction modAction;
+    private double zoom;
+    private Point3D viewOffset;
             
     public static Controller inst()
     {
@@ -53,6 +55,8 @@ public class Controller implements CS355Controller{
         this.mouseReleased = null;
         this.mouseCurrentLocation = null;
         this.mousePrevLocation = null;
+        this.zoom = 1.0;
+        this.viewOffset = new Point3D(0, 0, 0);
     }
 
 
@@ -97,9 +101,18 @@ public class Controller implements CS355Controller{
     }
     @Override
     public void zoomInButtonHit(){
+        if(Controller.inst().getZoom() < 4){
+            Controller.inst().setZoom(Controller.inst().getZoom() * 2);
+            Model.inst().modelChanged();
+            
+        }
     }
     @Override
     public void zoomOutButtonHit(){
+        if(Controller.inst().getZoom() > .25){
+            Controller.inst().setZoom(Controller.inst().getZoom() / 2);
+            Model.inst().modelChanged();
+        }
         
     }
     @Override
@@ -194,7 +207,25 @@ public class Controller implements CS355Controller{
     public void setMouseCurrentLocation(Point3D mouseCurrentLocation) {
         this.setMousePrevLocation(this.mouseCurrentLocation);
         this.mouseCurrentLocation = mouseCurrentLocation;
-    }       
+    }     
+
+    public double getZoom() {
+        return zoom;
+    }
+
+    public void setZoom(double zoom) {
+        this.zoom = zoom;
+    }
+    
+    public Point3D getViewOffset() {
+        return viewOffset;
+    }
+
+    public void setViewOffset(Point3D viewOffset) {
+        this.viewOffset = viewOffset;
+    }
+    
+    
     public void addShape(){
          
            if(Controller.inst().getState() == ControllerState.Circle){

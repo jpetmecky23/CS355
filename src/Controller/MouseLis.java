@@ -1,8 +1,9 @@
 package Controller;
 
-import Model.Model;
 import Model.shapes.Point3D;
+import Utillities.Tools;
 import java.awt.event.MouseEvent;
+import java.awt.geom.AffineTransform;
 
 public class MouseLis implements java.awt.event.MouseListener{
     private static MouseLis instance;
@@ -57,6 +58,7 @@ public class MouseLis implements java.awt.event.MouseListener{
 		// TODO Auto-generated method stub
 		//pass the coordinates to the model class
             Point3D mouseLocation = new Point3D(arg0.getX(), arg0.getY(), 0);
+            mouseLocation = view2World(mouseLocation);
             Controller.inst().setMouseDown(mouseLocation);
             if(Controller.inst().getState() != ControllerState.ModingShape){
                 Controller.inst().addShape();
@@ -75,7 +77,15 @@ public class MouseLis implements java.awt.event.MouseListener{
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
             Point3D mouseLocation = new Point3D(arg0.getX(), arg0.getY(), 0);
+            mouseLocation = view2World(mouseLocation);
             Controller.inst().setMouseUp(mouseLocation);
 	}
+        
+        public static Point3D view2World(Point3D mouseLocation){
+            double scale = Controller.inst().getZoom();
+            Point3D offset = Controller.inst().getViewOffset();
+            AffineTransform view2World = Tools.view2World(scale, offset);
+            return Tools.transform2Point(view2World, mouseLocation);
+        }
 
 }

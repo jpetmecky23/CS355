@@ -45,8 +45,7 @@ public class DrawableTri extends DrawableShape{
         g2d.drawLine(x1, y1, x2, y2);
         }
         else{
-       // AffineTransform obj2World = Tools.obj2World(angle, center);
-       // g2d.setTransform(obj2World);
+       g2d.setTransform(getTransform());
         g2d.setColor(color);
         Polygon p = getPolygon();
         g2d.fillPolygon(p);
@@ -61,6 +60,7 @@ public class DrawableTri extends DrawableShape{
     @Override
     public void drawHandles(Graphics2D g2d) {
             if(this.isSelected){
+            g2d.setTransform(getTransform());
             g2d.setColor(Color.WHITE);
             g2d.fillOval((int)p1.x - 10, (int)p1.y - 10, 6, 6);//rotation
             g2d.fillOval((int)p1.x - 3, (int)p1.y - 3, 6, 6);

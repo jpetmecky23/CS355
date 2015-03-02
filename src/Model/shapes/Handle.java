@@ -7,6 +7,7 @@ package Model.shapes;
 
 import Utillities.Tools;
 import java.awt.Color;
+import java.awt.geom.AffineTransform;
 
 /**
  *
@@ -24,7 +25,8 @@ public class Handle extends Shape{
     }
 
     public boolean isPointInShape(Point3D p) {
-        Point3D convertedPoint = Tools.world2Obj(p, this);
+        AffineTransform world2Obj = Tools.world2Obj(this.angle, this.getCenter());
+        Point3D convertedPoint = Tools.transform2Point(world2Obj, p);
         double dfoc = size / 2;//distanceFromObjectCenter
         
         if(Math.abs(convertedPoint.x) <= dfoc && Math.abs(convertedPoint.y) <= dfoc){
@@ -33,7 +35,7 @@ public class Handle extends Shape{
         }
         else{
             return false;
-            }
+           }
     } 
     @Override
     public Point3D getCenter(){

@@ -9,6 +9,7 @@ import Controller.ModAction;
 import Model.Model;
 import Utillities.Tools;
 import java.awt.Color;
+import java.awt.geom.AffineTransform;
 
 /**
  *
@@ -30,7 +31,9 @@ public class Ellipses extends Shape{
    
     @Override
     public boolean isPointInShape(Point3D p) {
-        Point3D convertedPoint = Tools.world2Obj(p, this);
+        AffineTransform world2Obj = Tools.world2Obj(this.angle, this.getCenter());
+        Point3D convertedPoint = Tools.transform2Point(world2Obj, p);
+
         Point3D objectOrigin = new Point3D(0, 0, 0); //Used to make sure the formula make since to me.
         double X = (convertedPoint.x - objectOrigin.x);
         X = X / (this.width / 2);//divid by half the width
@@ -126,7 +129,8 @@ public class Ellipses extends Shape{
     }
     @Override
     public ModAction getModAction(Point3D mouseDown){
-        Point3D converted = Tools.world2Obj(mouseDown, this);
+        AffineTransform world2Obj = Tools.world2Obj(this.angle, this.getCenter());
+        Point3D converted = Tools.transform2Point(world2Obj, mouseDown);
          if(this.isIsSelected()){
         if(checkRotation(converted)){
             return ModAction.Rotate;
@@ -156,8 +160,9 @@ public class Ellipses extends Shape{
 
     @Override
     public boolean modifyShape(Point3D mousePrevLocation, Point3D mouseCurrentLocation, ModAction modAction){
-        Point3D convertedCurrent = Tools.world2Obj(mouseCurrentLocation, this);
-        Point3D convertedPrev = Tools.world2Obj(mousePrevLocation, this);
+        AffineTransform world2Obj = Tools.world2Obj(this.angle, this.getCenter());
+        Point3D convertedCurrent = Tools.transform2Point(world2Obj, mouseCurrentLocation);
+        Point3D convertedPrev = Tools.transform2Point(world2Obj, mousePrevLocation);
         Point3D delta = Tools.findDelta(convertedPrev, convertedCurrent);
         if(this.isIsSelected()){
         if(modAction == ModAction.Rotate){

@@ -9,6 +9,7 @@ import Controller.ModAction;
 import Model.Model;
 import Utillities.Tools;
 import java.awt.Color;
+import java.awt.geom.AffineTransform;
 
 /**
  *
@@ -27,7 +28,8 @@ public class Square extends Shape{
 
     @Override
     public boolean isPointInShape(Point3D p) {
-        Point3D convertedPoint = Tools.world2Obj(p, this);
+        AffineTransform world2Obj = Tools.world2Obj(this.angle, this.getCenter());
+        Point3D convertedPoint = Tools.transform2Point(world2Obj, p);
         double dfoc = size / 2;//distanceFromObjectCenter
         if(Math.abs(convertedPoint.x) <= dfoc && Math.abs(convertedPoint.y) <= dfoc){
             this.isSelected = true;
@@ -117,7 +119,8 @@ public class Square extends Shape{
     }
         @Override
     public ModAction getModAction(Point3D mouseDown){
-        Point3D converted = Tools.world2Obj(mouseDown, this);
+        AffineTransform world2Obj = Tools.world2Obj(this.angle, this.getCenter());
+        Point3D converted = Tools.transform2Point(world2Obj, mouseDown);
          if(this.isIsSelected()){
         if(checkRotation(converted)){
             return ModAction.Rotate;
@@ -145,8 +148,9 @@ public class Square extends Shape{
     }
     @Override
     public  boolean modifyShape(Point3D mousePrevLocation, Point3D mouseCurrentLocation, ModAction modAction){
-        Point3D convertedCurrent = Tools.world2Obj(mouseCurrentLocation, this);
-        Point3D convertedPrev = Tools.world2Obj(mousePrevLocation, this);
+        AffineTransform world2Obj = Tools.world2Obj(this.angle, this.getCenter());
+        Point3D convertedCurrent = Tools.transform2Point(world2Obj, mouseCurrentLocation);
+        Point3D convertedPrev = Tools.transform2Point(world2Obj, mousePrevLocation);
         Point3D delta = Tools.findDelta(convertedPrev, convertedCurrent);
         if(this.isIsSelected()){
         if(modAction == ModAction.Rotate){
