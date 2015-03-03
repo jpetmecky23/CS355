@@ -42,6 +42,8 @@ public class CS355
     	MouseMotionLis mml = new MouseMotionLis();
     	
         GUIFunctions.createCS355Frame(c,v, ml, mml);
+        GUIFunctions.setHScrollBarKnob(512);
+        GUIFunctions.setVScrollBarKnob(512);
         GUIFunctions.refresh();
         GUIFunctions.changeSelectedColor(Color.BLUE);
         Model.inst().setSelectColor(Color.BLUE);//Change default color

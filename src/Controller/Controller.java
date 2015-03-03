@@ -27,6 +27,7 @@ public class Controller implements CS355Controller{
     private ModAction modAction;
     private double zoom;
     private Point3D viewOffset;
+    private int scrollBarKnobSize;
             
     public static Controller inst()
     {
@@ -57,6 +58,8 @@ public class Controller implements CS355Controller{
         this.mousePrevLocation = null;
         this.zoom = 1.0;
         this.viewOffset = new Point3D(0, 0, 0);
+        this.scrollBarKnobSize = 512;
+
     }
 
 
@@ -103,25 +106,38 @@ public class Controller implements CS355Controller{
     public void zoomInButtonHit(){
         if(Controller.inst().getZoom() < 4){
             Controller.inst().setZoom(Controller.inst().getZoom() * 2);
+            Controller.inst().setScrollBarKnobSize(2* Controller.inst().getScrollBarKnobSize() );
+            GUIFunctions.setHScrollBarKnob(Controller.inst().getScrollBarKnobSize() );
+            GUIFunctions.setVScrollBarKnob(Controller.inst().getScrollBarKnobSize() );
             Model.inst().modelChanged();
-            
         }
     }
     @Override
     public void zoomOutButtonHit(){
         if(Controller.inst().getZoom() > .25){
             Controller.inst().setZoom(Controller.inst().getZoom() / 2);
+            Controller.inst().setScrollBarKnobSize(Controller.inst().getScrollBarKnobSize() / 2);
+            GUIFunctions.setHScrollBarKnob(Controller.inst().getScrollBarKnobSize() );
+            GUIFunctions.setVScrollBarKnob(Controller.inst().getScrollBarKnobSize() );
             Model.inst().modelChanged();
         }
         
     }
     @Override
-    public void hScrollbarChanged(int value){
-        
+    public void hScrollbarChanged(int value){ 
+        System.out.println("hScroll: ");
+        System.out.println(value + "\n");
+        Point3D offset = new Point3D(value, Controller.inst().getViewOffset().y, 0);
+        Controller.inst().setViewOffset(offset);
+        Model.inst().modelChanged();
     }
     @Override
     public void vScrollbarChanged(int value){
-        
+        System.out.println("vScroll: ");
+        System.out.println(value + "\n");
+        Point3D offset = new Point3D(Controller.inst().getViewOffset().x, value, 0);
+        Controller.inst().setViewOffset(offset);
+        Model.inst().modelChanged();
     }
     @Override
     public void toggle3DModelDisplay(){
@@ -223,6 +239,14 @@ public class Controller implements CS355Controller{
 
     public void setViewOffset(Point3D viewOffset) {
         this.viewOffset = viewOffset;
+    }
+
+    public int getScrollBarKnobSize() {
+        return scrollBarKnobSize;
+    }
+
+    public void setScrollBarKnobSize(int scrollBarKnobSize) {
+        this.scrollBarKnobSize = scrollBarKnobSize;
     }
     
     
