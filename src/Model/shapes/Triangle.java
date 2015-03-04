@@ -5,6 +5,7 @@
  */
 package Model.shapes;
 
+import Controller.Controller;
 import Controller.ModAction;
 import Model.Model;
 import Utillities.Tools;
@@ -164,8 +165,9 @@ public class Triangle extends Shape{
     }
     
     public boolean checkOne(Point3D mouseDown){
-        Point3D upperLC = new Point3D(this.getOne().x - 3, this.getOne().y - 3, 0);
-        Point3D lowerRC = new Point3D(this.getOne().x + 3, this.getOne().y + 3, 0);
+        int handleScaler = (int) (16 / Controller.inst().getZoom());
+        Point3D upperLC = new Point3D(this.getOne().x - handleScaler, this.getOne().y - handleScaler, 0);
+        Point3D lowerRC = new Point3D(this.getOne().x + handleScaler, this.getOne().y + handleScaler, 0);
         Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
         if(handle.isPointInShape(mouseDown)){
             return true;
@@ -174,8 +176,9 @@ public class Triangle extends Shape{
     }
     
     public boolean checkTwo(Point3D mouseDown){
-        Point3D upperLC = new Point3D(this.getTwo().x - 3, this.getTwo().y - 3, 0);
-        Point3D lowerRC = new Point3D(this.getTwo().x + 3, this.getTwo().y + 3, 0);
+        int handleScaler = (int) (16 / Controller.inst().getZoom());
+        Point3D upperLC = new Point3D(this.getTwo().x - handleScaler, this.getTwo().y - handleScaler, 0);
+        Point3D lowerRC = new Point3D(this.getTwo().x + handleScaler, this.getTwo().y + handleScaler, 0);
         Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
         if(handle.isPointInShape(mouseDown)){
             return true;
@@ -184,8 +187,9 @@ public class Triangle extends Shape{
     }
     
     public boolean checkThree(Point3D mouseDown){
-        Point3D upperLC = new Point3D(this.getThree().x - 3, this.getThree().y - 3, 0);
-        Point3D lowerRC = new Point3D(this.getThree().x + 3, this.getThree().y + 3, 0);
+        int handleScaler = (int) (16 / Controller.inst().getZoom());
+        Point3D upperLC = new Point3D(this.getThree().x - handleScaler, this.getThree().y - handleScaler, 0);
+        Point3D lowerRC = new Point3D(this.getThree().x + handleScaler, this.getThree().y + handleScaler, 0);
         Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
         if(handle.isPointInShape(mouseDown)){
             return true;

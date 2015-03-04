@@ -5,6 +5,7 @@
  */
 package View.drawableShapes;
 
+import Controller.Controller;
 import Model.shapes.Point3D;
 import Utillities.Tools;
 import java.awt.Color;
@@ -60,12 +61,14 @@ public class DrawableTri extends DrawableShape{
     @Override
     public void drawHandles(Graphics2D g2d) {
             if(this.isSelected){
+            double zoom =  Controller.inst().getZoom();
+            int handleScaler = (int) (16 / zoom);
             g2d.setTransform(getTransform());
             g2d.setColor(Color.WHITE);
             g2d.fillOval((int)p1.x - 10, (int)p1.y - 10, 6, 6);//rotation
-            g2d.fillOval((int)p1.x - 3, (int)p1.y - 3, 6, 6);
-            g2d.fillOval((int)p2.x - 3, (int)p2.y - 3, 6, 6);
-            g2d.fillOval((int)p3.x - 3, (int)p3.y - 3, 6, 6);
+            g2d.fillOval((int)p1.x - handleScaler, (int)p1.y - handleScaler, handleScaler, handleScaler);
+            g2d.fillOval((int)p2.x - handleScaler, (int)p2.y - handleScaler, handleScaler, handleScaler);
+            g2d.fillOval((int)p3.x - handleScaler, (int)p3.y - handleScaler, handleScaler, handleScaler);
         }
     }
     

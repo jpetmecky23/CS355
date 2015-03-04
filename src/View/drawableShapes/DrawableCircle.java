@@ -40,15 +40,17 @@ public class DrawableCircle extends DrawableShape{
         @Override
     public void drawHandles(Graphics2D g2d) {
         if(this.isSelected){
+            double zoom =  Controller.inst().getZoom();
+            int handleScaler = (int) (16 / zoom);
             g2d.setTransform(getTransform());
             g2d.setColor(Color.WHITE);
             
             g2d.drawOval(-width / 2, -height / 2, width, height);;
             g2d.drawRect(-width / 2, -height / 2, width, height);
-            g2d.fillRect((-width / 2) - 3, (-height / 2) - 3, 7, 7);//Top Left            
-            g2d.fillRect((width / 2) - 3, (-height / 2) - 3, 7, 7); //Top Right         
-            g2d.fillRect((width / 2) - 3, (height / 2) - 3, 7, 7);  //Bottom Right        
-            g2d.fillRect((-width / 2) - 3, (height / 2) - 3, 7, 7);//Bottom Left
+            g2d.fillRect((-width  - handleScaler) / 2, (-height - handleScaler ) / 2, handleScaler, handleScaler );//Top Left            
+            g2d.fillRect((width - handleScaler) / 2, (-height - handleScaler) / 2, handleScaler, handleScaler); //Top Right         
+            g2d.fillRect((width - handleScaler) / 2, (height - handleScaler) / 2, handleScaler, handleScaler);  //Bottom Right        
+            g2d.fillRect((-width - handleScaler)/ 2, (height - handleScaler) / 2, handleScaler, handleScaler);//Bottom Left
             g2d.fillRect(0, (-height / 2) - 20, 7, 7);//Rotation
         }
     }

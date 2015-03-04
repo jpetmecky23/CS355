@@ -41,10 +41,12 @@ public class DrawableLine extends DrawableShape{
     
         @Override
     public void drawHandles(Graphics2D g2d) {
+            double zoom =  Controller.inst().getZoom();
+            int handleScaler = (int) (16 / zoom);
             if(this.isSelected){
             g2d.setColor(Color.WHITE);
-            g2d.fillOval(x1 - 3, y1 - 3, 6, 6);
-            g2d.fillOval(x2 - 3, y2 - 3, 6, 6);
+            g2d.fillRect(x1 - handleScaler, y1 - handleScaler, handleScaler, handleScaler);
+            g2d.fillRect(x2 - handleScaler, y2 - handleScaler, handleScaler, handleScaler);
         }
     }
     

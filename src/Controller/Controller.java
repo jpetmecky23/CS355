@@ -106,9 +106,12 @@ public class Controller implements CS355Controller{
     public void zoomInButtonHit(){
         if(Controller.inst().getZoom() < 4){
             Controller.inst().setZoom(Controller.inst().getZoom() * 2);
-            Controller.inst().setScrollBarKnobSize(2* Controller.inst().getScrollBarKnobSize() );
+            Controller.inst().setScrollBarKnobSize(Controller.inst().getScrollBarKnobSize() / 2);
             GUIFunctions.setHScrollBarKnob(Controller.inst().getScrollBarKnobSize() );
             GUIFunctions.setVScrollBarKnob(Controller.inst().getScrollBarKnobSize() );
+            this.hScrollbarChanged(60);
+            this.vScrollbarChanged(60);
+            //GUIFunctions.setVScrollBarPosit(scrollBarKnobSize);
             Model.inst().modelChanged();
         }
     }
@@ -116,7 +119,7 @@ public class Controller implements CS355Controller{
     public void zoomOutButtonHit(){
         if(Controller.inst().getZoom() > .25){
             Controller.inst().setZoom(Controller.inst().getZoom() / 2);
-            Controller.inst().setScrollBarKnobSize(Controller.inst().getScrollBarKnobSize() / 2);
+            Controller.inst().setScrollBarKnobSize(Controller.inst().getScrollBarKnobSize() * 2);
             GUIFunctions.setHScrollBarKnob(Controller.inst().getScrollBarKnobSize() );
             GUIFunctions.setVScrollBarKnob(Controller.inst().getScrollBarKnobSize() );
             Model.inst().modelChanged();
