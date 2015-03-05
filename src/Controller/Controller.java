@@ -109,8 +109,8 @@ public class Controller implements CS355Controller{
             Controller.inst().setScrollBarKnobSize(Controller.inst().getScrollBarKnobSize() / 2);
             GUIFunctions.setHScrollBarKnob(Controller.inst().getScrollBarKnobSize() );
             GUIFunctions.setVScrollBarKnob(Controller.inst().getScrollBarKnobSize() );
-            this.hScrollbarChanged(60);
-            this.vScrollbarChanged(60);
+            //this.hScrollbarChanged(60);
+            //this.vScrollbarChanged(60);
             //GUIFunctions.setVScrollBarPosit(scrollBarKnobSize);
             Model.inst().modelChanged();
         }
