@@ -32,8 +32,8 @@ public class DrawableLine extends DrawableShape{
 
     @Override
     public void drawShape(Graphics2D g2d){
-        AffineTransform world2View = Tools.world2View(Controller.inst().getZoom(), Controller.inst().getViewOffset());
-        g2d.setTransform(world2View);//Done differentlly than the other shapes since lines don't have centers
+        AffineTransform afftrand = getTransform();//Tools.world2View(Controller.inst().getZoom(), Controller.inst().getViewOffset());
+        g2d.setTransform(afftrand);//Done differentlly than the other shapes since lines don't have centers
         g2d.setColor(color);
         g2d.drawLine(x1, y1, x2, y2);
        
@@ -82,5 +82,12 @@ public class DrawableLine extends DrawableShape{
         this.y2 = y2;
     }
    
-    
+        @Override
+    public AffineTransform getTransform(){
+        Point3D center = new Point3D(0, 0, 0);//getCenter();
+        AffineTransform obj2World = Tools.obj2World(angle, center);
+        AffineTransform world2View = Tools.world2View(Controller.inst().getZoom(), Controller.inst().getViewOffset());
+       world2View.concatenate(obj2World);
+       return world2View;
+    }
 }

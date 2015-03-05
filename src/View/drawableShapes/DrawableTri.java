@@ -123,4 +123,12 @@ public class DrawableTri extends DrawableShape{
         this.center = center;
     }
     
+    @Override
+    public AffineTransform getTransform(){
+        Point3D center = new Point3D(0, 0, 0);//getCenter();
+        AffineTransform obj2World = Tools.obj2World(angle, center);
+        AffineTransform world2View = Tools.world2View(Controller.inst().getZoom(), Controller.inst().getViewOffset());
+       world2View.concatenate(obj2World);
+       return world2View;
+    }
 }
