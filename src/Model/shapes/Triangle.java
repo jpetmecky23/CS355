@@ -155,6 +155,7 @@ public class Triangle extends Shape{
     }
     
     public boolean checkRotation(Point3D mouseDown){
+        int handleScaler =  (int)(16 / Controller.inst().getZoom());
         Point3D upperLC = new Point3D(this.getOne().x - 10, this.getOne().y - 10, 0);
         Point3D lowerRC = new Point3D(this.getOne().x - 5, this.getOne().y - 5, 0);
         Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);

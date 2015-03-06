@@ -42,8 +42,9 @@ public class Line3D extends Shape
     }  
     
     public boolean checkStart(Point3D mouseDown){
-        Point3D upperLC = new Point3D(this.getStart().x - 3, this.getStart().y - 3, 0);
-        Point3D lowerRC = new Point3D(this.getStart().x + 3, this.getStart().y + 3, 0);
+        int handleScaler =  (int)(16 / Controller.inst().getZoom());
+        Point3D upperLC = new Point3D(this.getStart().x - handleScaler, this.getStart().y - handleScaler, 0);
+        Point3D lowerRC = new Point3D(this.getStart().x + handleScaler, this.getStart().y + handleScaler, 0);
         Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
         if(handle.isPointInShape(mouseDown)){
             return true;
@@ -52,8 +53,9 @@ public class Line3D extends Shape
     }
 
     public boolean checkEnd(Point3D mouseDown){
-        Point3D upperLC = new Point3D(this.getEnd().x - 3, this.getEnd().y - 3, 0);
-        Point3D lowerRC = new Point3D(this.getEnd().x + 3, this.getEnd().y + 3, 0);
+        int handleScaler =  (int)(16 / Controller.inst().getZoom());
+        Point3D upperLC = new Point3D(this.getEnd().x - handleScaler, this.getEnd().y - handleScaler, 0);
+        Point3D lowerRC = new Point3D(this.getEnd().x + handleScaler, this.getEnd().y + handleScaler, 0);
         Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
         if(handle.isPointInShape(mouseDown)){
             return true;

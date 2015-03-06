@@ -50,7 +50,7 @@ public class DrawableQuad extends DrawableShape{
             g2d.fillRect((width - handleScaler) / 2, (-height - handleScaler) / 2, handleScaler, handleScaler); //Top Right         
             g2d.fillRect((width - handleScaler) / 2, (height - handleScaler) / 2, handleScaler, handleScaler);  //Bottom Right        
             g2d.fillRect((-width - handleScaler)/ 2, (height - handleScaler) / 2, handleScaler, handleScaler);//Bottom Left
-            g2d.fillRect(0, (-height / 2) - 20, 7, 7);//Rotation
+            g2d.fillRect(0, (-height / 2) - 20, handleScaler, handleScaler);//Rotation
         }
     }
 

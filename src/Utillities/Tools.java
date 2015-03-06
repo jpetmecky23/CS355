@@ -52,12 +52,12 @@ public abstract class Tools {
         return obj2World;
     }   
     public static AffineTransform world2Obj(double angle, Point3D center){
-        double mX0 = Math.cos(-angle);
-        double mY0 = -Math.sin(-angle);
-        double mX1 = Math.sin(-angle);
-        double mY1 = Math.cos(-angle);
-        double mX2 = -center.x;
-        double mY2 = -center.y;
+        double mX0 = Math.cos(angle);
+        double mY0 = -Math.sin(angle);
+        double mX1 = Math.sin(angle);
+        double mY1 = Math.cos(angle);
+        double mX2 = (-Math.cos(angle) * center.x) - (Math.sin(angle) * center.y);
+        double mY2 = (Math.sin(angle) * center.x) - (Math.cos(angle) * center.y);
         // create a new transformation (defaults to identity)
         return  new AffineTransform(mX0, mY0, mX1, mY1, mX2, mY2);
     }
@@ -129,6 +129,7 @@ public abstract class Tools {
     }
     public static Point3D findDelta(Point3D mousePrevLocation, Point3D mouseCurrentLocation){
         if(mouseCurrentLocation != null && mousePrevLocation != null){
+        //mouseCurrentLocation = world2Obj();
         double x = mouseCurrentLocation.x - mousePrevLocation.x;
         double y = mouseCurrentLocation.y - mousePrevLocation.y;      
         Point3D mouseDelta = new Point3D(x, y, 0);

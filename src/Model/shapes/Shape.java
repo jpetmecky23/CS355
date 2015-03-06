@@ -39,7 +39,7 @@ public class Shape{
         return angle;
     }  
     public void setAngle(double angle) {
-        this.angle = angle;
+        this.angle = - angle + (Math.PI / 2);
     }    
     public Point3D getCenter() {
         return null;

@@ -5,6 +5,7 @@
  */
 package Model.shapes;
 
+import Controller.Controller;
 import Controller.ModAction;
 import Model.Model;
 import Utillities.Tools;
@@ -74,8 +75,9 @@ public class Circle extends Shape{
     }  
     
     public boolean checkRotation(Point3D mouseClicked){
-        Point3D upperLC = new Point3D(-3, (- this.getRadis()) - 20, 0);
-        Point3D lowerRC = new Point3D(3, (- this.getRadis()) - 13, 0);
+        int handleScaler =  (int)(16 / Controller.inst().getZoom());
+        Point3D upperLC = new Point3D(0, (- this.getRadis()) - 20, 0);
+        Point3D lowerRC = new Point3D(handleScaler, (- this.getRadis()) - handleScaler / 2, 0);
         Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
         if(handle.isPointInShape(mouseClicked)){
             return true;
@@ -83,8 +85,9 @@ public class Circle extends Shape{
         return false;
     }
     public boolean checkTopLeft(Point3D mouseClicked){
-        Point3D upperLC = new Point3D((- this.getRadis()) - 3, (- this.getRadis()) - 3, 0);
-        Point3D lowerRC = new Point3D((- this.getRadis()) + 3, (- this.getRadis()) + 3, 0);
+        int handleScaler =  (int)(16 / Controller.inst().getZoom());
+        Point3D upperLC = new Point3D((- this.getRadis()) - handleScaler, (- this.getRadis()) - handleScaler, 0);
+        Point3D lowerRC = new Point3D((- this.getRadis()) + handleScaler, (- this.getRadis()) + handleScaler, 0);
         Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
         if(handle.isPointInShape(mouseClicked)){
             return true;
@@ -92,8 +95,9 @@ public class Circle extends Shape{
         return false;
     }    
     public boolean checkTopRight(Point3D mouseClicked){
-        Point3D upperLC = new Point3D((this.getRadis()) - 3, (this.getRadis()) - 3, 0);
-        Point3D lowerRC = new Point3D((this.getRadis()) + 3, (this.getRadis()) + 3, 0);
+        int handleScaler =  (int)(16 / Controller.inst().getZoom());
+        Point3D upperLC = new Point3D((this.getRadis()) - handleScaler, (this.getRadis()) - handleScaler, 0);
+        Point3D lowerRC = new Point3D((this.getRadis()) + handleScaler, (this.getRadis()) + handleScaler, 0);
         Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
         if(handle.isPointInShape(mouseClicked)){
             return true;
@@ -101,8 +105,9 @@ public class Circle extends Shape{
         return false;
     }        
     public boolean checkBottomRight(Point3D mouseClicked){
-        Point3D upperLC = new Point3D((this.getRadis()) - 3, (this.getRadis()) - 3, 0);
-        Point3D lowerRC = new Point3D((this.getRadis()) + 3, (this.getRadis()) + 3, 0);
+        int handleScaler =  (int)(16 / Controller.inst().getZoom());
+        Point3D upperLC = new Point3D((this.getRadis()) - handleScaler, (this.getRadis()) - handleScaler, 0);
+        Point3D lowerRC = new Point3D((this.getRadis()) + handleScaler, (this.getRadis()) + handleScaler, 0);
         Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
         if(handle.isPointInShape(mouseClicked)){
             return true;
@@ -110,8 +115,9 @@ public class Circle extends Shape{
         return false;
     }        
     public boolean checkBottomLeft( Point3D mouseClicked){
-        Point3D upperLC = new Point3D((- this.getRadis()) - 3, (this.getRadis()) - 3, 0);
-        Point3D lowerRC = new Point3D((- this.getRadis()) + 3, (this.getRadis()) + 3, 0);
+        int handleScaler =  (int)(16 / Controller.inst().getZoom());
+        Point3D upperLC = new Point3D((- this.getRadis()) - handleScaler, (this.getRadis()) - handleScaler, 0);
+        Point3D lowerRC = new Point3D((- this.getRadis()) + handleScaler, (this.getRadis()) + handleScaler, 0);
         Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
         if(handle.isPointInShape(mouseClicked)){
             return true;

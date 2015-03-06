@@ -77,8 +77,9 @@ public class Rectangle extends Shape{
         this.width = width;
     }
     public boolean checkRotation(Point3D mouseClicked){
-        Point3D upperLC = new Point3D(-5, (- this.getHeight() / 2) - 20, 0);
-        Point3D lowerRC = new Point3D(5, (- this.getHeight() / 2) - 13, 0);
+        int handleScaler =  (int)(16 / Controller.inst().getZoom());
+        Point3D upperLC = new Point3D(0, (- this.getHeight() / 2) - 20, 0);
+        Point3D lowerRC = new Point3D(handleScaler, (- this.getHeight() / 2) - handleScaler / 2, 0);
         Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
         if(handle.isPointInShape(mouseClicked)){
             return true;

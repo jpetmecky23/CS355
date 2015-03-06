@@ -109,11 +109,12 @@ public class Controller implements CS355Controller{
             Controller.inst().setScrollBarKnobSize(Controller.inst().getScrollBarKnobSize() / 2);
             GUIFunctions.setHScrollBarKnob(Controller.inst().getScrollBarKnobSize());
             GUIFunctions.setVScrollBarKnob(Controller.inst().getScrollBarKnobSize());
+            /*
             double x = Controller.inst().getViewOffset().x + (1024 / Controller.inst().getZoom());
             double y = Controller.inst().getViewOffset().y + (1024 / Controller.inst().getZoom());
             GUIFunctions.setHScrollBarPosit((int) x);
             GUIFunctions.setVScrollBarPosit((int) y);
-            
+            */
             Model.inst().modelChanged();
         }
     }
@@ -124,7 +125,7 @@ public class Controller implements CS355Controller{
             Controller.inst().setScrollBarKnobSize(Controller.inst().getScrollBarKnobSize() * 2);
             GUIFunctions.setHScrollBarKnob(Controller.inst().getScrollBarKnobSize() );
             GUIFunctions.setVScrollBarKnob(Controller.inst().getScrollBarKnobSize() );
-            double x = Controller.inst().getViewOffset().x - (1024 / Controller.inst().getZoom());
+            /*double x = Controller.inst().getViewOffset().x - (1024 / Controller.inst().getZoom());
             double y = Controller.inst().getViewOffset().y - (1024 / Controller.inst().getZoom());
             
             if((Controller.inst().getViewOffset().x - (1024 / Controller.inst().getZoom())) > 0){
@@ -140,7 +141,7 @@ public class Controller implements CS355Controller{
             else{
              GUIFunctions.setVScrollBarPosit(0);             
             }
-            
+            */
             Model.inst().modelChanged();
         }
         

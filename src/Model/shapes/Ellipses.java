@@ -5,6 +5,7 @@
  */
 package Model.shapes;
 
+import Controller.Controller;
 import Controller.ModAction;
 import Model.Model;
 import Utillities.Tools;
@@ -83,8 +84,9 @@ public class Ellipses extends Shape{
     }
     
      public boolean checkRotation(Point3D mouseClicked){
-        Point3D upperLC = new Point3D(-5, (- this.getHeight() / 2) - 20, 0);
-        Point3D lowerRC = new Point3D(5, (- this.getHeight() / 2) - 13, 0);
+        int handleScaler =  (int)(16 / Controller.inst().getZoom());
+        Point3D upperLC = new Point3D(0, (- this.getHeight() / 2) - 20, 0);
+        Point3D lowerRC = new Point3D(handleScaler, (- this.getHeight() / 2) - handleScaler / 2, 0);
         Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
         if(handle.isPointInShape(mouseClicked)){
             return true;
@@ -92,8 +94,9 @@ public class Ellipses extends Shape{
         return false;
     }
     public boolean checkTopLeft(Point3D mouseClicked){
-        Point3D upperLC = new Point3D((- this.getWidth() / 2) - 3, (- this.getHeight() / 2) - 3, 0);
-        Point3D lowerRC = new Point3D((- this.getWidth() / 2) + 3, (- this.getHeight() / 2) + 3, 0);
+        int handleScaler =  (int)(16 / Controller.inst().getZoom());
+        Point3D upperLC = new Point3D((- this.getWidth() / 2) - handleScaler, (- this.getHeight() / 2) - handleScaler, 0);
+        Point3D lowerRC = new Point3D((- this.getWidth() / 2) + handleScaler, (- this.getHeight() / 2) + handleScaler, 0);
         Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
         if(handle.isPointInShape(mouseClicked)){
             return true;
@@ -101,8 +104,9 @@ public class Ellipses extends Shape{
         return false;
     }    
     public boolean checkTopRight(Point3D mouseClicked){
-        Point3D upperLC = new Point3D((this.getWidth() / 2) - 3, (- this.getHeight() / 2) - 3, 0);
-        Point3D lowerRC = new Point3D((this.getWidth() / 2) + 3, (- this.getHeight() / 2) + 3, 0);
+        int handleScaler =  (int)(16 / Controller.inst().getZoom());
+        Point3D upperLC = new Point3D((this.getWidth() / 2) - handleScaler, (- this.getHeight() / 2) - handleScaler, 0);
+        Point3D lowerRC = new Point3D((this.getWidth() / 2) + handleScaler, (- this.getHeight() / 2) + handleScaler, 0);
         Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
         if(handle.isPointInShape(mouseClicked)){
             return true;
@@ -110,8 +114,9 @@ public class Ellipses extends Shape{
         return false;
     }        
     public boolean checkBottomRight(Point3D mouseClicked){
-        Point3D upperLC = new Point3D((this.getWidth() / 2) - 3, (this.getHeight() / 2) - 3, 0);
-        Point3D lowerRC = new Point3D((this.getWidth() / 2) + 3, (this.getHeight() / 2) + 3, 0);
+        int handleScaler =  (int)(16 / Controller.inst().getZoom());
+        Point3D upperLC = new Point3D((this.getWidth() / 2) - handleScaler, (this.getHeight() / 2) - handleScaler, 0);
+        Point3D lowerRC = new Point3D((this.getWidth() / 2) + handleScaler, (this.getHeight() / 2) + handleScaler, 0);
         Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
         if(handle.isPointInShape(mouseClicked)){
             return true;
@@ -119,8 +124,9 @@ public class Ellipses extends Shape{
         return false;
     }        
     public boolean checkBottomLeft(Point3D mouseClicked){
-        Point3D upperLC = new Point3D((- this.getWidth() / 2) - 3, (this.getHeight() / 2) - 3, 0);
-        Point3D lowerRC = new Point3D((- this.getWidth() / 2) + 3, (this.getHeight() / 2) + 3, 0);
+        int handleScaler =  (int)(16 / Controller.inst().getZoom());
+        Point3D upperLC = new Point3D((- this.getWidth() / 2) - handleScaler, (this.getHeight() / 2) - handleScaler, 0);
+        Point3D lowerRC = new Point3D((- this.getWidth() / 2) + handleScaler, (this.getHeight() / 2) + handleScaler, 0);
         Handle handle = new Handle(upperLC, lowerRC, Color.WHITE);
         if(handle.isPointInShape(mouseClicked)){
             return true;

@@ -51,7 +51,7 @@ public class DrawableShape {
         return null;
     }
     public void setAngle(double angle) {
-        this.angle = angle;
+        this.angle =  angle;
     }
 
     public boolean isIsSelected() {
