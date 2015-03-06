@@ -107,11 +107,13 @@ public class Controller implements CS355Controller{
         if(Controller.inst().getZoom() < 4){
             Controller.inst().setZoom(Controller.inst().getZoom() * 2);
             Controller.inst().setScrollBarKnobSize(Controller.inst().getScrollBarKnobSize() / 2);
-            GUIFunctions.setHScrollBarKnob(Controller.inst().getScrollBarKnobSize() );
-            GUIFunctions.setVScrollBarKnob(Controller.inst().getScrollBarKnobSize() );
-            //this.hScrollbarChanged(60);
-            //this.vScrollbarChanged(60);
-            //GUIFunctions.setVScrollBarPosit(scrollBarKnobSize);
+            GUIFunctions.setHScrollBarKnob(Controller.inst().getScrollBarKnobSize());
+            GUIFunctions.setVScrollBarKnob(Controller.inst().getScrollBarKnobSize());
+            double x = Controller.inst().getViewOffset().x + (1024 / Controller.inst().getZoom());
+            double y = Controller.inst().getViewOffset().y + (1024 / Controller.inst().getZoom());
+            GUIFunctions.setHScrollBarPosit((int) x);
+            GUIFunctions.setVScrollBarPosit((int) y);
+            
             Model.inst().modelChanged();
         }
     }
@@ -122,6 +124,23 @@ public class Controller implements CS355Controller{
             Controller.inst().setScrollBarKnobSize(Controller.inst().getScrollBarKnobSize() * 2);
             GUIFunctions.setHScrollBarKnob(Controller.inst().getScrollBarKnobSize() );
             GUIFunctions.setVScrollBarKnob(Controller.inst().getScrollBarKnobSize() );
+            double x = Controller.inst().getViewOffset().x - (1024 / Controller.inst().getZoom());
+            double y = Controller.inst().getViewOffset().y - (1024 / Controller.inst().getZoom());
+            
+            if((Controller.inst().getViewOffset().x - (1024 / Controller.inst().getZoom())) > 0){
+            GUIFunctions.setHScrollBarPosit((int) x);
+            }
+            else{
+            GUIFunctions.setHScrollBarPosit(0);
+            }
+            
+            if((Controller.inst().getViewOffset().y - (1024 / Controller.inst().getZoom())) > 0){
+            GUIFunctions.setVScrollBarPosit((int) y);
+            }
+            else{
+             GUIFunctions.setVScrollBarPosit(0);             
+            }
+            
             Model.inst().modelChanged();
         }
         

@@ -1,5 +1,6 @@
 package Model.shapes;
 
+import Controller.Controller;
 import Controller.ModAction;
 import Model.Model;
 import Utillities.Tools;
@@ -27,7 +28,9 @@ public class Line3D extends Shape
         double e = Math.abs(((p2.y - p1.y) * q.x) - ((p2.x - p1.x) * q.y) + ((p2.x * p1.y) - (p2.y * p1.x)));
         double f = Tools.normalize(p1, p2);
         double result = e / f;
-        if(result <= 4){
+        double Scaler =  (1 / Controller.inst().getZoom());
+        //System.out.println(4 * Scaler);
+        if(result <= (4 * Scaler)){
                 this.isSelected = true;
                 Model.inst().setSelectColor(this.getColor());
                 return true;
@@ -66,6 +69,9 @@ public class Line3D extends Shape
         }
         else if(checkEnd(mouseDown)){
             return ModAction.MoveLineEnd;
+        }
+        else if(this.isPointInShape(mouseDown)){
+            return ModAction.Moving;
         }
         else{
             return ModAction.NoAction;
