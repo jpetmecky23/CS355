@@ -21,6 +21,10 @@ import java.util.Observable;
     private ArrayList<Shape> container;
     private static Model instance;
     private Color selectColor;
+    private double xOffset;
+    private double yOffset;
+    private double zOffset;
+    private double rotationOffset;
     
     public static Model inst()
     {
@@ -32,20 +36,75 @@ import java.util.Observable;
         return instance;
     }
     
-       
+    
     public static Model createModel()
-    {
-        instance = new Model();
-        return instance;
-    }
-
-	static boolean isInitialized() 
-    {
-        return (instance != null);
-    } 
+        {
+            instance = new Model();
+            return instance;
+        }
+    static boolean isInitialized() 
+        {
+            return (instance != null);
+        } 
 
     public Model() {
-        this.container = new ArrayList();     
+        this.container = new ArrayList(); 
+        xOffset = 0;
+        yOffset = 0;
+        zOffset = 0;
+        rotationOffset = 0;
+    }
+    public double getxOffset() {
+        return xOffset;
+    }
+    public double getyOffset() {
+        return yOffset;
+    }
+
+    public double getzOffset() {
+        return zOffset;
+    }
+
+    public double getRotationOffset() {
+        return rotationOffset;
+    }
+    
+    public void incrementXOffset() {
+        this.xOffset++;
+    }
+    public void decrementXOffset() {
+            this.xOffset--;
+    }
+    
+    public void incrementYOffset() {
+        this.yOffset++;
+    }
+    public void decrementYOffset() {
+            this.yOffset--;
+    }
+    
+    public void incrementZOffset() {
+        this.zOffset++;
+    }
+    public void decrementZOffset() {
+            this.zOffset--;
+    }
+    
+    public void incrementRotateOffset() {
+        if(this.rotationOffset == 359){
+           this.rotationOffset = 0; 
+        }
+        else{
+            this.rotationOffset++;
+        }
+    }
+    public void decrementRotateOffset() {
+        if(this.rotationOffset == 0){
+            this.rotationOffset = 359;
+        }
+        else{    
+            this.rotationOffset--;
+        }
     }
     
     public void addShape(Shape s){

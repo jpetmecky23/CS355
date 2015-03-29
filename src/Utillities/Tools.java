@@ -16,6 +16,12 @@ import java.awt.geom.Point2D;
  * @author James
  */
 public abstract class Tools {
+    
+    public static Point3D convert3DPoint(Point3D p){
+        
+        return p;
+    }
+    
     public static double dotProd(Point3D p1, Point3D p2){
         return (p1.x * p2.x) + (p1.y * p2.y);
     }   
@@ -142,4 +148,5 @@ public abstract class Tools {
         double angle = Math.atan2(mouseDown.x - mouseCurrentLocation.x, mouseDown.y - mouseCurrentLocation.y);
         return angle;
     }
+    
 }

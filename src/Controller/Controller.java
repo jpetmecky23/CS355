@@ -164,11 +164,43 @@ public class Controller implements CS355Controller{
     }
     @Override
     public void toggle3DModelDisplay(){
+        Controller.inst().setState(ControllerState.House);
+         Model.inst().clearSelectedShapes();
         
     }
     @Override
     public void keyPressed(Iterator<Integer> iterator){
-        
+        if(iterator.hasNext()){
+            Integer keyPressed = iterator.next();
+            if(keyPressed.equals(65)){//A
+                System.out.println("A");
+                //Use the same method from lab 6 to figure out the amounts to add to the offsets
+            }
+            else if(keyPressed.equals(83)){//S
+                System.out.println("S");
+            }
+            else if(keyPressed.equals(68)){//D
+                System.out.println("D");
+            }
+            else if(keyPressed.equals(81)){//Q
+                System.out.println("Q");
+            }
+            else if(keyPressed.equals(69)){//E
+                System.out.println("E");
+            }
+            else if(keyPressed.equals(82)){//R
+                System.out.println("R");
+            }
+            else if(keyPressed.equals(70)){//F
+                System.out.println("F");
+            }
+            else if(keyPressed.equals(72)){//H
+                System.out.println("H");
+            }
+            else if(keyPressed.equals(87)){//W
+                System.out.println("W");
+            }
+        }
     }
     @Override
     public void doEdgeDetection(){

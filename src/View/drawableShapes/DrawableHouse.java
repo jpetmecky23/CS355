@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package View.drawableShapes;
 
 /**
  *
  * @author James
  */
-public enum ControllerState {
-    Circle, Ellipses, Line, Rectangle, Square, Triangle, ModingShape, House 
+public class DrawableHouse {
+    
 }
