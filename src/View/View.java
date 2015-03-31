@@ -14,7 +14,6 @@ import Model.shapes.Rectangle;
 import Shell.GUIFunctions;
 import View.drawableShapes.DrawableShape;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  *
@@ -69,7 +68,9 @@ public class View implements ViewRefresher {
                 
                 for(int i = 0; i < shapes.size(); i++){
                     shapes.get(i).drawHandles(g2d);//iterate though them and draw them.
-                } 
+                }
+                
+                Factory.inst().drawHouse(Model.inst().getHouse(), g2d);
             }
             
             public void testView(){

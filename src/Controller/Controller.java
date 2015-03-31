@@ -166,6 +166,9 @@ public class Controller implements CS355Controller{
     public void toggle3DModelDisplay(){
         Controller.inst().setState(ControllerState.House);
          Model.inst().clearSelectedShapes();
+         HouseModel house = new HouseModel(Model.inst().getSelectColor());
+         Model.inst().setHouse(house);
+         Controller.inst().setZoom(.25);//Zoom all the way out
         
     }
     @Override
@@ -200,6 +203,7 @@ public class Controller implements CS355Controller{
             else if(keyPressed.equals(87)){//W
                 System.out.println("W");
             }
+            
         }
     }
     @Override

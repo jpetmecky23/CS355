@@ -25,6 +25,7 @@ import java.util.Observable;
     private double yOffset;
     private double zOffset;
     private double rotationOffset;
+    private HouseModel house;
     
     public static Model inst()
     {
@@ -52,7 +53,7 @@ import java.util.Observable;
         xOffset = 0;
         yOffset = 0;
         zOffset = 0;
-        rotationOffset = 0;
+        house = null;
     }
     public double getxOffset() {
         return xOffset;
@@ -71,24 +72,41 @@ import java.util.Observable;
     
     public void incrementXOffset() {
         this.xOffset++;
+        this.modelChanged();
     }
     public void decrementXOffset() {
             this.xOffset--;
+            this.modelChanged();
     }
     
     public void incrementYOffset() {
         this.yOffset++;
+        this.modelChanged();
     }
     public void decrementYOffset() {
             this.yOffset--;
+            this.modelChanged();
     }
     
     public void incrementZOffset() {
         this.zOffset++;
+        this.modelChanged();
     }
     public void decrementZOffset() {
             this.zOffset--;
+            this.modelChanged();
     }
+
+    public HouseModel getHouse() {
+        return house;
+    }
+
+    public void setHouse(HouseModel house) {
+        this.house = house;
+        this.modelChanged();
+    }
+
+    
     
     public void incrementRotateOffset() {
         if(this.rotationOffset == 359){
@@ -97,6 +115,7 @@ import java.util.Observable;
         else{
             this.rotationOffset++;
         }
+        this.modelChanged();
     }
     public void decrementRotateOffset() {
         if(this.rotationOffset == 0){
@@ -105,6 +124,7 @@ import java.util.Observable;
         else{    
             this.rotationOffset--;
         }
+        this.modelChanged();
     }
     
     public void addShape(Shape s){

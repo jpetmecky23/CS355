@@ -9,6 +9,7 @@ import Model.Model;
 import Model.shapes.*;
 import View.drawableShapes.*;
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 /**
@@ -159,4 +160,11 @@ public class Factory {
            dt.setCenter(center);
            return dt;
        }
+       
+       public void drawHouse(HouseModel house, Graphics2D g2d){
+           if(house != null){
+            DrawableHouse dh = new DrawableHouse(Model.inst().getHouse());
+            dh.draw(g2d);
+           }
+       } 
 }
