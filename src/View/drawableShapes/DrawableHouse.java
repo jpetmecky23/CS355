@@ -28,18 +28,26 @@ public class DrawableHouse {
     
     public void draw(Graphics2D g2d){
         //Used to draw the house at the center of the screen
-        double screenWidth = 512;
-        double screenHieght = 512;
-        Point3D start = new Point3D(250, 250, 0);
-        Point3D end = new Point3D(500, 500, 0);
-        Line3D line = new Line3D(start, end, Color.GREEN); //it.next();
-        DrawableLine dLine = Factory.inst().processLine(line);
-         dLine.drawShape(g2d);
-        //for(Iterator<Line3D> it = house.getLines(); it.hasNext();){
 
+        Line3D line = null;//new Line3D(start, end, Color.GREEN); //it.next();
+        DrawableLine dLine = null;//Factory.inst().processLine(line);
+       //  dLine.drawShape(g2d);
+         int i = 0;
+         Iterator<Line3D> it = house.getLines();
+        while(it.hasNext()){
+            line = it.next();
             if(line.getStart().z > -1 && line.getEnd().z > -1){
-                
+                double screenWidth = 64;
+                double screenHieght = 64;
+                double scale = 10;
+                Point3D start = new Point3D(scale * (line.getStart().x + (screenWidth / 2)), scale * ((screenHieght / 2) - line.getStart().y), 0);
+                Point3D end = new Point3D(scale * (line.getEnd().x + (screenWidth / 2)), scale * ((screenHieght / 2) - line.getEnd().y), 0);
+                line = new Line3D(start, end, Color.GREEN);
+               System.out.println("Line: " + i);
+               dLine = Factory.inst().processLine(line);
+               dLine.drawShape(g2d);
             }
-        //}
+            i++;
+        }
     }
 }

@@ -168,7 +168,7 @@ public class Controller implements CS355Controller{
          Model.inst().clearSelectedShapes();
          HouseModel house = new HouseModel(Model.inst().getSelectColor());
          Model.inst().setHouse(house);
-         Controller.inst().setZoom(.25);//Zoom all the way out
+         Controller.inst().setZoom(4);//Zoom all the way out
         
     }
     @Override
