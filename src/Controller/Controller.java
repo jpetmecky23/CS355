@@ -167,8 +167,10 @@ public class Controller implements CS355Controller{
         Controller.inst().setState(ControllerState.House);
          Model.inst().clearSelectedShapes();
          HouseModel house = new HouseModel(Model.inst().getSelectColor());
+         Controller.inst().setZoom(.25);//Zoom all the way out
+         Model.inst().modelChanged();
          Model.inst().setHouse(house);
-         Controller.inst().setZoom(4);//Zoom all the way out
+         
         
     }
     @Override
@@ -178,12 +180,15 @@ public class Controller implements CS355Controller{
             if(keyPressed.equals(65)){//A
                 System.out.println("A");
                 //Use the same method from lab 6 to figure out the amounts to add to the offsets
+                Model.inst().decrementXOffset();
             }
             else if(keyPressed.equals(83)){//S
                 System.out.println("S");
+                Model.inst().incrementZOffset();
             }
             else if(keyPressed.equals(68)){//D
                 System.out.println("D");
+                Model.inst().incrementXOffset();
             }
             else if(keyPressed.equals(81)){//Q
                 System.out.println("Q");
@@ -199,9 +204,14 @@ public class Controller implements CS355Controller{
             }
             else if(keyPressed.equals(72)){//H
                 System.out.println("H");
+                Model.inst().setxOffset(0);
+                Model.inst().setyOffset(0);
+                Model.inst().setzOffset(0);
+                Model.inst().setRotationOffset(0);
             }
             else if(keyPressed.equals(87)){//W
                 System.out.println("W");
+                Model.inst().decrementZOffset();
             }
             
         }

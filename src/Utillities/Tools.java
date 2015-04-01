@@ -6,10 +6,12 @@
 package Utillities;
 
 import Controller.Controller;
+import Model.Model;
 import Model.shapes.Point3D;
 import Model.shapes.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
 
 /**
  *
@@ -147,6 +149,104 @@ public abstract class Tools {
         Point3D mouseDown = Controller.inst().getMouseDown();
         double angle = Math.atan2(mouseDown.x - mouseCurrentLocation.x, mouseDown.y - mouseCurrentLocation.y);
         return angle;
+    }
+    
+    public static Matrix translate3D(Matrix m){
+        //create matrix
+        Matrix transM = new Matrix();
+        ArrayList<Double> row = new ArrayList();
+        row.add(1.0);
+        row.add(0.0);
+        row.add(0.0);
+        row.add(-(Model.inst().getxOffset()));
+        transM.addRow(0, row);
+        
+        row = new ArrayList();
+        row.add(0.0);
+        row.add(1.0);
+        row.add(0.0);
+        row.add(-(Model.inst().getyOffset()));
+        transM.addRow(1, row);
+        
+        row = new ArrayList();
+        row.add(0.0);
+        row.add(0.0);
+        row.add(1.0);
+        row.add(-(Model.inst().getzOffset()));
+        transM.addRow(2, row);
+        
+        row = new ArrayList();
+        row.add(0.0);
+        row.add(0.0);
+        row.add(0.0);
+        row.add(1.0);
+        transM.addRow(3, row);
+        
+        transM.multiply(m.getMatrix());
+        return transM;
+    }
+    
+    public static Matrix clip(Matrix m){
+        //create matrix
+        double fov = 60;
+        Matrix proM = new Matrix();
+        ArrayList<Double> row = new ArrayList();
+        double zoomX = 1 / (Math.tan(Math.toRadians(fov / 2)));
+        row.add(zoomX);
+        row.add(0.0);
+        row.add(0.0);
+        row.add(0.0);
+        proM.addRow(0, row);
+        
+        row = new ArrayList();
+        double zoomY = 1 / (Math.tan(Math.toRadians(fov / 2)));
+        row.add(0.0);
+        row.add(zoomY);
+        row.add(0.0);
+        row.add(0.0);
+        proM.addRow(1, row);
+        
+        row = new ArrayList();
+        double f = 1000;
+        double n = 5;
+        double value1 = (f + n) / (f - n);
+        double value2 = (-2 * n * f) / (f - n);       
+        row.add(0.0);
+        row.add(0.0);
+        row.add(value1);
+        row.add(value2);
+        proM.addRow(2, row);
+        
+        row = new ArrayList();
+        row.add(0.0);
+        row.add(0.0);
+        row.add(0.0);
+        row.add(1.0);
+        proM.addRow(3, row);
+        
+        proM.multiply(m.getMatrix());
+        return proM;
+    }
+    
+    public static Point3D normilize3D(Matrix clip){
+        Matrix temp = new Matrix();
+        int arraySize = clip.getMatrix().size();
+        for(int i = 0; i < arraySize; i++){
+        ArrayList<Double> row = new ArrayList();
+        row.add(clip.getMatrix().get(i).get(0) / clip.getMatrix().get(arraySize - 1).get(0));
+        temp.addRow(i, row);
+        }
+        
+        return new Point3D(temp.getMatrix().get(0).get(0), temp.getMatrix().get(1).get(0), 0);
+    }
+    
+    public static Point3D toScreenSpace(Point3D p){
+        double width = 2048;
+        double height = 2048;
+        double x = width * ((.5 * p.x) + .5);
+        double y = (.5 * height) - (.5 * p.y * height);
+        double z = 1;
+        return new Point3D(x, y, z);
     }
     
 }

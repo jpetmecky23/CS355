@@ -69,6 +69,22 @@ import java.util.Observable;
     public double getRotationOffset() {
         return rotationOffset;
     }
+
+    public void setxOffset(double xOffset) {
+        this.xOffset = xOffset;
+    }
+
+    public void setyOffset(double yOffset) {
+        this.yOffset = yOffset;
+    }
+
+    public void setzOffset(double zOffset) {
+        this.zOffset = zOffset;
+    }
+
+    public void setRotationOffset(double rotationOffset) {
+        this.rotationOffset = rotationOffset;
+    }
     
     public void incrementXOffset() {
         this.xOffset++;
