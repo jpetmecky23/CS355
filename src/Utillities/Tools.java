@@ -155,24 +155,30 @@ public abstract class Tools {
         //create matrix
         Matrix transM = new Matrix();
         ArrayList<Double> row = new ArrayList();
-        row.add(1.0);
+        double angle = Math.toRadians(Model.inst().getRotationOffset());
+        double x = Model.inst().getxOffset();
+        double y = Model.inst().getyOffset();
+        double z = Model.inst().getzOffset();
+        double Cosine = Math.cos(angle);
+        double Sine = Math.sin(angle);
+        row.add(Cosine);
         row.add(0.0);
-        row.add(0.0);
-        row.add(-(Model.inst().getxOffset()));
+        row.add(Sine);
+        row.add((-Cosine * x) - (Sine * z));
         transM.addRow(0, row);
         
         row = new ArrayList();
         row.add(0.0);
         row.add(1.0);
         row.add(0.0);
-        row.add(-(Model.inst().getyOffset()));
+        row.add(-y);
         transM.addRow(1, row);
         
         row = new ArrayList();
+        row.add(-Sine);
         row.add(0.0);
-        row.add(0.0);
-        row.add(1.0);
-        row.add(-(Model.inst().getzOffset()));
+        row.add(Cosine);
+        row.add((Sine * x) - (Cosine * z));
         transM.addRow(2, row);
         
         row = new ArrayList();
@@ -237,7 +243,7 @@ public abstract class Tools {
         temp.addRow(i, row);
         }
         
-        return new Point3D(temp.getMatrix().get(0).get(0), temp.getMatrix().get(1).get(0), 0);
+        return new Point3D(temp.getMatrix().get(0).get(0), temp.getMatrix().get(1).get(0), temp.getMatrix().get(2).get(0));
     }
     
     public static Point3D toScreenSpace(Point3D p){

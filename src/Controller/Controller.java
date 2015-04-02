@@ -182,6 +182,10 @@ public class Controller implements CS355Controller{
                 //Use the same method from lab 6 to figure out the amounts to add to the offsets
                 Model.inst().decrementXOffset();
             }
+            else if(keyPressed.equals(87)){//W
+                System.out.println("W");
+                Model.inst().decrementZOffset();
+            }
             else if(keyPressed.equals(83)){//S
                 System.out.println("S");
                 Model.inst().incrementZOffset();
@@ -192,15 +196,19 @@ public class Controller implements CS355Controller{
             }
             else if(keyPressed.equals(81)){//Q
                 System.out.println("Q");
+                Model.inst().decrementRotateOffset();
             }
             else if(keyPressed.equals(69)){//E
                 System.out.println("E");
+                Model.inst().incrementRotateOffset();
             }
             else if(keyPressed.equals(82)){//R
                 System.out.println("R");
+                Model.inst().incrementYOffset();
             }
             else if(keyPressed.equals(70)){//F
                 System.out.println("F");
+                Model.inst().decrementYOffset();
             }
             else if(keyPressed.equals(72)){//H
                 System.out.println("H");
@@ -209,10 +217,7 @@ public class Controller implements CS355Controller{
                 Model.inst().setzOffset(0);
                 Model.inst().setRotationOffset(0);
             }
-            else if(keyPressed.equals(87)){//W
-                System.out.println("W");
-                Model.inst().decrementZOffset();
-            }
+            
             
         }
     }
