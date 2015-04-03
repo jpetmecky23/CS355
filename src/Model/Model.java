@@ -72,45 +72,50 @@ import java.util.Observable;
 
     public void setxOffset(double xOffset) {
         this.xOffset = xOffset;
+        this.modelChanged();
     }
 
     public void setyOffset(double yOffset) {
         this.yOffset = yOffset;
+        this.modelChanged();
     }
 
     public void setzOffset(double zOffset) {
         this.zOffset = zOffset;
+        this.modelChanged();
     }
 
     public void setRotationOffset(double rotationOffset) {
         this.rotationOffset = rotationOffset;
-    }
-    
-    public void incrementXOffset() {
-        this.xOffset++;
         this.modelChanged();
     }
-    public void decrementXOffset() {
-            this.xOffset--;
-            this.modelChanged();
+    
+    public void incrementXOffset(double value) {
+        this.xOffset += value;
+        System.out.println("X: " + xOffset);
+    
+    }
+    public void decrementXOffset(double value) {
+            this.xOffset -= value;
+            System.out.println("X: " + xOffset);
     }
     
-    public void incrementYOffset() {
-        this.yOffset++;
-        this.modelChanged();
+    public void incrementYOffset(double value) {
+        this.yOffset += value;
+        System.out.println("Y: " + yOffset);
     }
-    public void decrementYOffset() {
-            this.yOffset--;
-            this.modelChanged();
+    public void decrementYOffset(double value) {
+            this.yOffset -= value;
+            System.out.println("Y: " + yOffset);
     }
     
-    public void incrementZOffset() {
-        this.zOffset++;
-        this.modelChanged();
+    public void incrementZOffset(double value) {
+        this.zOffset += value;
+        System.out.println("Z: " + zOffset);
     }
-    public void decrementZOffset() {
-            this.zOffset--;
-            this.modelChanged();
+    public void decrementZOffset(double value) {
+            this.zOffset -= value;
+            System.out.println("Z: " + zOffset);
     }
 
     public HouseModel getHouse() {
@@ -125,21 +130,23 @@ import java.util.Observable;
     
     
     public void incrementRotateOffset() {
-        if(this.rotationOffset == 359){
-           this.rotationOffset = 0; 
-        }
-        else{
+       // if(this.rotationOffset == 359){
+       //    this.rotationOffset = 0; 
+        //}
+       // else{
             this.rotationOffset++;
-        }
+        //}
+        System.out.println("Rotation: " + rotationOffset);
         this.modelChanged();
     }
     public void decrementRotateOffset() {
-        if(this.rotationOffset == 0){
+      /*  if(this.rotationOffset == 0){
             this.rotationOffset = 359;
         }
-        else{    
+        else{ */   
             this.rotationOffset--;
-        }
+       // }
+        System.out.println("Rotation: " + rotationOffset);
         this.modelChanged();
     }
     

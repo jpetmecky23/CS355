@@ -164,7 +164,7 @@ public abstract class Tools {
         row.add(Cosine);
         row.add(0.0);
         row.add(Sine);
-        row.add((-Cosine * x) - (Sine * z));
+        row.add((-Cosine * x) + (-Sine * z));
         transM.addRow(0, row);
         
         row = new ArrayList();
@@ -178,7 +178,7 @@ public abstract class Tools {
         row.add(-Sine);
         row.add(0.0);
         row.add(Cosine);
-        row.add((Sine * x) - (Cosine * z));
+        row.add((Sine * x) + (-Cosine * z));
         transM.addRow(2, row);
         
         row = new ArrayList();
@@ -213,7 +213,7 @@ public abstract class Tools {
         proM.addRow(1, row);
         
         row = new ArrayList();
-        double f = 1000;
+        double f = 10;
         double n = 5;
         double value1 = (f + n) / (f - n);
         double value2 = (-2 * n * f) / (f - n);       
@@ -243,15 +243,16 @@ public abstract class Tools {
         temp.addRow(i, row);
         }
         
-        return new Point3D(temp.getMatrix().get(0).get(0), temp.getMatrix().get(1).get(0), temp.getMatrix().get(2).get(0));
+        return new Point3D(temp.getMatrix().get(0).get(0), temp.getMatrix().get(1).get(0), 1);
     }
     
     public static Point3D toScreenSpace(Point3D p){
-        double width = 2048;
-        double height = 2048;
+        double width = 128;
+        double height = 128;
         double x = width * ((.5 * p.x) + .5);
         double y = (.5 * height) - (.5 * p.y * height);
         double z = 1;
+        System.out.println("X: " + x + "Y: " + y + "Z:" + z);
         return new Point3D(x, y, z);
     }
     

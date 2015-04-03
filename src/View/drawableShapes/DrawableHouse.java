@@ -43,13 +43,30 @@ public class DrawableHouse {
                 Point3D end = new Point3D(line.getEnd().x , line.getEnd().y,line.getEnd().z);
                 start = this.convertPoint(start);
                 end = this.convertPoint(end);
-
-                line = new Line3D(start, end, line.getColor());
-               System.out.println("Line: " + i);
-               dLine = Factory.inst().processLine(line);
-               dLine.drawShape(g2d);
+              // System.out.println("Line: " + i);
+                if(start != null && end != null){
+                    line = new Line3D(start, end, line.getColor());
+                    dLine = Factory.inst().processLine(line);
+                    dLine.drawShape(g2d);
+                }
             i++;
         }
+    }
+    
+    private boolean testPoint(double xValue, double yValue, double w){
+        boolean xTest = equalityTest(xValue, w);
+        boolean yTest = equalityTest(yValue, w);
+        if(xTest && yTest){
+            return true;
+        }
+        return false;
+    }
+    
+    private boolean equalityTest(double x, double w){
+        if(-w <= x && x <= w){
+            return true;
+        }
+        return false;
     }
     
     private Point3D convertPoint(Point3D p){
@@ -58,7 +75,14 @@ public class DrawableHouse {
         m = Tools.translate3D(m);
         m = Tools.clip(m);
         Point3D point = Tools.normilize3D(m);
-        return Tools.toScreenSpace(point);
+        double w = m.getMatrix().get(3).get(0);
+        double xValue = m.getMatrix().get(0).get(0);
+        double yValue = m.getMatrix().get(1).get(0);
+        boolean pass = testPoint(xValue, yValue, w);
+        //if(pass){
+            return Tools.toScreenSpace(point);
+        //}
+       // return null;
     }
     
     private Matrix prepMatrix(Point3D p){

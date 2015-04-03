@@ -164,13 +164,18 @@ public class Controller implements CS355Controller{
     }
     @Override
     public void toggle3DModelDisplay(){
-        Controller.inst().setState(ControllerState.House);
-         Model.inst().clearSelectedShapes();
-         HouseModel house = new HouseModel(Model.inst().getSelectColor());
-         Controller.inst().setZoom(.25);//Zoom all the way out
-         Model.inst().modelChanged();
-         Model.inst().setHouse(house);
-         
+        if(Model.inst().getHouse() == null){
+            Controller.inst().setState(ControllerState.House);
+             Model.inst().clearSelectedShapes();
+             HouseModel house = new HouseModel(Model.inst().getSelectColor());
+             Controller.inst().zoomOutButtonHit();//Zoom all the way out
+             Controller.inst().zoomOutButtonHit();//Zoom all the way out
+             Model.inst().modelChanged();
+             Model.inst().setHouse(house);
+        }
+        else{
+            Model.inst().setHouse(null);
+        }
         
     }
     @Override
@@ -180,19 +185,25 @@ public class Controller implements CS355Controller{
             if(keyPressed.equals(65)){//A
                 System.out.println("A");
                 //Use the same method from lab 6 to figure out the amounts to add to the offsets
-                Model.inst().decrementXOffset();
-            }
-            else if(keyPressed.equals(87)){//W
-                System.out.println("W");
-                Model.inst().decrementZOffset();
-            }
-            else if(keyPressed.equals(83)){//S
-                System.out.println("S");
-                Model.inst().incrementZOffset();
+                Model.inst().decrementZOffset(Math.cos(Math.toRadians(Model.inst().getRotationOffset() + 90)));
+                Model.inst().incrementXOffset(Math.sin(Math.toRadians(Model.inst().getRotationOffset() + 90)));
+               
+                
             }
             else if(keyPressed.equals(68)){//D
                 System.out.println("D");
-                Model.inst().incrementXOffset();
+                 Model.inst().incrementZOffset(Math.cos(Math.toRadians(Model.inst().getRotationOffset() + 90)));
+                Model.inst().decrementXOffset(Math.sin(Math.toRadians(Model.inst().getRotationOffset() + 90)));
+            }
+            else if(keyPressed.equals(87)){//W
+                System.out.println("W");
+                Model.inst().decrementZOffset(Math.cos(Math.toRadians(Model.inst().getRotationOffset())));
+                Model.inst().incrementXOffset(Math.sin(Math.toRadians(Model.inst().getRotationOffset())));
+            }
+            else if(keyPressed.equals(83)){//S
+                System.out.println("S");
+                Model.inst().incrementZOffset(Math.cos(Math.toRadians(Model.inst().getRotationOffset())));
+                Model.inst().decrementXOffset(Math.sin(Math.toRadians(Model.inst().getRotationOffset())));
             }
             else if(keyPressed.equals(81)){//Q
                 System.out.println("Q");
@@ -204,11 +215,11 @@ public class Controller implements CS355Controller{
             }
             else if(keyPressed.equals(82)){//R
                 System.out.println("R");
-                Model.inst().incrementYOffset();
+                Model.inst().decrementYOffset(1);
             }
             else if(keyPressed.equals(70)){//F
                 System.out.println("F");
-                Model.inst().decrementYOffset();
+                Model.inst().incrementYOffset(1); 
             }
             else if(keyPressed.equals(72)){//H
                 System.out.println("H");
@@ -218,7 +229,7 @@ public class Controller implements CS355Controller{
                 Model.inst().setRotationOffset(0);
             }
             
-            
+            Model.inst().modelChanged();
         }
     }
     @Override
