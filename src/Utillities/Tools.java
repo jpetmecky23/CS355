@@ -213,7 +213,7 @@ public abstract class Tools {
         proM.addRow(1, row);
         
         row = new ArrayList();
-        double f = 10;
+        double f = 30;
         double n = 5;
         double value1 = (f + n) / (f - n);
         double value2 = (-2 * n * f) / (f - n);       
@@ -226,8 +226,8 @@ public abstract class Tools {
         row = new ArrayList();
         row.add(0.0);
         row.add(0.0);
-        row.add(0.0);
         row.add(1.0);
+        row.add(0.0);
         proM.addRow(3, row);
         
         proM.multiply(m.getMatrix());
@@ -247,12 +247,12 @@ public abstract class Tools {
     }
     
     public static Point3D toScreenSpace(Point3D p){
-        double width = 128;
-        double height = 128;
+        double width = 2048;
+        double height = 2048;
         double x = width * ((.5 * p.x) + .5);
         double y = (.5 * height) - (.5 * p.y * height);
         double z = 1;
-        System.out.println("X: " + x + "Y: " + y + "Z:" + z);
+      // System.out.println("X: " + x + "Y: " + y + "Z:" + z);
         return new Point3D(x, y, z);
     }
     

@@ -79,10 +79,10 @@ public class DrawableHouse {
         double xValue = m.getMatrix().get(0).get(0);
         double yValue = m.getMatrix().get(1).get(0);
         boolean pass = testPoint(xValue, yValue, w);
-        //if(pass){
+        if(pass){
             return Tools.toScreenSpace(point);
-        //}
-       // return null;
+        }
+        return null;
     }
     
     private Matrix prepMatrix(Point3D p){

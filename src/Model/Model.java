@@ -51,8 +51,8 @@ import java.util.Observable;
     public Model() {
         this.container = new ArrayList(); 
         xOffset = 0;
-        yOffset = 0;
-        zOffset = 0;
+        yOffset = 2;
+        zOffset = -25;
         house = null;
     }
     public double getxOffset() {

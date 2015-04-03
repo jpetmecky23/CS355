@@ -197,13 +197,13 @@ public class Controller implements CS355Controller{
             }
             else if(keyPressed.equals(87)){//W
                 System.out.println("W");
-                Model.inst().decrementZOffset(Math.cos(Math.toRadians(Model.inst().getRotationOffset())));
-                Model.inst().incrementXOffset(Math.sin(Math.toRadians(Model.inst().getRotationOffset())));
+                Model.inst().incrementZOffset(Math.cos(Math.toRadians(Model.inst().getRotationOffset())));
+                Model.inst().decrementXOffset(Math.sin(Math.toRadians(Model.inst().getRotationOffset())));
             }
             else if(keyPressed.equals(83)){//S
                 System.out.println("S");
-                Model.inst().incrementZOffset(Math.cos(Math.toRadians(Model.inst().getRotationOffset())));
-                Model.inst().decrementXOffset(Math.sin(Math.toRadians(Model.inst().getRotationOffset())));
+                Model.inst().decrementZOffset(Math.cos(Math.toRadians(Model.inst().getRotationOffset())));
+                Model.inst().incrementXOffset(Math.sin(Math.toRadians(Model.inst().getRotationOffset())));
             }
             else if(keyPressed.equals(81)){//Q
                 System.out.println("Q");
@@ -224,8 +224,8 @@ public class Controller implements CS355Controller{
             else if(keyPressed.equals(72)){//H
                 System.out.println("H");
                 Model.inst().setxOffset(0);
-                Model.inst().setyOffset(0);
-                Model.inst().setzOffset(0);
+                Model.inst().setyOffset(2);
+                Model.inst().setzOffset(-25);
                 Model.inst().setRotationOffset(0);
             }
             
