@@ -255,7 +255,7 @@ public class Controller implements CS355Controller{
     }
     @Override
     public void doChangeContrast(int contrastAmountNum){
-        
+        Model.inst().contrast(contrastAmountNum);
     }
     @Override
     public void doChangeBrightness(int brightnessAmountNum){

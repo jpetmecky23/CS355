@@ -283,4 +283,28 @@ import java.util.Observable;
         Model.inst().setImage(pic);
          Model.inst().modelChanged();
     }
+    
+    public void contrast(int contrastAmountNum){
+        int[][] pic = new int[heigth][width];
+        for(int i = 0; i < heigth; i++){
+            for(int j = 0; j < width; j++){
+                int pixel = Model.inst().getImage()[i][j];
+                pixel = pixel - 128;
+                double contrastAmount = (contrastAmountNum + 100.0) / 100.0;
+                pixel = (int)(Math.pow(contrastAmount, 4) * pixel);
+                pixel = pixel + 128;
+                if(pixel >= 0 && pixel <= 255){
+                    pic[i][j] = pixel;
+                }
+                else if(pixel < 0){
+                    pic[i][j] = 0;
+                }
+                else{
+                    pic[i][j] = 255;
+                }
+            }
+        }
+        Model.inst().setImage(pic);
+         Model.inst().modelChanged();
+    }
 }
