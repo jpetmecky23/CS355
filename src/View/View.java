@@ -61,6 +61,9 @@ public class View implements ViewRefresher {
 
             @Override
             public void refreshView(Graphics2D g2d) {
+                //print picture background
+                Factory.inst().printPic(g2d);
+                
                 shapes = Factory.inst().prepShapes();//Call factory and get a new drawable shapes array
                 for(int i = 0; i < shapes.size(); i++){
                     shapes.get(i).drawShape(g2d);//iterate though them and draw them.

@@ -10,6 +10,7 @@ import Model.shapes.*;
 import View.drawableShapes.*;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.WritableRaster;
 import java.util.ArrayList;
 
 /**
@@ -167,4 +168,21 @@ public class Factory {
             dh.draw(g2d);
            }
        } 
+       
+       public void printPic(Graphics2D g2d){
+           if(Model.inst().isPrintPic() && Model.inst().getImage() != null){
+              //print picture   
+               int h = Model.inst().getHeigth();
+               int w = Model.inst().getWidth();
+               int[][] pic = Model.inst().getImage();
+                for(int i = 0; i < h; i++){
+                     for(int j = 0; j < w; j++){
+                         int colorValue = pic[i][j];
+                         Color color = new Color(colorValue, colorValue, colorValue);
+                         g2d.setColor(color);
+                         g2d.drawLine(j, i, j, i);
+                    }
+                }
+           }
+       }
 }

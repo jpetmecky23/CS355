@@ -8,6 +8,7 @@ package Model;
 import Model.shapes.*;
 import Shell.GUIFunctions;
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -26,6 +27,10 @@ import java.util.Observable;
     private double zOffset;
     private double rotationOffset;
     private HouseModel house;
+    int[][] image;
+    int width;
+    int heigth;
+    private boolean printPic;
     
     public static Model inst()
     {
@@ -54,7 +59,44 @@ import java.util.Observable;
         yOffset = 2;
         zOffset = -25;
         house = null;
+        image = null;
+        printPic = false;
+        
     }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeigth() {
+        return heigth;
+    }
+
+    public void setHeigth(int heigth) {
+        this.heigth = heigth;
+    }
+
+    public boolean isPrintPic() {
+        return printPic;
+    }
+
+    public void setPrintPic(boolean printPic) {
+        this.printPic = printPic;
+    }
+
+    public int[][] getImage() {
+        return image;
+    }
+
+    public void setImage(int[][] image) {
+        this.image = image;
+    }
+    
+    
     public double getxOffset() {
         return xOffset;
     }

@@ -11,6 +11,9 @@ import java.awt.image.BufferedImage;
 import java.util.Iterator;
 import Model.Model;
 import Model.shapes.*;
+import Shell.ImageIO;
+import java.awt.image.WritableRaster;
+
 
 
 /**
@@ -170,6 +173,8 @@ public class Controller implements CS355Controller{
              HouseModel house = new HouseModel(Model.inst().getSelectColor());
              Controller.inst().zoomOutButtonHit();//Zoom all the way out
              Controller.inst().zoomOutButtonHit();//Zoom all the way out
+             Controller.inst().zoomOutButtonHit();//Zoom all the way out
+             Controller.inst().zoomOutButtonHit();//Zoom all the way out
              Model.inst().modelChanged();
              Model.inst().setHouse(house);
         }
@@ -258,11 +263,33 @@ public class Controller implements CS355Controller{
     }
     @Override
     public void doLoadImage(BufferedImage openImage){
-        
+        Controller.inst().zoomOutButtonHit();//Zoom all the way out
+        Controller.inst().zoomOutButtonHit();//Zoom all the way out
+        Controller.inst().zoomOutButtonHit();//Zoom all the way out
+        Controller.inst().zoomOutButtonHit();//Zoom all the way out
+        WritableRaster rast = openImage.getRaster();
+        int heigth = rast.getHeight();
+        int width = rast.getWidth();
+        Model.inst().setHeigth(heigth);
+        Model.inst().setWidth(width);
+        int[][] pic = new int[heigth][width];
+        for(int i = 0; i < heigth; i++){
+            for(int j = 0; j < width; j++){
+                pic[i][j] = (int)((rast.getPixel(j, i, new double[3]))[0]);
+            }
+        }
+        Model.inst().setImage(pic);
+         Model.inst().modelChanged();
     }
     @Override
     public void toggleBackgroundDisplay(){
-        
+        if(Model.inst().isPrintPic()){
+            Model.inst().setPrintPic(false);
+        }
+        else{
+            Model.inst().setPrintPic(true);
+        }
+         Model.inst().modelChanged();
     }
     
     public ControllerState getState(){
