@@ -259,7 +259,7 @@ public class Controller implements CS355Controller{
     }
     @Override
     public void doChangeBrightness(int brightnessAmountNum){
-        
+        Model.inst().brighten(brightnessAmountNum);
     }
     @Override
     public void doLoadImage(BufferedImage openImage){

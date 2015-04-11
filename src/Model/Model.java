@@ -263,4 +263,24 @@ import java.util.Observable;
         }
         return -1;
     }
+    
+    public void brighten(int brightnessAmountNum){
+        int[][] pic = new int[heigth][width];
+        for(int i = 0; i < heigth; i++){
+            for(int j = 0; j < width; j++){
+                int pixel = Model.inst().getImage()[i][j] + brightnessAmountNum;
+                if(pixel > 0 && pixel < 255){
+                    pic[i][j] = pixel;
+                }
+                else if(pixel < 0){
+                    pic[i][j] = 0;
+                }
+                else{
+                    pic[i][j] = 255;
+                }
+            }
+        }
+        Model.inst().setImage(pic);
+         Model.inst().modelChanged();
+    }
 }
