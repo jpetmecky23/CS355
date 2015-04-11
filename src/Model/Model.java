@@ -10,6 +10,9 @@ import Shell.GUIFunctions;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Observable;
 
 
@@ -306,5 +309,100 @@ import java.util.Observable;
         }
         Model.inst().setImage(pic);
          Model.inst().modelChanged();
+    }
+    
+    public void uniformBlur(){
+          int[][] pic = new int[heigth][width];
+        for(int i = 1; i < heigth - 1; i++){
+            for(int j = 1; j < width - 1; j++){
+                int[][] values = createSubArray(i, j);
+                int [][] kernal = createKernal(1, 1, 1, 1, 1, 1, 1, 1, 1);
+                int pixel = avaerage(values, kernal);
+                if(pixel >= 0 && pixel <= 255){
+                    pic[i][j] = pixel;
+                }
+                else if(pixel < 0){
+                    pic[i][j] = 0;
+                }
+                else{
+                    pic[i][j] = 255;
+                }
+            }
+        }
+        Model.inst().setImage(pic);
+         Model.inst().modelChanged();
+    }
+    
+    public void mediumBlur(){
+          int[][] pic = new int[heigth][width];
+        for(int i = 1; i < heigth - 1; i++){
+            for(int j = 1; j < width - 1; j++){
+                int[][] values = createSubArray(i, j);
+                int pixel = median(values);
+                if(pixel >= 0 && pixel <= 255){
+                    pic[i][j] = pixel;
+                }
+                else if(pixel < 0){
+                    pic[i][j] = 0;
+                }
+                else{
+                    pic[i][j] = 255;
+                }
+            }
+        }
+        Model.inst().setImage(pic);
+         Model.inst().modelChanged();
+    }
+    
+    private int[][] createKernal(int a, int b, int c, int d, int e, int f, int g, int h, int i){
+        int[][] kernal = new int[3][3];
+        kernal[0][0] = a;
+        kernal[0][1] = b;
+        kernal[0][2] = c;
+        kernal[1][0] = d;
+        kernal[1][1] = e;
+        kernal[1][2] = f;
+        kernal[2][0] = g;
+        kernal[2][1] = h;
+        kernal[2][2] = i;
+        return kernal;
+    }
+    
+    private int[][] createSubArray(int i, int j){
+        int[][] values = new int[3][3];
+        values[0][0] = Model.inst().getImage()[i - 1][j - 1];
+        values[0][1] = Model.inst().getImage()[i - 1][j];
+        values[0][2] = Model.inst().getImage()[i - 1][j + 1];
+        values[1][0] = Model.inst().getImage()[i][j - 1];
+        values[1][1] = Model.inst().getImage()[i][j];
+        values[1][2] = Model.inst().getImage()[i][j + 1];
+        values[2][0] = Model.inst().getImage()[i + 1][j - 1];
+        values[2][1] = Model.inst().getImage()[i + 1][j];
+        values[2][2] = Model.inst().getImage()[i + 1][j + 1];
+        return values;
+    }
+    
+    private Integer median(int[][] values){
+        ArrayList value = new ArrayList<Integer>();
+        for(int i = 0; i < values.length; i++){
+            for(int j = 0; j < values.length; j++){
+                value.add(values[i][j]);
+            }
+        }
+        Collections.sort(value);
+        int returnValue = (int) value.get(5); 
+        return returnValue;
+    }
+    
+    private int avaerage(int[][] values, int[][] kernal){
+        int value = 0;
+        int wieghts = 0;
+        for(int i = 0; i < kernal.length; i++){
+            for(int j = 0; j < kernal.length; j++){
+                value += values[i][j] * kernal[i][j];
+                wieghts += kernal[i][j];
+            }
+        }
+        return value / wieghts;
     }
 }
