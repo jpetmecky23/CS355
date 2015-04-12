@@ -317,7 +317,7 @@ import java.util.Observable;
             for(int j = 1; j < width - 1; j++){
                 int[][] values = createSubArray(i, j);
                 int [][] kernal = createKernal(1, 1, 1, 1, 1, 1, 1, 1, 1);
-                int pixel = avaerage(values, kernal);
+                int pixel = crunch(values, kernal, "blur");
                 if(pixel >= 0 && pixel <= 255){
                     pic[i][j] = pixel;
                 }
@@ -352,6 +352,59 @@ import java.util.Observable;
         }
         Model.inst().setImage(pic);
          Model.inst().modelChanged();
+    }
+    
+    public void sharpening(){
+          int[][] pic = new int[heigth][width];
+        for(int i = 1; i < heigth - 1; i++){
+            for(int j = 1; j < width - 1; j++){
+                int[][] values = createSubArray(i, j);
+                int [][] kernal = createKernal(0, -1, 0, -1, 6, -1, 0, -1, 0);
+                int pixel = crunch(values, kernal, "sharp");
+                if(pixel >= 0 && pixel <= 255){
+                    pic[i][j] = pixel;
+                }
+                else if(pixel < 0){
+                    pic[i][j] = 0;
+                }
+                else{
+                    pic[i][j] = 255;
+                }
+            }
+        }
+        Model.inst().setImage(pic);
+         Model.inst().modelChanged();
+    }
+    
+    public void edge(){
+          int[][] pic = new int[heigth][width];
+        for(int i = 1; i < heigth - 1; i++){
+            for(int j = 1; j < width - 1; j++){
+                int[][] values = createSubArray(i, j);
+                int [][] kernalX = createKernal(-1, -2, -1, 0, 0, 0, 1, 2, 1);
+                int [][] kernalY = createKernal(-1, 0, 1, -2, 0, 2, -1, 0, 1);
+                int pixelX = crunch(values, kernalX, "edge");
+                int pixelY = crunch(values, kernalY, "edge");
+                int pixel = finish(pixelX, pixelY);
+                if(pixel >= 0 && pixel <= 255){
+                    pic[i][j] = pixel;
+                }
+                else if(pixel < 0){
+                    pic[i][j] = 0;
+                }
+                else{
+                    pic[i][j] = 255;
+                }
+            }
+        }
+        
+        //int[][] pic = new int[heigth][width];
+        Model.inst().setImage(pic);
+         Model.inst().modelChanged();
+    }
+    
+    private int finish(int x, int y){
+        return (int) Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
     }
     
     private int[][] createKernal(int a, int b, int c, int d, int e, int f, int g, int h, int i){
@@ -394,7 +447,7 @@ import java.util.Observable;
         return returnValue;
     }
     
-    private int avaerage(int[][] values, int[][] kernal){
+    private int crunch(int[][] values, int[][] kernal, String command){
         int value = 0;
         int wieghts = 0;
         for(int i = 0; i < kernal.length; i++){
@@ -403,6 +456,17 @@ import java.util.Observable;
                 wieghts += kernal[i][j];
             }
         }
-        return value / wieghts;
+        if(command.equals("blur")){
+            return value / wieghts;
+        }
+        else if(command.equals("sharp")){
+            return value / 2;
+        }
+        else if(command.equals("edge")){
+            return value;
+        }
+        return 0;
     }
+    
+    
 }

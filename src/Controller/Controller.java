@@ -239,11 +239,11 @@ public class Controller implements CS355Controller{
     }
     @Override
     public void doEdgeDetection(){
-        
+        Model.inst().edge();
     }
     @Override
     public void doSharpen(){
-        
+        Model.inst().sharpening();
     }
     @Override
     public void doMedianBlur(){
